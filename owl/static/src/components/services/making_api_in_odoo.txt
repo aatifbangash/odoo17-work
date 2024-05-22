@@ -1,0 +1,174 @@
+// CONTROLLER PART
+
+from odoo import http
+from odoo.http import request
+import json
+
+class PostController(http.Controller):
+
+    @http.route('/api/posts', type='http', auth='public', methods=['GET'], csrf=False)
+    def get_posts(self):
+        posts = request.env['blog.post'].sudo().search([])
+        posts_data = posts.read(['id', 'name', 'content', 'author_id'])
+        return request.make_response(
+            json.dumps(posts_data),
+            headers=[('Content-Type', 'application/json')]
+        )
+
+    @http.route('/api/posts/<int:id>', type='http', auth='public', methods=['GET'], csrf=False)
+    def get_post(self, id):
+        post = request.env['blog.post'].sudo().browse(id)
+        if not post.exists():
+            return request.make_response(
+                json.dumps({'error': 'Post not found'}),
+                headers=[('Content-Type', 'application/json')],
+                status=404
+            )
+        post_data = post.read(['id', 'name', 'content', 'author_id'])[0]
+        return request.make_response(
+            json.dumps(post_data),
+            headers=[('Content-Type', 'application/json')]
+        )
+
+    @http.route('/api/posts', type='http', auth='public', methods=['POST'], csrf=False)
+    def create_post(self, **kwargs):
+        post_data = json.loads(request.httprequest.data)
+        post = request.env['blog.post'].sudo().create(post_data)
+        return request.make_response(
+            json.dumps(post.read(['id', 'name', 'content', 'author_id'])[0]),
+            headers=[('Content-Type', 'application/json')]
+        )
+
+    @http.route('/api/posts/<int:id>', type='http', auth='public', methods=['PUT'], csrf=False)
+    def update_post(self, id, **kwargs):
+        post_data = json.loads(request.httprequest.data)
+        post = request.env['blog.post'].sudo().browse(id)
+        if not post.exists():
+            return request.make_response(
+                json.dumps({'error': 'Post not found'}),
+                headers=[('Content-Type', 'application/json')],
+                status=404
+            )
+        post.sudo().write(post_data)
+        return request.make_response(
+            json.dumps(post.read(['id', 'name', 'content', 'author_id'])[0]),
+            headers=[('Content-Type', 'application/json')]
+        )
+
+    @http.route('/api/posts/<int:id>', type='http', auth='public', methods=['DELETE'], csrf=False)
+    def delete_post(self, id):
+        post = request.env['blog.post'].sudo().browse(id)
+        if not post.exists():
+            return request.make_response(
+                json.dumps({'error': 'Post not found'}),
+                headers=[('Content-Type', 'application/json')],
+                status=404
+            )
+        post.sudo().unlink()
+        return request.make_response(
+            json.dumps({'success': True}),
+            headers=[('Content-Type', 'application/json')]
+        )
+
+
+
+
+//OWL PART
+const { Component, useState } = owl;
+
+class PostList extends Component {
+    setup() {
+        this.posts = useState([]);
+        this.loadPosts();
+    }
+
+    async loadPosts() {
+        const response = await fetch('/api/posts', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        this.posts.splice(0, this.posts.length, ...data);
+    }
+
+    async createPost(post) {
+        const response = await fetch('/api/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(post)
+        });
+        const data = await response.json();
+        this.posts.push(data);
+    }
+
+    async updatePost(id, post) {
+        const response = await fetch(`/api/posts/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(post)
+        });
+        const data = await response.json();
+        const index = this.posts.findIndex(p => p.id === id);
+        this.posts.splice(index, 1, data);
+    }
+
+    async deletePost(id) {
+        const response = await fetch(`/api/posts/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        await response.json();
+        const index = this.posts.findIndex(p => p.id === id);
+        this.posts.splice(index, 1);
+    }
+
+    render() {
+        // Your rendering logic here
+    }
+}
+
+
+//VIEW PART
+
+<odoo>
+    <template id="post_list_template">
+        <t t-name="post_list_template">
+            <div>
+                <h2>Post List</h2>
+                <ul>
+                    <t t-foreach="posts" t-as="post">
+                        <li>
+                            <h3><t t-esc="post.name"/></h3>
+                            <p><t t-esc="post.content"/></p>
+                            <button t-on-click="() => this.startEditing(post)">Edit</button>
+                            <button t-on-click="() => this.deletePost(post.id)">Delete</button>
+                        </li>
+                    </t>
+                </ul>
+                <div>
+                    <h2>Create Post</h2>
+                    <input type="text" placeholder="Title" t-model="newPost.name" />
+                    <textarea placeholder="Content" t-model="newPost.content"></textarea>
+                    <button t-on-click="createPost">Create</button>
+                </div>
+                <t t-if="editingPost">
+                    <div>
+                        <h2>Edit Post</h2>
+                        <input type="text" placeholder="Title" t-model="editingPost.name" />
+                        <textarea placeholder="Content" t-model="editingPost.content"></textarea>
+                        <button t-on-click="() => this.updatePost(editingPost.id)">Update</button>
+                        <button t-on-click="cancelEditing">Cancel</button>
+                    </div>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

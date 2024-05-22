@@ -1,0 +1,121 @@
+.option_set_heading,.option_set_description{
+padding: 5px 0px 5px 5px;
+}
+
+.option_set_header {
+font-size: 18px;
+color: #fff;
+}
+
+.option_set_heading p{
+font-size: 12px;
+color: #a3a3a3;
+}
+
+.option_set_description p {
+font-weight: 600;
+color: #fff;
+font-size: 14px;
+}
+
+span.option_set_list_item {
+padding: 7px 10px;
+}
+
+span.badge p {
+font-size: 9px;
+color: #fff;
+
+}
+
+.edit_option_set_badge {
+position: relative;
+    bottom: 3px;
+}
+
+.text-bg-secondary.edit_option_set_badge p{
+    color: black;
+}
+
+
+.badge.rounded-pill.text-bg-primary{
+background-color: #0D6EFD !important;
+}
+
+hr {
+color: #999898;
+}
+
+.mapper-wrapper-active {
+    /* Styles for active mapper wrapper */
+    display: block !important;
+}
+
+.mapper-wrapper-inactive {
+    /* Styles for inactive mapper wrapper */
+    display: none !important;
+}
+
+.action_header {
+justify-content: center;
+gap: 57px;
+padding-left: 60px;
+}
+
+.children_dropdown, .children_dropdown:hover,.children_dropdown:focus {
+background-color: transparent;
+color: #fff;
+border-color: black;
+box-shadow: none;
+}
+
+.dropdown-toggle::after {
+display: none;
+}
+
+.modal-content {
+    border: 1px solid gray !important;
+}
+
+.edit_option_set_field {
+    border: 1px solid #c3c3c3 !important;
+    border-radius: 6px !important;
+    background: black !important;
+    color: #fff !important;
+}
+
+.edit_option_set_select {
+    border: 1px solid #c3c3c3 !important;
+    border-radius: 6px !important;
+    color: #fff;
+}
+
+.edit_option_set_select option {
+    background: black !important;
+}
+
+.form-control:focus {
+    color: #fff !important;
+}
+
+.modal-header,.modal-body,.modal-footer {
+background-color: black;
+}
+
+.new_btn_wrapper {
+    padding: 12px 0px;
+    border-bottom: 1px solid white;
+}
+
+.action_popup,.action_popup:hover {
+background: black;
+}
+
+.action_popup li a {
+color: #fff !important;
+}
+
+.action_popup li a:hover {
+color: #fff !important;
+background: #373737 !important;
+}
