@@ -1,0 +1,31 @@
+.option_set_heading,.option_set_description{
+padding: 5px 85px 5px 5px;
+}
+
+.option_set_header {
+font-size: 18px;
+color: #fff;
+}
+
+.option_set_heading p{
+font-size: 12px;
+color: #a3a3a3;
+}
+
+.option_set_description p {
+font-weight: 600;
+color: #fff;
+font-size: 14px;
+}
+
+span.badge {
+padding: 7px 10px;
+}
+
+.badge.rounded-pill.text-bg-primary{
+background-color: #0D6EFD !important;
+}
+
+hr {
+color: #999898;
+}

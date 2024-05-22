@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="school_student_form_view" model="ir.ui.view">
+            <field name="name">school.student.form.view</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <form>
+                    <strong>name</strong>
+                    <field name="name"/>
+                    <strong>school</strong>
+                    <field name="school_id" context="{'name': name}"/>
+                </form>
+            </field>
+        </record>
+        <record id="school_student_tree_view" model="ir.ui.view">
+            <field name="name">school.student.tree.view</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="school_student_kanban_view" model="ir.ui.view">
+            <field name="name">school.student.kanban.view</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <kanban create="false" class="o_modules_kanban">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_module_vignette">
+                                <field name="name"/>
+<!--                                <t t-esc="record.school_id.raw_value"/>-->
+<!--                                <t t-foreach="record.student_ids.raw_value" t-as="r" t-key="r">-->
+<!--                                    <t t-esc="r.name"/>-->
+<!--                                </t>-->
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="action_student" model="ir.actions.act_window">
+            <field name="name">Student List</field>
+            <field name="res_model">school.student</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+    </data>
+
+    <menuitem name="School" id="menu_student" sequence="50">
+        <menuitem name="Student List" id="menu_student_list" sequence="10" action="action_student"/>
+    </menuitem>
+</odoo>

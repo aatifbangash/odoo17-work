@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="school_wizard_form" model="ir.ui.view">
+        <field name="name">school.wizard.form</field>
+        <field name="model">school.school_wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <field name="student_ids" options="{'no_quick_create':True}" widget="one2many">
+                        <kanban>
+                                        <control>
+                                            <create string="Add an action" />
+                                        </control>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div class="oe_kanban_global_click row g-0 align-items-center">
+                                                    <div class="d-flex align-items-center gap-1">
+                                                        <field name="name"/>
+                                                     </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+<!--                        <form>-->
+<!--                            <field name="name"/>-->
+<!--&lt;!&ndash;                            <field name="school_id"/>&ndash;&gt;-->
+<!--                        </form>-->
+<!--                        <tree string="Current Contracts"-->
+<!--                                      decoration-primary="1"-->
+<!--                                      editable="bottom"-->
+<!--                                      no_open="1"-->
+<!--                              multi_edit="1"-->
+<!--                                      create="0" delete="0">-->
+<!--                            <field name="name"/>-->
+<!--                        </tree>-->
+                    </field>
+                </group>
+
+                <footer>
+                    <button name="update_new_school" type="object" string="Update"
+                            invisible="context.get('mode') == 'create'"/>
+                    <button name="create_new_school" type="object" string="Create"
+                            invisible="context.get('mode') == 'edit'"/>
+                    <button class="btn-secondary" special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="school_wizard_action" model="ir.actions.act_window">
+        <field name="name">Create new school</field>
+        <field name="res_model">school.school_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <!--        <field name="binding_model_id" ref="model_wb_student"/>-->
+        <!--        <field name="binding_view_types">list,form</field>-->
+    </record>
+
+    <record id="school_action_menu" model="ir.actions.act_window">
+        <field name="name">Wizard Action Menu</field>
+        <field name="res_model">school.school_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_school_school"/>
+        <field name="binding_view_types">list,form</field>
+    </record>
+
+    <record id="school_server_action_menu" model="ir.actions.server">
+        <field name="name">Python Code (update all)</field>
+        <field name="model_id" ref="school.model_school_school"/>
+        <field name="binding_model_id" ref="school.model_school_school"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">model.server_action()</field>
+    </record>
+</odoo>

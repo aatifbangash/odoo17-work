@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="school_school_tree_view" model="ir.ui.view">
+            <field name="name">school.school.tree.view</field>
+            <field name="model">school.school</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <header>
+                        <button name="new_school_wizard" type="object" string="New Record" class="oe_highlight"
+                                display="always"/>
+                    </header>
+                    <field name="name"/>
+
+                    <button name="edit_school" type="object" string="Edit" icon="fa-pencil"/>
+                    <button name="delete_school" type="object" string="Delete" icon="fa-trash"
+                            confirm="Do you want to proceed?"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="school_school_form_view" model="ir.ui.view">
+            <field name="name">school.school.form.view</field>
+            <field name="model">school.school</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Add [(0,0,val)]" name="add_student" icon="fa-pencil" type="object"/>
+                        <button string="Edit existing [(1,ID,val)]" name="edit_existing_student" icon="fa-pencil" type="object"/>
+                        <button string="Delete [(2,ID,0)]" name="delete_student" icon="fa-remove" type="object"/>
+                        <button string="Unlink Rel [(3,ID,0)]" name="unlink_relation_student" icon="fa-remove" type="object"/>
+                        <button string="Add existing record to Rel [(4,ID,0)]" name="add_existing" icon="fa-pencil" type="object"/>
+                        <button string="Unlink All Rel [(5,0,0)]" name="unlink_all_relation" icon="fa-remove" type="object"/>
+                        <button string="Replace all [(6,0,[ids])]" name="replace_all" icon="fa-pencil" type="object"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <field name="student_ids" nolabel="1"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_school" model="ir.actions.act_window">
+            <field name="name">School List</field>
+            <field name="res_model">school.school</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+    </data>
+
+    <menuitem name="School List" id="menu_school_list" parent="menu_student" sequence="10" action="action_school"/>
+</odoo>
