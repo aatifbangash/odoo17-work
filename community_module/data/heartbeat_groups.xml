@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Define the custom group -->
+    <record id="group_heartbeat" model="res.groups">
+        <field name="name">Heartbeat Group</field>
+    </record>
+
+    <!-- Define ACL for the community_module -->
+    <record id="community_module_acl" model="ir.model.access">
+        <field name="name">Community Module Access for Heartbeat Group</field>
+        <field name="model_id" ref="model_community_module_community"/>
+        <field name="group_id" ref="group_heartbeat"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+<!--   <record id="record_rule_community_create" model="ir.rule">-->
+<!--    <field name="name">Community Record Rule - Create</field>-->
+<!--    <field name="model_id" ref="model_community_module_community"/>-->
+<!--    <field name="domain_force">[('create_uid','=',user.id)]</field>-->
+<!--    <field name="perm_create" eval="False"/>-->
+<!--    <field name="perm_write" eval="True"/>-->
+<!--    <field name="perm_read" eval="True"/>-->
+<!--    <field name="perm_unlink" eval="True"/>-->
+<!--</record>-->
+
+
+
+</odoo>

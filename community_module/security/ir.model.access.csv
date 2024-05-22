@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_community_module_community_user,community_module.community,model_community_module_community,base.group_user,1,1,1,1
+access_community_module_community_homeplans_user,community_module.community_homeplans,model_community_module_community_homeplans,,1,1,1,1
+access_community_module_community_homeplan_options_user,community_module.community_homeplan_options,model_community_module_community_homeplan_options,,1,1,1,1

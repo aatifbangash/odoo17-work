@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+        <template id="listing" name="Record listing">
+            <!-- Call the website layout -->
+            <t t-call="website.layout">
+                <xpath expr="//main" position="replace">
+                    <ul>
+                        <li t-foreach="objects" t-as="object">
+                            <a t-attf-href="#{ root }/objects/#{ object.id }">
+                                <t t-esc="object.legal_name"/>
+                            </a>
+                        </li>
+                    </ul>
+                </xpath>
+                <!-- Add your custom content here -->
+                <div class="container">
+                    <h1>Welcome to My Website</h1>
+                    <p>This is my custom template.</p>
+                </div>
+                <ul>
+                    <li t-foreach="objects" t-as="object">
+                        <a t-attf-href="#{ root }/objects/#{ object.id }">
+                            <t t-esc="object.legal_name"/>
+                        </a>
+                    </li>
+                </ul>
+            </t>
+        </template>
+
+        <template id="single" name="Single record">
+            <!-- Call the website layout -->
+            <t t-call="website.layout">
+                <h1 style="color: black;">
+                    <t t-out="object.legal_name"/>
+                </h1>
+                <dl>
+                    <t t-foreach="object._fields" t-as="field">
+                        <dt>
+                            <t t-out="field"/>
+                        </dt>
+                        <dd>
+                            <t t-out="object[field]"/>
+                        </dd>
+                    </t>
+                </dl>
+            </t>
+        </template>
+    </data>
+</odoo>

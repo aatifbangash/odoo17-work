@@ -1,0 +1,182 @@
+<odoo>
+    <data>
+        <template id="community_custom_css" name="Community Custom CSS" inherit_id="web.layout">
+            <xpath expr="//link[last()]" position="after">
+                <style>
+                    .btn-outline-primary.o_form_button_create {
+                    display: none !important;
+                    }
+                </style>
+            </xpath>
+        </template>
+
+        <!-- Community List View -->
+        <record id="view_community_list" model="ir.ui.view">
+            <field name="name">community.module.community.list</field>
+            <field name="model">community_module.community</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="city"/>
+                    <field name="address"/>
+                    <field name="zip_code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_community_kanban" model="ir.ui.view">
+            <field name="name">community.module.community.kanban</field>
+            <field name="model">community_module.community</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_card">
+                                    <div class="oe_kanban_card_content">
+                                        <div class="oe_kanban_primary">
+                                            <div class="oe_kanban_content">
+                                                <t t-if="record.image_1920.value">
+                                                    <div class="oe_kanban_bottom_right">
+                                                        <field name="image_1920" widget="image"/>
+                                                    </div>
+                                                </t>
+                                                <div class="oe_kanban_bottom_right">
+                                                    <label for="kova_community_rid" style="font-weight: bold;">Kova
+                                                        Community RID:
+                                                    </label>
+                                                    <field name="kova_community_rid" placeholder="Kova Community RID"/>
+                                                </div>
+                                                <div class="oe_kanban_bottom_right list-group-itemlist-item">
+                                                    <i title="icon" class="fa fa-globe"/>
+                                                    <field name="city" placeholder="City"/>
+                                                </div>
+                                                <div class="oe_kanban_bottom_left list-group-itemlist-item">
+                                                    <i title="icon" class="fa fa-location-arrow"/>
+                                                    <field name="zip_code" placeholder="Zip Code"/>
+                                                </div>
+                                                <div class="oe_kanban_bottom_right list-group-itemlist-item">
+                                                    <i title="icon" class="fa fa-home"/>
+                                                    <field name="address" placeholder="Address"/>
+                                                </div>
+
+                                                <div class="oe_kanban_bottom_right list-group-itemlist-item">
+                                                    <i title="icon" class="fa fa-compass"/>
+                                                    <field name="code" placeholder="Code"/>
+                                                </div>
+                                                <div class="oe_kanban_bottom_right list-group-itemlist-item">
+                                                    <i title="icon" class="fa fa-user"/>
+                                                    <field name="legal_name" placeholder="Legal Name"/>
+                                                </div>
+                                                <div class="oe_kanban_bottom_right list-group-itemlist-item">
+                                                    <i title="icon" class="fa fa-file"/>
+                                                    <field name="display_name" placeholder="Display Name"/>
+                                                </div>
+                                                <div class="oe_kanban_bottom_right list-group-itemlist-item">
+                                                    <i title="icon" class="fa fa-envelope"/>
+                                                    <field name="email" placeholder="Email"/>
+                                                </div>
+                                                <div class="oe_kanban_bottom_right list-group-itemlist-item">
+                                                    <i title="icon" class="fa fa-phone"/>
+                                                    <field name="phone" placeholder="Phone"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_community_form" model="ir.ui.view">
+            <field name="name">community_module.community.form</field>
+            <field name="model">community_module.community</field>
+            <field name="arch" type="xml">
+                <form string="Community">
+                    <sheet>
+                        <notebook>
+                            <page name="General Information" String="General Information">
+                                <group>
+                                    <group>
+                                        <field name="legal_name"/>
+                                        <field name="display_name"/>
+                                        <field name="email"/>
+                                        <field name="phone"/>
+                                        <field name="address"/>
+                                        <field name="city"/>
+                                        <field name="state_code"/>
+                                        <field name="zip_code"/>
+                                        <field name="description"/>
+                                    </group>
+                                    <group>
+                                        <field name="kova_community_rid"/>
+                                        <field name="code"/>
+                                        <field name="latitude"/>
+                                        <field name="longitude"/>
+                                        <field name="is_active"/>
+                                        <field name="image_1920" widget="image"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name="Home Plans" String="Home Plans">
+                                <field name="community_homeplan_ids">
+                                    <tree>
+                                        <control>
+                                            <create string="Add homeplan"/>
+                                            <!--                                            <button type="object" string="BUTTON" name="test"/>-->
+                                        </control>
+                                        <field name="homeplan_id"/>
+<!--                                        <button name="test" type="object" icon="fa-options" string="Options"-->
+<!--                                                context="{'homeplan_id':homeplan_id}"/>-->
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="current_company" invisible="1"/>
+                                            <field name="homeplan_id"
+                                                   domain="[('franchise_homeplans_ids.company_id', '=', current_company)]"
+                                                   groups="module_sb.franchise_admin"
+                                            />
+
+                                            <field name="homeplan_id"
+                                                   groups="!module_sb.franchise_admin"
+                                            />
+                                        </group>
+                                        <field name="community_homeplan_options_ids" nolabel="1">
+                                            <tree editable="top">
+                                                <field name="homeplan_option_id"/>
+                                                <field name="community_homeplan_id_related" invisible="1"/>
+                                            </tree>
+                                        </field>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Community Action -->
+        <record id="action_community" model="ir.actions.act_window">
+            <field name="name">Communities</field>
+            <field name="res_model">community_module.community</field>
+            <field name="view_mode">kanban,form,tree</field>
+        </record>
+
+        <!-- Community Menu -->
+        <menuitem id="menu_community_list" name="Communities" parent="base.menu_users" action="action_community"/>
+        <!--                  groups="module_sb.franchise_admin"/>-->
+
+
+        <!--        <template id="custom_division" inherit_id="franchisor_theme.divisions" >-->
+        <!--            <xpath expr="//div[@class='container']" position="after">-->
+        <!--                <h1>heeeerr</h1>-->
+        <!--                <t t-esc="name"/>-->
+        <!--            </xpath>-->
+
+        <!--        </template>-->
+    </data>
+</odoo>
