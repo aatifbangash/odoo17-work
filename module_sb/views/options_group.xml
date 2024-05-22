@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form View -->
+        <record id="view_home_plan_options_group_form" model="ir.ui.view">
+            <field name="name">view.home.plan.options.group.form</field>
+            <field name="model">module_sb.options_group</field>
+            <field name="arch" type="xml">
+                <form string="Option Groups">
+                    <sheet>
+                        <group>
+                            <field name="name" placeholder="Option Name..."/>
+                            <field name="parent_id"
+                                   domain="[('parent_id', '=', False)]" placeholder="Group..."/>
+                            <!--                            options="{'no_edit': True, 'no_create': True, 'no_open': True,  'no_create_edit': True}"-->
+                            <field name="option_category" placeholder="Category..."
+                                   options="{'no_edit': True, 'no_create': True, 'no_open': True,  'no_create_edit': True}"/>
+                            <field name="option_class" placeholder="Class..."
+                                   options="{'no_edit': True, 'no_create': True, 'no_open': True,  'no_create_edit': True}"/>
+                            <field name="location" placeholder="Location..."
+                                   options="{'no_edit': True, 'no_create': True, 'no_open': True,  'no_create_edit': True}"/>
+                            <field name="option_id" placeholder="Option ID..."/>
+                            <field name="enabled"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="view_home_plan_options_group_tree" model="ir.ui.view">
+            <field name="name">home.plan.options.group.tree</field>
+            <field name="model">module_sb.options_group</field>
+            <field name="arch" type="xml">
+                <tree
+                        default_order="parent_id asc, name asc"
+                        default_group_by="parent_id"
+                        expand="True"
+                >
+                    <field name="name" string="Option Names"/>
+                    <field name="enabled" widget="button"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_home_plan_options_group" model="ir.actions.act_window">
+            <field name="name">Options Group</field>
+            <field name="res_model">module_sb.options_group</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem id="home_plan_options_groups_menu"
+                  name="Options Group"
+                  parent="sale.prod_config_main"
+                  action="action_home_plan_options_group"
+                  sequence="0"/>
+
+    </data>
+</odoo>

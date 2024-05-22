@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <record id="option_category_1" model="module_sb.option_categories">
+        <field name="name">Structural</field>
+    </record>
+    <record id="option_category_2" model="module_sb.option_categories">
+        <field name="name">Exterior</field>
+    </record>
+    <record id="option_category_3" model="module_sb.option_categories">
+        <field name="name">Interior</field>
+    </record>
+    <record id="option_category_4" model="module_sb.option_categories">
+        <field name="name">Electrical</field>
+    </record>
+    <record id="option_category_5" model="module_sb.option_categories">
+        <field name="name">Mechanical</field>
+    </record>
+    <record id="option_category_6" model="module_sb.option_categories">
+        <field name="name">Other</field>
+    </record>
+</odoo>

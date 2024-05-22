@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <record id="option_class_1" model="module_sb.option_classes">
+        <field name="name">Cabinet Configurations</field>
+    </record>
+    <record id="option_class_2" model="module_sb.option_classes">
+        <field name="name">Cabinets</field>
+    </record>
+    <record id="option_class_3" model="module_sb.option_classes">
+        <field name="name">Interior Details</field>
+    </record>
+    <record id="option_class_4" model="module_sb.option_classes">
+        <field name="name">Exterior</field>
+    </record>
+</odoo>

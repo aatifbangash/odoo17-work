@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form View -->
+        <record id="view_option_values_form" model="ir.ui.view">
+            <field name="name">view.option.values.form</field>
+            <field name="model">module_sb.option_values</field>
+            <field name="arch" type="xml">
+                <form string="Option Values">
+                    <sheet>
+                        <group>
+                            <field name="name" placeholder="Name..."/>
+                            <field name="option_categories_id" placeholder="Category..."
+                                   options="{'no_edit': True, 'no_create': True, 'no_open': True,  'no_create_edit': True}"/>
+                            <field name="option_classes_id" placeholder="Class..."
+                                   options="{'no_edit': True, 'no_create': True, 'no_open': True,  'no_create_edit': True}"/>
+                            <field name="option_locations_id" placeholder="Location..."
+                                   options="{'no_edit': True, 'no_create': True, 'no_open': True,  'no_create_edit': True}"/>
+                            <field name="option_id" placeholder="Option ID..."/>
+                            <field name="enabled"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="view_option_values_tree" model="ir.ui.view">
+            <field name="name">home.option.values.tree</field>
+            <field name="model">module_sb.option_values</field>
+            <field name="arch" type="xml">
+                <tree>
+<!--                        default_order="parent_id asc, name asc"-->
+<!--                        default_group_by="parent_id"-->
+<!--                        expand="True"-->
+<!--                >-->
+                    <field name="name" string="Names"/>
+                    <field name="option_classes_id" string="Class"/>
+                    <field name="option_categories_id" string="Category"/>
+                    <field name="option_locations_id" string="Location"/>
+                    <field name="enabled" widget="button"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_option_values" model="ir.actions.act_window">
+            <field name="name">Option Values</field>
+            <field name="res_model">module_sb.option_values</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem id="menu_option_values"
+                  name="Options Values"
+                  parent="sale.prod_config_main"
+                  action="action_option_values"
+                  sequence="1"/>
+
+    </data>
+</odoo>

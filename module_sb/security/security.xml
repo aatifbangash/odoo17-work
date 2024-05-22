@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Define the custom group -->
+    <record id="franchise_admin" model="res.groups">
+        <field name="name">Franchise Admin</field>
+    </record>
+
+    <record id="franchise_admin_products_access_right" model="ir.model.access">
+        <field name="name">Franchise admin products access right</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="group_id" ref="franchise_admin"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+
+<!--    <record id="own_community_records" model="ir.rule">-->
+<!--        <field name="name">Own community records</field>-->
+<!--        <field name="model_id" ref="community_module.model_community_module_community"/>-->
+<!--        <field name="domain_force">[('create_uid','=',user.id)]</field>-->
+<!--        <field name="groups" eval="[(4, ref('franchise_admin'))]"/>-->
+<!--        <field name="perm_create" eval="True"/>-->
+<!--        <field name="perm_write" eval="True"/>-->
+<!--        <field name="perm_read" eval="True"/>-->
+<!--        <field name="perm_unlink" eval="True"/>-->
+<!--    </record>-->
+
+    <record id="own_company_users" model="ir.rule">
+        <field name="name">Own company users</field>
+        <field name="model_id" ref="base.model_res_users"/>
+        <field name="domain_force">[('company_id', 'in', user.company_ids.ids)]</field>
+        <field name="groups" eval="[(4, ref('franchise_admin'))]"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="own_company_website" model="ir.rule">
+        <field name="name">Own company websites</field>
+        <field name="model_id" ref="website.model_website"/>
+        <field name="domain_force">[('company_id', 'in', user.company_ids.ids)]</field>
+        <field name="groups" eval="[(4, ref('franchise_admin'))]"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+<!--    <record id="own_franchise_options" model="ir.rule">-->
+<!--        <field name="name">Own franchise options</field>-->
+<!--        <field name="model_id" ref="module_sb.model_module_sb_franchise_options"/>-->
+<!--        <field name="domain_force">[('company_id', 'in', user.company_ids.ids)]</field>-->
+<!--        <field name="groups" eval="[(4, ref('franchise_admin'))]"/>-->
+<!--        <field name="perm_create" eval="True"/>-->
+<!--        <field name="perm_write" eval="True"/>-->
+<!--        <field name="perm_read" eval="True"/>-->
+<!--        <field name="perm_unlink" eval="True"/>-->
+<!--    </record>-->
+
+    <record id="own_home_plan_options" model="ir.rule">
+        <field name="name">Own franchise home plan options</field>
+        <field name="model_id" ref="module_sb.model_module_sb_home_plan_options"/>
+        <field name="domain_force">[('company_id', 'in', user.company_ids.ids)]</field>
+        <field name="groups" eval="[(4, ref('franchise_admin'))]"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+</odoo>

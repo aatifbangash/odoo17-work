@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_module_sb_options_group_user,module_sb.options_group,model_module_sb_options_group,,1,1,1,1
+access_module_sb_options_user,module_sb.options,model_module_sb_options,,1,1,1,1
+access_module_sb_option_values_user,module_sb.option_values,model_module_sb_option_values,,1,1,1,1
+access_module_sb_homeplan_groups_user,module_sb.homeplan.groups,model_module_sb_homeplan_groups,base.group_user,1,1,1,1
+access_module_sb_homeplan_options_user,module_sb.homeplan.options,model_module_sb_homeplan_options,base.group_user,1,1,1,1
+access_module_sb_franchise_options_user,module_sb.franchise.options,model_module_sb_franchise_options,base.group_user,1,1,1,1
+access_module_sb_home_plan_options_user,module_sb.home_plan_options,model_module_sb_home_plan_options,base.group_user,1,1,1,1
+access_module_sb_franchise_homeplans_user,module_sb.franchise_homeplans,model_module_sb_franchise_homeplans,,1,1,1,1
+access_module_sb_categories_group_user,module_sb.categories_group,model_module_sb_categories_group,,1,1,1,1
+access_module_sb_option_classes_user,module_sb.option_classes,model_module_sb_option_classes,,1,1,1,1
+access_module_sb_option_locations_user,module_sb.option_locations,model_module_sb_option_locations,,1,1,1,1
+access_module_sb_option_categories_user,module_sb.option_categories,model_module_sb_option_categories,,1,1,1,1
+access_module_sb_master_plan_options_user,module_sb.master_plan_options,model_module_sb_master_plan_options,,1,1,1,1

@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="module_sb_users_form_view" model="ir.ui.view">
+            <field name="name">module.sb.users.form.view</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <field name="login" position="after">
+                    <label for="is_franchisor" string="Is Franchisor Admin"/>
+                    <h2>
+                        <field name="is_franchisor"/>
+                    </h2>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

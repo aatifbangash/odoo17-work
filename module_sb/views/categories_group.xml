@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form View -->
+        <record id="view_categories_group_form" model="ir.ui.view">
+            <field name="name">categories.group.form</field>
+            <field name="model">module_sb.categories_group</field>
+            <field name="arch" type="xml">
+                <form string="Categories Group Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Kanban View -->
+        <record id="view_category_group_kanban" model="ir.ui.view">
+            <field name="name">categories.group.kanban</field>
+            <field name="model">module_sb.categories_group</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_custom">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card oe_kanban_global_click">
+                                <div class="oe_kanban_record_top">
+                                    <div class="oe_kanban_record_head">
+                                        Name:
+                                        <field name="name"/>
+                                    </div>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    Description:
+                                    <field name="description"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="view_category_group_tree" model="ir.ui.view">
+            <field name="name">categories.group.tree</field>
+            <field name="model">module_sb.categories_group</field>
+            <field name="arch" type="xml">
+                <tree create="True" default_group_by="name" editable="top" open_form_view="True">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_categories_group" model="ir.actions.act_window">
+            <field name="name">Categories Group</field>
+            <field name="res_model">module_sb.categories_group</field>
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem id="school_management_menu"
+                  name="Categories Group"
+                  parent="sale.prod_config_main"
+                  action="action_categories_group"
+                  sequence="0"/>
+
+    </data>
+</odoo>
