@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+   <t t-name="bista_web_form.section">
+       <form class="col-md-12" style="display: none">
+            <h3 t-if="section != 'Other'" t-out="section"/>
+           <div class="section_content">
+
+            </div>
+           <div class="section_footer">
+               <button type="submit" class="submit_btn btn btn-primary">Submit</button>
+               <button class="back_btn btn btn-default d-none">Go Back</button>
+           </div>
+       </form>
+    </t>
+</templates>

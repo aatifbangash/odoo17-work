@@ -1,0 +1,131 @@
+<odoo>
+
+    <record id="web_form_view_form" model="ir.ui.view">
+        <field name="name">web_form_view_form</field>
+        <field name="model">bista.web.form</field>
+        <field name="arch" type="xml">
+            <form string="web_form_form">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code" required="1"/>
+                            <field name="model_id" required="1"/>
+                        </group>
+                        <group>
+                            <field name="post_action"/>
+                            <field name="redirect_url" invisible="post_action != 'redirect'"
+                                   required="post_action == 'redirect'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Fields">
+                            <field name="field_ids"
+                                   widget="section_and_note_one2many"
+                                   context="{'default_model_id': model_id}">
+                                <tree editable="bottom">
+                                    <control>
+                                        <create name="add_record_control" string="Add a Field"/>
+                                        <create name="add_section_control" string="Add a Section"
+                                                context="{'default_display_type': 'line_section'}"/>
+                                    </control>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="field_id" domain="[('model','=',model), ('store','=',True)]"/>
+                                    <field name="field_description" string="Field ID"/>
+                                    <field name="field_type" column_invisible="1"/>
+                                    <field name="field_relation" column_invisible="1"/>
+                                    <field name="name"/>
+                                    <field name="value_source"/>
+                                    <field name="css_class"/>
+                                    <field name="model" column_invisible="1"/>
+                                    <field name="required"/>
+                                    <field name="invisible" column_invisible="1"/>
+                                    <field name="domain" invisible="field_type not in ['many2one','many2many']"
+                                           widget="domain" options="{'model': 'field_relation'}"/>
+                                    <field name="display_type" column_invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Confirmation Message" invisible="post_action != 'confirmation'">
+                            <field name="confirmation_message" required="confirmation_message == 'confirmation'"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="web_form_view_tree" model="ir.ui.view">
+        <field name="name">web_form_view_tree</field>
+        <field name="model">bista.web.form</field>
+        <field name="arch" type="xml">
+            <tree string="web_form_tree">
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="web_form_field_view_form" model="ir.ui.view">
+        <field name="name">web_form_field_view_form</field>
+        <field name="model">web.form.field</field>
+        <field name="arch" type="xml">
+            <form string="web_form_field_form">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name">Field Name</label>
+                        <field name="name" placeholder="Field Name"/>
+                    </div>
+                    <group>
+                        <group invisible="display_type" string="Configuration">
+                            <field name="field_id"
+                                   domain="[('model','=',model), ('store','=',True), ('readonly','=', False)]"/>
+                            <field name="field_description" string="Field ID"/>
+                            <field name="value_source" widget="selection_badge"/>
+                            <field name="model" invisible="1"/>
+                            <field name="model_id" invisible="1"/>
+                            <field name="display_type" invisible="1"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group invisible="display_type" string="Behavior">
+                            <field name="invisible"/>
+                            <field name="required"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="web_form_action" model="ir.actions.act_window">
+        <field name="name">Web Form</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bista.web.form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="web_form_menu_main" name="Web Forms"/>
+    <menuitem id="web_form_menu" parent="web_form_menu_main" name="Forms" action="web_form_action"/>
+
+    <template id="bista_web_form.contact_form" name="Web Form">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty preference">
+                <section class="bista_web_form" form_id="website_lead">
+                    <div class="container">
+                        <div class="row form_header">
+                            <div class="col-md-6 col-center">
+                                <h1/>
+                            </div>
+                        </div>
+                        <div class="form_content col-md-6 col-center">
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+
+
+</odoo>

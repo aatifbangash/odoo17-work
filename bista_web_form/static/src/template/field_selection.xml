@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+   <t t-name="bista_web_form.field_selection">
+        <div t-attf-class="form-group {{ field.css_class }} {{ field.value_source === 'param' ? 'd-none': ''}}">
+            <label t-att-for="field.id" t-esc="field.name"/>
+            <select t-att-required="field.required" type="text"
+                    t-att-id="field.field_description"
+                    t-att-name="field.field_description">
+                    <option selected="selected" value='' disabled="1">Select Option</option>
+                <t t-foreach="field.records" t-as="record" t-key="record.id">
+                    <option t-att-value="record.id" t-esc="record.display_name"/>
+                </t>
+            </select>
+
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+   <t t-name="bista_web_form.field_text">
+        <div class="form-group">
+            <label t-att-for="field.id" t-esc="field.name"/>
+            <textarea t-att-required="field.required"
+                      t-att-id="field.field_description"
+                      t-att-name="field.field_description"
+                      t-att-placeholder="field.name"/>
+        </div>
+    </t>
+</templates>

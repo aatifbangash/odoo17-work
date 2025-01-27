@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+   <t t-name="bista_web_form.field_basic">
+        <div t-attf-class="form-group {{ field.css_class }} {{ field.value_source === 'param' ? 'd-none': ''}}">
+            <label t-att-for="field.id" t-esc="field.name"/>
+            <input t-att-required="field.required" type="text" t-att-id="field.field_Description"
+                   t-att-name="field.field_description"
+                   t-att-value="record[field.field_description]"
+                   t-att-placeholder="field.name"/>
+        </div>
+    </t>
+</templates>

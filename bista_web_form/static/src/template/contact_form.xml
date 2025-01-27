@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+   <t t-name="bista_web_form.contact_form_template">
+       <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 title row">
+                            <div class="col-md-8">
+                                <p class="section_title">In order to best help you, tell us where you are in your new
+                                    home search.
+                                </p>
+                            </div>
+                            <div class="agent col-md-4">
+                                <div>
+                                    <h6>
+                                        <strong>
+                                            Hi, I'am Melissa
+                                        </strong>
+                                    </h6>
+                                    <p>(302) 569-9698</p>
+                                    <p>
+                                        <span>Get to know me</span>
+                                        <span class="fa fa-exclamation-circle "/>
+                                    </p>
+                                </div>
+                                <div>
+                                    <img src="https://schellbrothers.com/content/presize/9/91/910/910f5ff93f92557290fad86396f3477b-1718309317.jpg"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+           <div id="config_options" class="row option_section">
+                        <t t-foreach="form.config_options" t-as="config" t-key="config">
+                            <t t-set="config" t-value="form.config_options[config]"/>
+                            <div t-on-click="form.toggleConfig.bind(form, config.id)" class="col-md-4 option">
+                            <div class="wrapper">
+                                <div class="content">
+                                    <strong t-esc="config.title"/>
+                                    <p t-esc="config.description"/>
+                                </div>
+                                <div class="icon">
+                                    <i t-attf-class="fa {{ config.icon }}" aria-hidden="true"/>
+                                </div>
+                            </div>
+                        </div>
+                        </t>
+                    </div>
+           <div id="config_success" class="row section_complete d-none">
+                        <div class="col-md-12">
+                            <div class="wrapper">
+                                <div class="message">
+                                    <span class="fa fa-check-circle"/>
+                                    <strong id="config_description"/>
+                                </div>
+                                <a href="#" t-on-click="form.toggleConfig.bind(form)">Change</a>
+                            </div>
+                        </div>
+                    </div>
+
+           <div id="section_communities" style="" class="row option_section d-none">
+                        <t t-foreach="form.communities" t-as="community" t-key="community">
+                            <t t-set="c" t-value="form.communities[community]"/>
+                            <div class="col-md-3 option" t-on-click="form.toggleCommunities.bind(form, c.id)">
+                            <div class="wrapper">
+                                <div class="content">
+                                    <strong t-esc="c.title"/>
+                                    <p t-if="c.count">
+                                        <stron t-esc="c.count"/>
+                                        <span> Available Communities</span>
+                                    </p>
+                                    <p t-else="">
+                                        <span>Coming Soon!</span>
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                    <span t-esc="c.icon"/>
+                                </div>
+                            </div>
+                        </div>
+                        </t>
+                    </div>
+           <div id="section_community_success" style="" class="row section_complete d-none">
+                        <div class="col-md-12">
+                            <div class="wrapper">
+                                <div class="message">
+                                    <span class="fa fa-check-circle"/>
+                                    <strong id="community_description"/>
+                                </div>
+                                <a href="#" t-on-click="form.toggleCommunities.bind(form)">Change</a>
+                            </div>
+                        </div>
+                    </div>
+
+           <div id="bista_web_form" class="row bista_web_form d-none" form_id="website_lead">
+               <div class="form_content col-md-12 col-center"/>
+               <div class="confirmation_message d-none"/>
+               <div class="col-md-12">
+                    <p class="deem">
+                        When you join our list, you agree to receive email updates and promotions, as well
+                        as
+                        calls if
+                        you share your phone number.
+                    </p>
+                </div>
+            </div>
+
+           <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div t-on-click="form.cancelBtn.bind()" class="close-badge">
+                            <span>x</span>
+                            <span>Cancel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </t>
+</templates>
