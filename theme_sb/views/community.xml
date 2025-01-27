@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="theme_sb.community_page" model="website.page">
+            <field name="name">Services</field>
+            <field name="type">qweb</field>
+            <field name="url">/communities</field>
+            <field name="is_published">True</field>
+            <field name="key">theme_sb.community_page</field>
+            <field name="arch" type="xml">
+                <t name="Services" t-name="theme_sb.community_page">
+                    <t t-call="website.layout">
+                        <div class="oe_structure"/>
+                        <section class="award_panel">
+                            <img src="https://schellbrothers.com/content/gallery/boty-12.png" height="45px" alt="img"/>
+                            Schell Brothers named 2023 Builder of the Year by PROBUILDER Magazine. Read the Article
+                        </section>
+                        <section class="our-services py-5">
+                            <div class="container">
+                                <div class="text-center partner_name py-5">
+                                    <h2 class="h1">Arbour Lynn</h2>
+                                    <p class="partner_punch_line">Single-family homes with a Rehoboth address, just
+                                        minutes from shopping and
+                                        beaches.
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="partner_address_details">
+                            <div class="d-flex">
+                                <p>
+                                    19325 Loblolly Circle Rehoboth Beach, DE 19971
+                                </p>
+                                <p>
+                                    Mon-Sat 10am-5pm Sun 11am-5pm
+                                </p>
+
+                            </div>
+                        </section>
+                        <div class="oe_structure"/>
+                    </t>
+                </t>
+            </field>
+        </record>
+
+        <record id="community_page_menu" model="website.menu">
+            <field name="name">Communities</field>
+            <field name="url">/communities</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">20</field>
+        </record>
+    </data>
+</odoo>

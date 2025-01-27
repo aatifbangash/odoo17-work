@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="theme_sb.home_plan" name="Record listing">
+            <!-- Call the website layout -->
+            <t t-call="website.layout">
+                <!-- Add your custom content here -->
+                <div class="container">
+                    <h1>Welcome to My Website</h1>
+                    <p>This is my custom template.</p>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

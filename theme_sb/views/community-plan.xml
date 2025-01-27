@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="community_plan" inherit_id="website.homepage" name="Home">
+        <xpath expr="//t[@t-call='website.layout']" position="replace">
+            <t t-call="website.layout">
+                <t t-set="pageName" t-value="'homepage'"/>
+                <div class="oe_structure"/>
+
+                <section class="mx-auto" style="margin-bottom: 5rem;">
+                    <div class="container">
+                        <img class="w-100" t-att-src="'/franchisor_theme/static/img/schell-franchisor-home.png'"/>
+                        <div class="division-card">
+                            <p>
+                                COASTAL. IN STYLE.
+                            </p>
+                            <div class="d-flex justify-content-center gap-4">
+                                <a class="btn btn-primary rounded-0 division-button" href="/division">Communities
+                                </a>
+                                <a class="btn btn-primary rounded-0 division-button">Floor Plans</a>
+                                <a class="btn btn-primary rounded-0 division-button">Design Studio</a>
+                            </div>
+                            <span class="d-flex justify-content-center text-light"
+                                  style="position: relative; top: 80px;">
+                                Learn more about our delaware division >
+                            </span>
+                        </div>
+                    </div>
+                </section>
+                <section class="communities">
+                    <p class="communities-heading">
+                        delaware communities
+                    </p>
+                    <p class="communities-description">
+                        The Coastal resorts of southeastern Delaware are known for their gorgeous natural scenery,
+                        protected parks and clean beaches.
+                    </p>
+                    <img class="w-100" t-att-src="'/franchisor_theme/static/img/division-communities-map.png'"/>
+                    <ul t-if="communities" class="row mt-5 " style="gap: 4.2rem;">
+                        <t t-foreach="communities" t-as="community">
+                            <li t-if="community" class="col-2">
+                                <a t-attf-href="community_plan/{{community.id}}">
+                                    <div class="card rounded-0" style="height: 15rem; width: 19rem;">
+                                        <div class="card-body">
+                                            <img
+                                                    t-if="community.image_1920"
+                                                    t-att-src="image_data_uri(community.image_1920)"
+                                                    class="card-img-top rounded-0"
+                                                    style="height: 8rem;"
+                                            />
+                                            <h5 class="card-text text-center text-dark mt-1">
+                                                <t t-esc="community.display_name"/>
+                                            </h5>
+                                            <p style="font-size: 12px;" class="text-center text-dark">
+                                                <t t-esc="community.code"/>
+                                            </p>
+                                            <p class="text-center text-dark">
+                                                <t t-esc="community.address"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </t>
+                    </ul>
+                    <!--                    </div>-->
+                </section>
+                <section class="floor_plans">
+                    <h1 class="text-dark communities-heading">
+                        floor plans
+                    </h1>
+                    <h2 class="text-dark communities-description">
+                        The Coastal resorts of southeastern Delaware are known for their gorgeous natural scenery,
+                        protected parks and clean beaches.
+                    </h2>
+                    <div class="d-flex text-light gap-2 justify-content-center">
+                        <h5 class="text-dark" style="margin-top: auto; margin-bottom: auto;">Filter:</h5>
+                        <button class="btn btn-link text-dark filter_button">All</button>
+                        <button class="btn btn-link text-dark filter_button">Ranch</button>
+                        <button class="btn btn-link text-dark filter_button">First Floor Suit</button>
+                        <button class="btn btn-link text-dark filter_button">Second Floor Suit</button>
+                    </div>
+                    <!--                    <div class="row">-->
+                    <ul t-if="home_plans" class="row mt-5 " style="gap: 4.2rem;">
+                        <t t-foreach="home_plans" t-as="home_plan">
+                            <li t-if="home_plan" class="col-2">
+                                <a href="https://schellbrothers.com/find-new-homes/delaware-beaches/arbor-lyn/floorplan/the-azalea/">
+                                    <div class="card rounded-0 floor-plan-card border-0"
+                                    >
+                                        <div class="card-body rounded-0">
+                                            <img
+                                                    t-if="home_plan.image_1920"
+                                                    t-att-src="image_data_uri(home_plan.image_1920)"
+                                                    class="card-img-top rounded-0"
+                                                    style="height: 115px;"
+                                            />
+                                            <h5 class="card-text text-center text-dark mt-1">
+                                                <t t-esc="home_plan.name"/>
+                                            </h5>
+                                            <span class="listing-price">
+                                                Base price
+                                                <span class="nowrap text-dark">$
+                                                    <t t-esc="home_plan.base_price"/>
+                                                </span>
+                                                <span class="nowrap text-dark">- $
+                                                    <t t-esc="home_plan.incentive_price"/>
+                                                    incentive
+                                                </span>
+                                                <span class="nowrap text-dark">=
+                                                    $
+                                                    <strong class="price"
+                                                            t-esc="home_plan.base_price - home_plan.incentive_price"/>
+                                                </span>
+                                            </span>
+                                            <span class="home_structure">
+                                                <ul class="detail-stats large-block-grid-2 small-block-grid-2">
+                                                    <li>
+                                                        <div class="detail-stat">
+                                                            <p>
+                                                                <strong>
+                                                                    <t t-esc="home_plan.min_bedrooms"/>
+                                                                    -
+                                                                    <t t-esc="home_plan.max_bedrooms"/>
+                                                                </strong>
+                                                            </p>
+                                                            <p>
+                                                                <small>Bedrooms</small>
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="detail-stat">
+                                                            <p>
+                                                                <strong>
+                                                                    <t t-esc="home_plan.min_bathrooms"/>
+                                                                    -
+                                                                    <t t-esc="home_plan.max_bathrooms"/>
+                                                                </strong>
+                                                            </p>
+                                                            <p>
+                                                                <small>Bathrooms</small>
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </span>
+                                            <div class="area-stats">
+                                                <strong class="text-black">
+                                                    <t t-esc="home_plan.base_heated_square_feet"/>
+                                                    -
+                                                    <t t-esc="home_plan.max_heated_square_feet"/>
+                                                </strong>
+                                                <small class="text-black">Heated Sqft</small>
+                                                <small class="text-black">(
+                                                    <t t-esc="home_plan.base_total_square_feet"/>
+                                                    -
+                                                    <t t-esc="home_plan.max_total_square_feet"/>
+                                                    Total Sqft)
+                                                </small>
+                                            </div>
+                                            <div class="area-stats">
+                                                <t t-if="home_plan.home_plan_options_ids.exists()">
+                                                    <ul>
+                                                        <t t-foreach="home_plan.home_plan_options_ids"
+                                                           t-as="franchise">
+                                                            <t t-if="franchise.is_active">
+                                                                <t t-if="franchise.master_plan_options_id.options_id">
+                                                                    <li>
+                                                                        <small class="text-black">
+                                                                            <t t-esc="franchise.master_plan_options_id.options_id.name"/>
+                                                                        </small>
+                                                                        <small class="text-black">-</small>
+                                                                        <small class="text-black">
+                                                                            <t t-esc="franchise.master_plan_options_id.option_values_id.name"/>
+                                                                        </small>
+                                                                    </li>
+                                                                </t>
+                                                            </t>
+                                                        </t>
+                                                    </ul>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </t>
+                    </ul>
+                </section>
+                <section class="design_studio_section">
+                    <div class="container">
+                        <div class="row build_homes">
+                            <div class="col-lg-6">
+                                <img class="w-100 big_house"
+                                     t-att-src="'/franchisor_theme/static/img/schell-bighouse1.png'"/>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="d-flex design_studio text-center">
+                                    <div class="heading">
+                                        <h3>Design Studio</h3>
+                                    </div>
+                                    <div>
+                                        <p>To help you prepare for your Selections Appointment, browse our
+                                            inspirational new home idea gallery, create style collages, and save
+                                            your
+                                            favorite selections.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-primary launch_design_studio mt-4">Launch online
+                                            design
+                                            studio
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="d-flex victory_images mt-4">
+                                    <div>
+                                        <img class="w-100"
+                                             t-att-src="'/franchisor_theme/static/img/schell-interior1.png'"/>
+                                    </div>
+                                    <div>
+                                        <img class="w-100"
+                                             t-att-src="'/franchisor_theme/static/img/schell-interior2.png'"/>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="division_homes">
+                    <!--                    <div class="container">-->
+                    <p class="division_home_heading">
+                        come home to delaware
+                    </p>
+                    <p class="division_home_description">
+                        The Coastal resorts of southeastern Delaware are known for their gorgeous natural scenery,
+                        protected parks and clean beaches.
+                    </p>
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <img class="w-100 big_division_home"
+                                 t-att-src="'/franchisor_theme/static/img/schell-division-img.png'"/>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="d-flex design_studio">
+                                <div class="heading">
+                                    <h3 class="text-black">The Secret is Out: Southern Delaware is a Retirement
+                                        Oasis
+                                    </h3>
+                                </div>
+                                <div>
+                                    <p>To help you prepare for your Selections Appointment, browse our
+                                        inspirational new home idea gallery, create style collages, and save your
+                                        favorite selections.
+                                    </p>
+                                    <p>"To help you prepare for your Selections Appointment, browse our
+                                        inspirational new home idea gallery, create style collages, and save your
+                                        favorite selections."
+                                    </p>
+                                </div>
+                                <div class="heading text-black">
+                                    <h5 class="text-black">Your income goes further in Delaware</h5>
+                                </div>
+                                <div>
+                                    <p>To help you prepare for your Selections Appointment, browse our
+                                        inspirational new home idea gallery, create style collages, and save your
+                                        favorite selections.
+                                    </p>
+                                    <p>"To help you prepare for your Selections Appointment, browse our
+                                        inspirational new home idea gallery, create style collages, and save your
+                                        favorite selections."
+                                    </p>
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary launch_design_studio mt-4">MORE ABOUT DELAWARE
+                                        RETIREMENT BENIFITS
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--                    </div>-->
+                </section>
+                <div class="oe_structure"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>

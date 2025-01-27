@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="community_plan" name="Community_homeplans">
+            <t t-call="website.layout">
+                <t t-set="pageName" t-value="'Community homeplans'"/>
+                <div class="oe_structure"/>
+
+                <section class="mx-auto" style="margin-bottom: 5rem;">
+                    <div class="container">
+                        <img class="w-100" t-att-src="'/franchisor_theme/static/img/schell-franchisor-home.png'"/>
+                        <div class="division-card">
+                            <p>
+                                COASTAL. IN STYLE.
+                            </p>
+                            <div class="d-flex justify-content-center gap-4">
+                                <a class="btn btn-primary rounded-0 division-button" href="/division">Communities
+                                </a>
+                                <a class="btn btn-primary rounded-0 division-button">Floor Plans</a>
+                                <a class="btn btn-primary rounded-0 division-button">Design Studio</a>
+                            </div>
+                            <span class="d-flex justify-content-center text-light"
+                                  style="position: relative; top: 80px;">
+                                Learn more about our delaware division >
+                            </span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="floor_plans">
+                    <h1 class="text-dark communities-heading">
+                        floor plans
+                    </h1>
+                    <h2 class="text-dark communities-description">
+                        The Coastal resorts of southeastern Delaware are known for their gorgeous natural scenery,
+                        protected parks and clean beaches.
+                    </h2>
+                    <div class="d-flex text-light gap-2 justify-content-center">
+                        <h5 class="text-dark" style="margin-top: auto; margin-bottom: auto;">Filter:</h5>
+                        <button class="btn btn-link text-dark filter_button">All</button>
+                        <button class="btn btn-link text-dark filter_button">Ranch</button>
+                        <button class="btn btn-link text-dark filter_button">First Floor Suit</button>
+                        <button class="btn btn-link text-dark filter_button">Second Floor Suit</button>
+                    </div>
+                    <!--                    <div class="row">-->
+                    <ul t-if="community_home_plan" class="row mt-5 " style="gap: 4.2rem;">
+                        <t t-foreach="community_home_plan.community_homeplans_ids" t-as="record">
+                            <li t-if="record.homeplan_id" class="col-2">
+                                <a href="https://schellbrothers.com/find-new-homes/delaware-beaches/arbor-lyn/floorplan/the-azalea/">
+                                    <div class="card rounded-0 floor-plan-card border-0"
+                                    >
+                                        <div class="card-body rounded-0">
+                                            <img
+                                                    t-if="record.homeplan_id.image_1920"
+                                                    t-att-src="image_data_uri(record.homeplan_id.image_1920)"
+                                                    class="card-img-top rounded-0"
+                                                    style="height: 115px;"
+                                            />
+                                            <h5 class="card-text text-center text-dark mt-1">
+                                                <t t-esc="record.homeplan_id.name"/>
+                                            </h5>
+                                            <span class="listing-price">
+                                                Base price
+                                                <span class="nowrap text-dark">$
+                                                    <t t-esc="record.homeplan_id.base_price"/>
+                                                </span>
+                                                <span class="nowrap text-dark">- $
+                                                    <t t-esc="record.homeplan_id.incentive_price"/>
+                                                    incentive
+                                                </span>
+                                                <span class="nowrap text-dark">=
+                                                    $
+                                                    <strong class="price"
+                                                            t-esc="record.homeplan_id.base_price - record.homeplan_id.incentive_price"/>
+                                                </span>
+                                            </span>
+                                            <span class="home_structure">
+                                                <ul class="detail-stats large-block-grid-2 small-block-grid-2">
+                                                    <li>
+                                                        <div class="detail-stat">
+                                                            <p>
+                                                                <strong>
+                                                                    <t t-esc="record.homeplan_id.min_bedrooms"/>
+                                                                    -
+                                                                    <t t-esc="record.homeplan_id.max_bedrooms"/>
+                                                                </strong>
+                                                            </p>
+                                                            <p>
+                                                                <small>Bedrooms</small>
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="detail-stat">
+                                                            <p>
+                                                                <strong>
+                                                                    <t t-esc="record.homeplan_id.min_bathrooms"/>
+                                                                    -
+                                                                    <t t-esc="record.homeplan_id.max_bathrooms"/>
+                                                                </strong>
+                                                            </p>
+                                                            <p>
+                                                                <small>Bathrooms</small>
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </span>
+                                            <div class="area-stats">
+                                                <strong class="text-black">
+                                                    <t t-esc="record.homeplan_id.base_heated_square_feet"/>
+                                                    -
+                                                    <t t-esc="record.homeplan_id.max_heated_square_feet"/>
+                                                </strong>
+                                                <small class="text-black">Heated Sqft</small>
+                                                <small class="text-black">(
+                                                    <t t-esc="record.homeplan_id.base_total_square_feet"/>
+                                                    -
+                                                    <t t-esc="record.homeplan_id.max_total_square_feet"/>
+                                                    Total Sqft)
+                                                </small>
+                                            </div>
+
+                                            <div class="area-stats">
+                                                <t t-if="record.community_homeplan_options_ids.exists()">
+                                                    <ul>
+                                                        <t t-foreach="record.community_homeplan_options_ids"
+                                                           t-as="option">
+
+                                                            <t t-if="option.is_active">
+                                                                <t t-if="option.homeplan_option_id.community_homeplan_option_override_ids.filtered(lambda x: x.type == 'option_value').exists() and option.homeplan_option_id.community_homeplan_option_override_ids.filtered(lambda x: x.type == 'option_value').name">
+                                                                    <li><t t-esc="option.homeplan_option_id.community_homeplan_option_override_ids.filtered(lambda x: x.type == 'option_value').name"/></li>
+                                                                </t>
+                                                                <t t-elif="option.homeplan_option_id.master_plan_options_id.homeplan_option_override_ids.filtered(lambda x: x.type == 'option_value' and x.company_id.id == request.env.company.id).exists() and option.homeplan_option_id.master_plan_options_id.homeplan_option_override_ids.filtered(lambda x: x.type == 'option_value' and x.company_id.id == request.env.company.id).name">
+                                                                    <li><t t-esc="option.homeplan_option_id.master_plan_options_id.homeplan_option_override_ids.filtered(lambda x: x.type == 'option_value' and x.company_id.id == request.env.company.id).name"/></li>
+                                                                </t>
+                                                                <t t-elif="option.homeplan_option_id.master_plan_options_id.option_value_override_id.exists() and option.homeplan_option_id.master_plan_options_id.option_value_override_id.name">
+                                                                    <li><t t-esc="option.homeplan_option_id.master_plan_options_id.option_value_override_id.name"/></li>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <li><t t-esc="option.homeplan_option_id.master_plan_options_id.option_values_id.name"/> </li>
+                                                                </t>
+
+                                                                <!--                                                                <t t-if="franchise.master_plan_options_id.options_id">-->
+                                                                <!--                                                                    <li>-->
+                                                                <!--                                                                        <small class="text-black">-->
+                                                                <!--                                                                            <t t-esc="franchise.master_plan_options_id.options_id.name"/>-->
+                                                                <!--                                                                        </small>-->
+                                                                <!--                                                                        <small class="text-black">-</small>-->
+                                                                <!--                                                                        <small class="text-black">-->
+                                                                <!--                                                                            <t t-esc="franchise.master_plan_options_id.option_values_id.name"/>-->
+                                                                <!--                                                                        </small>-->
+                                                                <!--                                                                    </li>-->
+                                                                <!--                                                                </t>-->
+                                                            </t>
+                                                        </t>
+                                                    </ul>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </t>
+                    </ul>
+                </section>
+                <section class="design_studio_section">
+                    <div class="container">
+                        <div class="row build_homes">
+                            <div class="col-lg-6">
+                                <img class="w-100 big_house"
+                                     t-att-src="'/franchisor_theme/static/img/schell-bighouse1.png'"/>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="d-flex design_studio text-center">
+                                    <div class="heading">
+                                        <h3>Design Studio</h3>
+                                    </div>
+                                    <div>
+                                        <p>To help you prepare for your Selections Appointment, browse our
+                                            inspirational new home idea gallery, create style collages, and save
+                                            your
+                                            favorite selections.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-primary launch_design_studio mt-4">Launch online
+                                            design
+                                            studio
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="d-flex victory_images mt-4">
+                                    <div>
+                                        <img class="w-100"
+                                             t-att-src="'/franchisor_theme/static/img/schell-interior1.png'"/>
+                                    </div>
+                                    <div>
+                                        <img class="w-100"
+                                             t-att-src="'/franchisor_theme/static/img/schell-interior2.png'"/>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="division_homes">
+                    <!--                    <div class="container">-->
+                    <p class="division_home_heading">
+                        come home to delaware
+                    </p>
+                    <p class="division_home_description">
+                        The Coastal resorts of southeastern Delaware are known for their gorgeous natural scenery,
+                        protected parks and clean beaches.
+                    </p>
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <img class="w-100 big_division_home"
+                                 t-att-src="'/franchisor_theme/static/img/schell-division-img.png'"/>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="d-flex design_studio">
+                                <div class="heading">
+                                    <h3 class="text-black">The Secret is Out: Southern Delaware is a Retirement
+                                        Oasis
+                                    </h3>
+                                </div>
+                                <div>
+                                    <p>To help you prepare for your Selections Appointment, browse our
+                                        inspirational new home idea gallery, create style collages, and save your
+                                        favorite selections.
+                                    </p>
+                                    <p>"To help you prepare for your Selections Appointment, browse our
+                                        inspirational new home idea gallery, create style collages, and save your
+                                        favorite selections."
+                                    </p>
+                                </div>
+                                <div class="heading text-black">
+                                    <h5 class="text-black">Your income goes further in Delaware</h5>
+                                </div>
+                                <div>
+                                    <p>To help you prepare for your Selections Appointment, browse our
+                                        inspirational new home idea gallery, create style collages, and save your
+                                        favorite selections.
+                                    </p>
+                                    <p>"To help you prepare for your Selections Appointment, browse our
+                                        inspirational new home idea gallery, create style collages, and save your
+                                        favorite selections."
+                                    </p>
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary launch_design_studio mt-4">MORE ABOUT DELAWARE
+                                        RETIREMENT BENIFITS
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--                    </div>-->
+                </section>
+                <div class="oe_structure"/>
+            </t>
+        </template>
+    </data>
+</odoo>
+
