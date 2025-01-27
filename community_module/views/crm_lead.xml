@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <record id="community_module_crm_lead_form_view" model="ir.ui.view">
+            <field name="name">community.module.crm.lead.form.view</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='lead']//field[@name='company_id']" position="after">
+                    <field name="community_id" string="Community"/>
+                </xpath>
+                <xpath expr="//notebook/page[@name='extra']//field[@name='company_id']" position="after">
+                    <field name="community_id" string="Community"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="community_module_crm_lead_tree_view" model="ir.ui.view">
+            <field name="name">community.module.crm.lead.tree.view</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
+            <field name="arch" type="xml">
+                <field name="country_id" position="after">
+                    <field name="company_id"/>
+                    <field name="community_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

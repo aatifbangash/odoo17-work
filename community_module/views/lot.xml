@@ -1,0 +1,97 @@
+<odoo>
+    <data>
+        <record id="community_module_lot_list" model="ir.ui.view">
+            <field name="name">community.module.lot.list</field>
+            <field name="model">community_module.lot</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="lot_number"/>
+                    <field name="section_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="community_module_lot_kanban" model="ir.ui.view">
+            <field name="name">community.module.lot.kanban</field>
+            <field name="model">community_module.lot</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_card">
+                                    <div class="oe_kanban_card_content">
+                                        <div class="oe_kanban_primary">
+                                            <div class="oe_kanban_content">
+                                                <t t-if="record.image_1920.value">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="oe_kanban_bottom_right d-flex justify-content-between">
+                                                            <field name="image_1920" widget="image"/>
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                                <div class="oe_kanban_bottom_right list-group-itemlist-item">
+                                                    <i title="icon" class="fa fa-file"/>
+                                                    <field name="name" placeholder="Display Name"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="community_module_lot_form" model="ir.ui.view">
+            <field name="name">community_module.lot.form</field>
+            <field name="model">community_module.lot</field>
+            <field name="arch" type="xml">
+                <form string="Lot">
+                    <sheet>
+                        <notebook>
+                            <page name="General Information" String="General Information">
+                                <group>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="lot_number"/>
+                                        <field name="section_id"/>
+                                        <field name="is_active"/>
+                                        <field name="description"/>
+                                    </group>
+                                    <group>
+
+                                        <field name="image_1920" widget="image"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Community Action -->
+        <record id="action_lot_list" model="ir.actions.act_window">
+            <field name="name">Lots</field>
+            <field name="res_model">community_module.lot</field>
+            <field name="view_mode">kanban,form,tree</field>
+        </record>
+
+        <menuitem id="menu_lot_list" sequence="20" name="Lots" parent="base.menu_users" action="action_lot_list"/>
+
+        <record id="google_map_lot_action_button" model="ir.actions.server">
+            <field name="name">Map Item</field>
+            <field name="model_id" ref="community_module.model_community_module_lot"/>
+            <field name="binding_model_id" ref="community_module.model_community_module_lot"/>
+            <field name="binding_view_types">form</field>
+            <field name="state">code</field>
+            <field name="code">action = records.map_lot_action()</field>
+        </record>
+    </data>
+</odoo>

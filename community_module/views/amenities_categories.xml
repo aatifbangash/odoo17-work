@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+
+        <record id="view_amenities_categories_form" model="ir.ui.view">
+            <field name="name">community_module.amenities.categories.form</field>
+            <field name="model">community_module.amenities_categories</field>
+            <field name="arch" type="xml">
+                <form string="Amenities Categories">
+                    <notebook>
+                        <page string="General">
+                            <group>
+                                <field name="name" placeholder="Name"/>
+                                <field name="icon" placeholder="Font-awesome Icon Class"/>
+                                <field name="company_id" invisible="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_amenities_categories" model="ir.actions.act_window">
+            <field name="name">Amenities Categories</field>
+            <field name="res_model">community_module.amenities_categories</field>
+            <field name="view_mode">kanban,form,tree</field>
+        </record>
+
+        <menuitem id="menu_amenities_parent"
+                  name="Amenities"
+                  parent="sale.menu_sale_config"
+                  sequence="41"/>
+
+        <menuitem id="menu_amenities_categories" name="Categories" parent="community_module.menu_amenities_parent"
+                  action="action_amenities_categories"/>
+
+    </data>
+</odoo>

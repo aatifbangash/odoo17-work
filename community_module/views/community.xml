@@ -6,6 +6,9 @@
                     .btn-outline-primary.o_form_button_create {
                     display: none !important;
                     }
+                    .img {
+                        height: 15rem !important;
+                    }
                 </style>
             </xpath>
         </template>
@@ -16,9 +19,9 @@
             <field name="model">community_module.community</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="city"/>
+                    <field name="id"/>
+                    <field name="display_name"/>
                     <field name="address"/>
-                    <field name="zip_code"/>
                 </tree>
             </field>
         </record>
@@ -36,8 +39,23 @@
                                         <div class="oe_kanban_primary">
                                             <div class="oe_kanban_content">
                                                 <t t-if="record.image_1920.value">
-                                                    <div class="oe_kanban_bottom_right">
-                                                        <field name="image_1920" widget="image"/>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="oe_kanban_bottom_right d-flex justify-content-between">
+                                                            <field name="image_1920" widget="image"/>
+                                                        </div>
+                                                        <button class="border-0 fa fa-gear bg-transparent d-flex" groups="module_sb.franchise_admin"
+                                                                name="action_owl_community_plans"
+                                                                type="object"
+                                                        />
+                                                    </div>
+                                                </t>
+                                                <t t-else="">
+                                                    <div class="d-flex justify-content-end" groups="module_sb.franchise_admin">
+
+                                                        <button class="border-0 fa fa-gear bg-transparent d-flex"
+                                                                name="action_owl_community_plans"
+                                                                type="object"
+                                                        />
                                                     </div>
                                                 </t>
                                                 <div class="oe_kanban_bottom_right">
@@ -79,6 +97,15 @@
                                                     <i title="icon" class="fa fa-phone"/>
                                                     <field name="phone" placeholder="Phone"/>
                                                 </div>
+
+                                                <div class="oe_kanban_bottom_right list-group-itemlist-item"
+                                                     groups="module_sb.franchise_admin">
+                                                    <br/>
+                                                    <!--                                                    <button class="btn btn-primary" name="action_option_community_plans"-->
+                                                    <!--                                                            type="object"-->
+                                                    <!--                                                            string="Set Plans"/>-->
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -102,6 +129,7 @@
                                     <group>
                                         <field name="legal_name"/>
                                         <field name="display_name"/>
+                                        <field name="slug"/>
                                         <field name="email"/>
                                         <field name="phone"/>
                                         <field name="address"/>
@@ -120,37 +148,189 @@
                                     </group>
                                 </group>
                             </page>
-                            <page name="Home Plans" String="Home Plans">
-                                <field name="community_homeplan_ids">
-                                    <tree>
-                                        <control>
-                                            <create string="Add homeplan"/>
-                                            <!--                                            <button type="object" string="BUTTON" name="test"/>-->
-                                        </control>
-                                        <field name="homeplan_id"/>
-<!--                                        <button name="test" type="object" icon="fa-options" string="Options"-->
-<!--                                                context="{'homeplan_id':homeplan_id}"/>-->
-                                    </tree>
-                                    <form>
-                                        <group>
-                                            <field name="current_company" invisible="1"/>
-                                            <field name="homeplan_id"
-                                                   domain="[('franchise_homeplans_ids.company_id', '=', current_company)]"
-                                                   groups="module_sb.franchise_admin"
-                                            />
+                            <!--                            <page name="Plans" String="Plans">-->
+                            <!--                                <h3>Enabled Plans</h3>-->
+                            <!--                                <field name="community_homeplans_ids">-->
+                            <!--                                    <kanban>-->
+                            <!--                                        <templates>-->
+                            <!--                                            <t t-name="kanban-box">-->
+                            <!--                                                <div class="oe_kanban_global_click">-->
+                            <!--                                                    <div class="oe_kanban_card">-->
+                            <!--                                                        <div class="oe_kanban_card_content">-->
+                            <!--                                                            <div class="oe_kanban_primary">-->
+                            <!--                                                                <div class="oe_kanban_content">-->
+                            <!--                                                                    <div class="o_kanban_record_top mb-0 mx-2">-->
+                            <!--                                                                        <div class="o_kanban_record_headings">-->
+                            <!--                                                                            <strong class="o_kanban_record_title">-->
+                            <!--                                                                                <field name="homeplan_id"-->
+                            <!--                                                                                       style="color: white; font-family: poppins, sans-serif;"/>-->
+                            <!--                                                                            </strong>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="list-group-itemlist-item kanban-items text-light">-->
+                            <!--                                                                        <field name="homeplan_base_price"-->
+                            <!--                                                                               style="font-size: 40px; font-weight: bold;"/>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="list-group-itemlist-item kanban-items"-->
+                            <!--                                                                         style="color:white !important;">-->
+                            <!--                                                                        <i class="fa fa-globe" title="icon"/>-->
+                            <!--                                                                        <field name="homeplan_company_id"/>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="list-group-itemlist-item kanban-items"-->
+                            <!--                                                                         style="color:white !important;">-->
+                            <!--                                                                        <i class="fa fa-globe" title="icon"/>-->
+                            <!--                                                                        <field name="homeplan_is_published"-->
+                            <!--                                                                               invisible="1"/>-->
+                            <!--                                                                        <t t-esc="record.homeplan_is_published.raw_value and 'Yes' or 'No'"/>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="list-group-itemlist-item kanban-items"-->
+                            <!--                                                                         style="color:white !important;">-->
+                            <!--                                                                        <i class="fa fa-globe" title="icon"/>-->
+                            <!--                                                                        <field name="homeplan_detailed_type"/>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="list-group-itemlist-item kanban-items"-->
+                            <!--                                                                         style="color:white !important;">-->
+                            <!--                                                                        <i class="fa fa-globe" title="icon"/>-->
+                            <!--                                                                        <field name="homeplan_active" invisible="1"/>-->
+                            <!--                                                                        <t t-esc="record.homeplan_active.raw_value and 'Yes' or 'No'"/>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="list-group-itemlist-item kanban-items"-->
+                            <!--                                                                         style="color:white !important;">-->
+                            <!--                                                                        <i class="fa fa-globe" title="icon"/>-->
+                            <!--                                                                        <field name="homeplan_default_code"/>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="list-group-itemlist-item kanban-items"-->
+                            <!--                                                                         style="color:white !important;">-->
+                            <!--                                                                        <i class="fa fa-globe" title="icon"/>-->
+                            <!--                                                                        <field name="homeplan_standard_price"/>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="list-group-itemlist-item kanban-items"-->
+                            <!--                                                                         style="color:white !important;">-->
+                            <!--                                                                        <i class="fa fa-globe" title="icon"/>-->
+                            <!--                                                                        <field name="homeplan_kova_model_rid"/>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                        </div>-->
+                            <!--                                                    </div>-->
+                            <!--                                                </div>-->
+                            <!--                                            </t>-->
+                            <!--                                        </templates>-->
+                            <!--                                    </kanban>-->
+                            <!--                                    &lt;!&ndash;                                    <tree>&ndash;&gt;-->
+                            <!--                                    &lt;!&ndash;&lt;!&ndash;                                        <control>&ndash;&gt;&ndash;&gt;-->
+                            <!--                                    &lt;!&ndash;&lt;!&ndash;                                            <create string="Add homeplan"/>&ndash;&gt;&ndash;&gt;-->
+                            <!--                                    &lt;!&ndash;&lt;!&ndash;                                            &lt;!&ndash;                                            <button type="object" string="BUTTON" name="test"/>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+                            <!--                                    &lt;!&ndash;&lt;!&ndash;                                        </control>&ndash;&gt;&ndash;&gt;-->
+                            <!--                                    &lt;!&ndash;                                        <field name="id"/>&ndash;&gt;-->
+                            <!--                                    &lt;!&ndash;                                        <field name="homeplan_id" string="Plans"/>&ndash;&gt;-->
+                            <!--                                    &lt;!&ndash;&lt;!&ndash;                                        <button name="test" type="object" icon="fa-options" string="Options"&ndash;&gt;&ndash;&gt;-->
+                            <!--                                    &lt;!&ndash;&lt;!&ndash;                                                context="{'homeplan_id':homeplan_id}"/>&ndash;&gt;&ndash;&gt;-->
+                            <!--                                    &lt;!&ndash;                                    </tree>&ndash;&gt;-->
+                            <!--                                    <form>-->
+                            <!--                                        <group>-->
+                            <!--                                            <field name="current_company" invisible="1"/>-->
+                            <!--                                            &lt;!&ndash; FranchiseAdmin: Show franchise specific home plans only&ndash;&gt;-->
+                            <!--                                            <field name="homeplan_id"-->
+                            <!--                                                   domain="[('franchise_homeplans_ids.company_id', '=', current_company)]"-->
+                            <!--                                                   groups="module_sb.franchise_admin"-->
+                            <!--                                                   string="Plans"-->
+                            <!--                                            />-->
+                            <!--                                            &lt;!&ndash; SuperAdmin: Show all home plans only&ndash;&gt;-->
+                            <!--                                            <field name="homeplan_id"-->
+                            <!--                                                   groups="!module_sb.franchise_admin"-->
+                            <!--                                                   string="Plans"-->
+                            <!--                                            />-->
+                            <!--                                        </group>-->
+                            <!--                                        <field name="community_homeplan_options_ids" nolabel="1">-->
+                            <!--                                            <tree editable="top">-->
+                            <!--                                                <field name="homeplan_option_id" string="Plans Options"/>-->
+                            <!--                                                <field name="community_homeplan_id_related" column_invisible="1"/>-->
 
-                                            <field name="homeplan_id"
-                                                   groups="!module_sb.franchise_admin"
-                                            />
-                                        </group>
-                                        <field name="community_homeplan_options_ids" nolabel="1">
-                                            <tree editable="top">
-                                                <field name="homeplan_option_id"/>
-                                                <field name="community_homeplan_id_related" invisible="1"/>
-                                            </tree>
-                                        </field>
-                                    </form>
-                                </field>
+                            <!--                                                <field name="options_id"/>-->
+                            <!--                                                <field name="option_values_id"/>-->
+                            <!--                                            </tree>-->
+                            <!--                                        </field>-->
+                            <!--                                    </form>-->
+                            <!--                                </field>-->
+
+                            <!--                                <br/>-->
+                            <!--                                <h3>Active Plans</h3>-->
+                            <!--                                <field name="community_homeplans_inactive_ids">-->
+                            <!--                                    <kanban create="false" edit="false" quick_edit="false" quick_create="false">-->
+                            <!--                                        <templates>-->
+                            <!--                                            <t t-name="kanban-box">-->
+                            <!--                                                <div class="oe_kanban_global">-->
+                            <!--                                                    <div class="oe_kanban_card">-->
+                            <!--                                                        <div class="oe_kanban_card_content">-->
+                            <!--                                                            <div class="oe_kanban_primary">-->
+                            <!--                                                                <div class="oe_kanban_content">-->
+                            <!--                                                                    <div class="o_kanban_record_top mb-0 mx-2">-->
+                            <!--                                                                        <div class="o_kanban_record_headings">-->
+                            <!--                                                                            <strong class="o_kanban_record_title">-->
+                            <!--                                                                                <field name="homeplan_id"-->
+                            <!--                                                                                       style="color: white; font-family: poppins, sans-serif;"/>-->
+                            <!--                                                                            </strong>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="list-group-itemlist-item kanban-items text-light">-->
+                            <!--                                                                        <field name="homeplan_base_price"-->
+                            <!--                                                                               style="font-size: 40px; font-weight: bold;"/>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="list-group-itemlist-item kanban-items"-->
+                            <!--                                                                         style="color:white !important;">-->
+                            <!--                                                                        <i class="fa fa-globe" title="icon"/>-->
+                            <!--                                                                        <field name="homeplan_company_id"/>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="list-group-itemlist-item kanban-items"-->
+                            <!--                                                                         style="color:white !important;">-->
+                            <!--                                                                        <i class="fa fa-globe" title="icon"/>-->
+                            <!--                                                                        <field name="homeplan_is_published"-->
+                            <!--                                                                               invisible="1"/>-->
+                            <!--                                                                        <t t-esc="record.homeplan_is_published.raw_value and 'Yes' or 'No'"/>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="list-group-itemlist-item kanban-items"-->
+                            <!--                                                                         style="color:white !important;">-->
+                            <!--                                                                        <i class="fa fa-globe" title="icon"/>-->
+                            <!--                                                                        <field name="homeplan_detailed_type"/>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="list-group-itemlist-item kanban-items"-->
+                            <!--                                                                         style="color:white !important;">-->
+                            <!--                                                                        <i class="fa fa-globe" title="icon"/>-->
+                            <!--                                                                        <field name="homeplan_active" invisible="1"/>-->
+                            <!--                                                                        <t t-esc="record.homeplan_active.raw_value and 'Yes' or 'No'"/>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="list-group-itemlist-item kanban-items"-->
+                            <!--                                                                         style="color:white !important;">-->
+                            <!--                                                                        <i class="fa fa-globe" title="icon"/>-->
+                            <!--                                                                        <field name="homeplan_default_code"/>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="list-group-itemlist-item kanban-items"-->
+                            <!--                                                                         style="color:white !important;">-->
+                            <!--                                                                        <i class="fa fa-globe" title="icon"/>-->
+                            <!--                                                                        <field name="homeplan_standard_price"/>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="list-group-itemlist-item kanban-items"-->
+                            <!--                                                                         style="color:white !important;">-->
+                            <!--                                                                        <i class="fa fa-globe" title="icon"/>-->
+                            <!--                                                                        <field name="homeplan_kova_model_rid"/>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                        </div>-->
+                            <!--                                                    </div>-->
+                            <!--                                                </div>-->
+                            <!--                                            </t>-->
+                            <!--                                        </templates>-->
+                            <!--                                    </kanban>-->
+                            <!--                                </field>-->
+                            <!--                            </page>-->
+                            <page name="Amenities" String="Amenities">
+                                <field name="amenities_ids"/>
+                            </page>
+                            <page name="Web Content" String="Web Content">
+                                <field name="header_text" placeholder="Header Text..." widget="html"/>
+                                <field name="why_us_html" placeholder="Why Us Text..." widget="html"/>
                             </page>
                         </notebook>
                     </sheet>
@@ -167,7 +347,7 @@
         </record>
 
         <!-- Community Menu -->
-        <menuitem id="menu_community_list" name="Communities" parent="base.menu_users" action="action_community"/>
+        <menuitem id="menu_community_list" sequence="18" name="Communities" parent="base.menu_users" action="action_community"/>
         <!--                  groups="module_sb.franchise_admin"/>-->
 
 
@@ -178,5 +358,14 @@
         <!--            </xpath>-->
 
         <!--        </template>-->
+
+        <record id="google_map_community_action_button" model="ir.actions.server">
+            <field name="name">Map Item</field>
+            <field name="model_id" ref="community_module.model_community_module_community"/>
+            <field name="binding_model_id" ref="community_module.model_community_module_community"/>
+            <field name="binding_view_types">form</field>
+            <field name="state">code</field>
+            <field name="code">action = records.map_community_action()</field>
+        </record>
     </data>
 </odoo>

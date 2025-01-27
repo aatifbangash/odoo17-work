@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <record id="community_product_form_view" model="ir.ui.view">
+            <field name="name">community product form view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="module_sb.module_sb_product_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook[last()]" position="inside">
+                    <page name="Communities" String="Communities">
+                        <field name="homeplan_community_ids" readonly="is_franchise_admin">
+                            <tree editable="top">
+                                <field name="community_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

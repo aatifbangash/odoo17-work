@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+
+        <record id="view_amenities_form" model="ir.ui.view">
+            <field name="name">community_module.amenities.form</field>
+            <field name="model">community_module.amenities</field>
+            <field name="arch" type="xml">
+                <form string="Amenities">
+                    <notebook>
+                        <page string="General" name="General">
+                            <group>
+                                <group>
+                                    <field name="category_id" placeholder="Category"/>
+                                    <field name="name" placeholder="Name"/>
+                                    <field name="description" placeholder="Description"/>
+                                    <field name="company_id" invisible="1"/>
+                                </group>
+                                <group>
+                                    <field name="image_1920" widget="image"/>
+                                </group>
+                            </group>
+                        </page>
+<!--                        <page string="Communities">-->
+<!--                                <field name="community_ids" placeholder="Community">-->
+<!--                                    <tree>-->
+<!--                                        <field name="id"/>-->
+<!--                                        <field name="display_name"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+<!--                        </page>-->
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_amenities" model="ir.actions.act_window">
+            <field name="name">Amenities</field>
+            <field name="res_model">community_module.amenities</field>
+            <field name="view_mode">kanban,form,tree</field>
+        </record>
+
+
+
+        <menuitem id="menu_amenities" parent="community_module.menu_amenities_parent" name="Amenities"
+                  action="action_amenities"/>
+
+    </data>
+</odoo>

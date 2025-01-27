@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+
+        <record id="view_community_web_form_data" model="ir.ui.view">
+            <field name="name">community.module.web_form_data</field>
+            <field name="model">community_module.web_form_data</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="company_name"/>
+                    <field name="community_name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_web_form_data" model="ir.actions.act_window">
+            <field name="name">Test Web Form Data</field>
+            <field name="res_model">community_module.web_form_data</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        <menuitem id="menu_test_web_form_data" name="Test Web Form Data" parent="base.menu_users" action="action_web_form_data"/>-->
+    </data>
+</odoo>

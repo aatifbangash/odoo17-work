@@ -12,6 +12,26 @@
         <field name="perm_unlink" eval="True"/>
     </record>
 
+    <record id="franchise_admin_amenities_categories" model="ir.model.access">
+        <field name="name">Franchise admin amenities categories read only</field>
+        <field name="model_id" ref="community_module.model_community_module_amenities_categories"/>
+        <field name="group_id" ref="module_sb.franchise_admin"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="franchise_admin_amenities" model="ir.model.access">
+        <field name="name">Franchise admin amenities categories read only</field>
+        <field name="model_id" ref="community_module.model_community_module_amenities"/>
+        <field name="group_id" ref="module_sb.franchise_admin"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
     <record id="own_community_records" model="ir.rule">
         <field name="name">Own community records</field>
         <field name="model_id" ref="community_module.model_community_module_community"/>
@@ -22,5 +42,27 @@
         <field name="perm_read" eval="True"/>
         <field name="perm_unlink" eval="True"/>
     </record>
+
+    <!--    <record id="own_amenities_categories" model="ir.rule">-->
+    <!--        <field name="name">Own amenities categories</field>-->
+    <!--        <field name="model_id" ref="community_module.model_community_module_amenities_categories"/>-->
+    <!--        <field name="domain_force">[('company_id', 'in', user.company_ids.ids)]</field>-->
+    <!--        <field name="groups" eval="[(4, ref('module_sb.franchise_admin'))]"/>-->
+    <!--        <field name="perm_create" eval="True"/>-->
+    <!--        <field name="perm_write" eval="True"/>-->
+    <!--        <field name="perm_read" eval="True"/>-->
+    <!--        <field name="perm_unlink" eval="True"/>-->
+    <!--    </record>-->
+
+    <!--    <record id="own_amenities" model="ir.rule">-->
+    <!--        <field name="name">Own amenities</field>-->
+    <!--        <field name="model_id" ref="community_module.model_community_module_amenities"/>-->
+    <!--        <field name="domain_force">[('company_id', 'in', user.company_ids.ids)]</field>-->
+    <!--        <field name="groups" eval="[(4, ref('module_sb.franchise_admin'))]"/>-->
+    <!--        <field name="perm_create" eval="True"/>-->
+    <!--        <field name="perm_write" eval="True"/>-->
+    <!--        <field name="perm_read" eval="True"/>-->
+    <!--        <field name="perm_unlink" eval="True"/>-->
+    <!--    </record>-->
 
 </odoo>
