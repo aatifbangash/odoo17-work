@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rpc_auth,access_rpc_auth,model_rpc_auth,group_rpc_admin,1,1,1,1
+access_rpc_auth_attempts,access_rpc_auth_attempts,model_rpc_auth_attempts,group_rpc_admin,1,1,1,1

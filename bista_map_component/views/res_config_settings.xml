@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="res_config_settings_google_places_api" model="ir.ui.view">
+        <field name="name">res_config_settings_google_places_api</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="70"/>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='cf-turnstile']" position="after">
+                <div class="app_settings_block" data-string="Autocomplete Services" string="Google Services"
+                     data-key="google_services">
+                    <div class="col-12 col-lg-6 o_setting_box" id="autocomplete_googleplaces_setting">
+                        <div class="o_setting_left_pane">
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="google_places_api" string="Google API Key"/>
+                            <div class="text-muted">
+                                This key is required for the google map and places feature.
+                            </div>
+                            <field name="google_places_api" placeholder="XXa3932209209329..." password="True"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

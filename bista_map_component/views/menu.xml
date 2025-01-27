@@ -1,0 +1,16 @@
+<odoo>
+
+
+    <menuitem id="google_map_root" name="Google Map" web_icon="bista_google_map_product,static/description/icon.png"/>
+    <menuitem parent="google_map_root" id="map_item_community_menu" name="Communities" action="map_community_action"
+              sequence="2"/>
+    <menuitem parent="google_map_root" id="map_item_home_pan_menu" name="Lots" action="map_home_plan_action"
+              sequence="3"/>
+    <menuitem id="google_map_configuration" name="Configuration" parent="google_map_root"/>
+    <menuitem id="google_map_menu" parent="google_map_configuration" name="Google Map" action="google_map_action"
+              sequence="1"/>
+    <menuitem id="map_item_state_menu" parent="google_map_configuration" name="Item Status"
+              action="map_item_status_action"
+              sequence="4"/>
+
+</odoo>

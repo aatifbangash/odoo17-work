@@ -1,0 +1,6 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_google_map,access_google_map,model_google_map,base.group_user,1,1,1,1
+access_google_map_item,access_google_map_item,model_google_map_item,base.group_user,1,1,1,1
+access_google_map_coordinate,access_google_map_coordinate,model_google_map_coordinate,base.group_user,1,1,1,1
+access_map_item_content,access_map_item_content,model_map_item_content,base.group_user,1,1,1,1
+access_map_item_status,access_map_item_status,model_map_item_status,base.group_user,1,1,1,1

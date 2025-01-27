@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+   <t t-name="bista_map_component.lot_preview">
+       <div>
+
+       <!--                    below is for status: Available-->
+                     <section t-if="data.status_name == 'Available'" style="margin-top: 5rem; margin-right: 7px; margin-left: 7px;">
+                        <div class="partner_name">
+                            <h4>Miralon</h4>
+                            <h3>Homesite #<t t-esc="data.lot_number || 0"/></h3>
+                            <h4 class="homesites_heading">Available Homesites</h4>
+                            <p class="lot_price">Lot Premium <span>$35000</span></p>
+                        </div>
+                        <hr style="color: gray; margin-bottom: 10px;"/>
+                        <p class="info_desc"><i class="fa fa-info-circle" aria-hidden="true"></i> Base price includes lot cost. Some lots have additional premiums. Some plans may require structural options to meet minimum square feet requirements.</p>
+                        <p class="info_desc"><i class="fa fa-info-circle" aria-hidden="true"></i> Consult the community sales manager to confirm which options fit on the lot. Incentive shown is a combination of our community incentive and our Platinum Package Discount ($10,000). Speak to your Community Sales Manager for details.</p>
+                        <hr style="color: gray; margin-bottom: 5px;"/>
+
+                        <div class="partner_name">
+                        <h4 style="color: gray; margin: 15px 0px; font-size: 19px;">Single Family Floor Plans</h4>
+                            <i class="fa fa-arrow-down" style="display: block; color: gray;" aria-hidden="true"></i>
+                    </div>
+                        <div class="container mt-4">
+                             <ul t-if="data.home_plans" class="row mt-1 flex-wrap">
+                                <t t-foreach="data.home_plans" t-as="home_plan" t-key="home_plan.id">
+                                    <li t-if="home_plan" class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mt-4" t-key="home_plan.id">
+                                        <a class="mx-5"
+                                           t-attf-href="/find-your-home/{{data.partner.data_id and data.partner.data_id.code ? data.partner.data_id.code  : 'undefined' }}/{{data.partner.slug}}/plan/{{home_plan.slug}}">
+                                            <div class="card rounded-0 floor-plan-card border-0 w-100">
+                                                <div class="card-body rounded-0">
+                                                    <img
+                                                            t-if="home_plan.image_1920"
+                                                            t-att-src="`data:image/png;base64,${home_plan.image_1920}`"
+                                                            class="card-img-top w-100 rounded-0"
+                                                            style="height: 115px;"
+                                                    />
+                                                    <h5 class="card-text text-center text-dark mt-1">
+                                                        <t t-esc="home_plan.name"/>
+                                                    </h5>
+                                                    <span class="listing-price">
+                                                        Base price
+                                                        <span class="nowrap text-dark">
+                                                            <t t-set="final_base_price" t-value="0.00"/>
+                                                            <t t-set="plan_base_price"
+                                                               t-value="home_plan.product_override_ids.filter((r)=> r.type == 'plan' and r.company_id.id == partner.id)"/>
+                                                            <t t-if="plan_base_price and plan_base_price.base_price">
+                                                                <t t-set="final_base_price"
+                                                                   t-value="plan_base_price.base_price"/>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <t t-set="master_plan_base_price"
+                                                                   t-value="home_plan.product_override_ids.filter((r)=> r.type == 'master_plan')"/>
+                                                                <t t-if="master_plan_base_price and master_plan_base_price.base_price">
+                                                                    <t t-set="final_base_price"
+                                                                       t-value="master_plan_base_price.base_price"/>
+                                                                </t>
+                                                            </t>
+                                                            $
+                                                            <t t-esc="final_base_price"/>
+                                                        </span>
+                                                        <span class="nowrap text-dark">- $
+                                                            <t t-esc="home_plan.incentive_price"/>
+                                                            incentive
+                                                        </span>
+                                                        <span class="nowrap text-dark">=
+                                                            $
+                                                            <strong class="price"
+                                                                    t-esc="final_base_price - home_plan.incentive_price"/>
+                                                        </span>
+                                                    </span>
+                                                    <span class="home_structure">
+                                                        <ul class="detail-stats large-block-grid-2 small-block-grid-2">
+                                                            <li>
+                                                                <div class="detail-stat">
+                                                                    <p>
+                                                                        <strong>
+                                                                            <t t-esc="home_plan.min_bedrooms"/>
+                                                                            -
+                                                                            <t t-esc="home_plan.max_bedrooms"/>
+                                                                        </strong>
+                                                                    </p>
+                                                                    <p>
+                                                                        <small>Bedrooms</small>
+                                                                    </p>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="detail-stat">
+                                                                    <p>
+                                                                        <strong>
+                                                                            <t t-esc="home_plan.min_bathrooms"/>
+                                                                            -
+                                                                            <t t-esc="home_plan.max_bathrooms"/>
+                                                                        </strong>
+                                                                    </p>
+                                                                    <p>
+                                                                        <small>Bathrooms</small>
+                                                                    </p>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </span>
+                                                    <div class="area-stats">
+                                                        <strong class="text-black">
+                                                            <t t-esc="home_plan.base_heated_square_feet"/>
+                                                            -
+                                                            <t t-esc="home_plan.max_heated_square_feet"/>
+                                                        </strong>
+                                                        <small class="text-black">Heated Sqft</small>
+                                                        <small class="text-black">(
+                                                            <t t-esc="home_plan.base_total_square_feet"/>
+                                                            -
+                                                            <t t-esc="home_plan.max_total_square_feet"/>
+                                                            Total Sqft)
+                                                        </small>
+                                                    </div>
+                                                    <!--                                        <div class="area-stats">-->
+                                                    <!--                                            <t t-if="home_plan.home_plan_options_ids.exists()">-->
+                                                    <!--                                                <ul>-->
+                                                    <!--                                                    <t t-foreach="home_plan.home_plan_options_ids"-->
+                                                    <!--                                                       t-as="franchise">-->
+                                                    <!--                                                        <t t-if="franchise.is_active">-->
+                                                    <!--                                                            <t t-if="franchise.master_plan_options_id.options_id">-->
+                                                    <!--                                                                <li>-->
+                                                    <!--                                                                    <small class="text-black">-->
+                                                    <!--                                                                        <t t-esc="franchise.master_plan_options_id.options_id.name"/>-->
+                                                    <!--                                                                    </small>-->
+                                                    <!--                                                                    <small class="text-black">-</small>-->
+                                                    <!--                                                                    <small class="text-black">-->
+                                                    <!--                                                                        <t t-esc="franchise.master_plan_options_id.option_values_id.name"/>-->
+                                                    <!--                                                                    </small>-->
+                                                    <!--                                                                </li>-->
+                                                    <!--                                                            </t>-->
+                                                    <!--                                                        </t>-->
+                                                    <!--                                                    </t>-->
+                                                    <!--                                                </ul>-->
+                                                    <!--                                            </t>-->
+                                                    <!--                                        </div>-->
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="restriction col-lg-12">
+                                    * Some restrictions apply. Subject to change without notice.
+                                </div>
+                                <div class="col-lg-12 mt-5">
+                                    <button class="btn features_btn w-100">
+                                       <i class="fa fa-download" aria-hidden="true"></i> Included Features <br/><span>SCHELL BORTHER</span>
+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr style="color: gray; margin-top: 4rem;"/>
+
+                        <div class="text-center">
+                            <i class="fa fa-home" style="color: gray; font-size: 6rem;" aria-hidden="true"></i>
+                            <h4>Your future home awaits.</h4>
+                            <h5 style="font-size: 15px; color: gray; margin-top: 10px;">Get in contact with our experienced Sales Team for questions about available homesites.
+                            </h5>
+                        </div>
+
+                        <div class="d-flex justify-content-evenly mt-4">
+                            <div class="d-flex flex-column align-items-center">
+                                <img class="sales_person_img" t-att-src="'/franchisor_theme/static/img/tyler.jpg'"/>
+                                <strong class="mt-2">Tyler</strong>
+                                <p class="text-light">(302) 569-939</p>
+                                <p class="get_to_know text-light">Get to know Tarah</p>
+                            </div>
+                            <div class="d-flex flex-column align-items-center">
+                                <img class="sales_person_img" t-att-src="'/franchisor_theme/static/img/tarah.jpg'"/>
+                                <strong class="mt-2">Tarah</strong>
+                                <p class="text-light">(302) 569-9122</p>
+                                <p class="get_to_know text-light">Get to know Tarah</p>
+                            </div>
+                        </div>
+
+
+                    </section>
+<!--                    below is for status: Sold-->
+                    <section t-elif="data.status_name == 'Sold'" style="margin-top: 5rem; margin-right: 7px; margin-left: 7px;">
+                    <div class="partner_name">
+                        <h4>Miralon</h4>
+                        <h3>Homesite #<t t-esc="data.lot_number || 0"/></h3>
+                        <h4 class="homesites_sold_heading">Sold Homesite</h4>
+                    </div>
+                        <hr style="color: gray; margin-bottom: 10px;"/>
+
+                        <div class="text-center">
+                            <i class="fa fa-home" style="color: gray; font-size: 6rem;" aria-hidden="true"></i>
+                            <h4>This shouldn't be your stopping point.</h4>
+                            <h5 style="font-size: 15px; color: gray; margin-top: 10px;">Get in contact with our experienced Sales Team for questions about available homesites.
+                            </h5>
+                        </div>
+
+                        <div class="d-flex justify-content-evenly mt-4">
+                            <div class="d-flex flex-column align-items-center">
+                                <img class="sales_person_img" t-att-src="'/franchisor_theme/static/img/tyler.jpg'"/>
+                                <strong class="mt-2">Tyler</strong>
+                                <p class="text-light">(302) 569-939</p>
+                                <p class="get_to_know text-light">Get to know Tarah</p>
+                            </div>
+                            <div class="d-flex flex-column align-items-center">
+                                <img class="sales_person_img" t-att-src="'/franchisor_theme/static/img/tarah.jpg'"/>
+                                <strong class="mt-2">Tarah</strong>
+                                <p class="text-light">(302) 569-9122</p>
+                                <p class="get_to_know text-light">Get to know Tarah</p>
+                            </div>
+                        </div>
+
+
+                    </section>
+<!--&lt;!&ndash;                    below is for status: Model/Future Models&ndash;&gt;-->
+                    <section t-elif="data.status_name == 'Model'" style="margin-top: 5rem; margin-right: 7px; margin-left: 7px;">
+                    <div class="partner_name">
+                        <h4>Miralon</h4>
+                        <h3>Homesite #<t t-esc="data.lot_number || 0"/></h3>
+                        <h4 class="homesites_model_heading">Model Homesite</h4>
+                    </div>
+                        <div style="margin: 0px 10px;">
+                            <h5 style="color: gray;">Details:</h5>
+                            <div>
+                                <p class="details"><i class="fa fa-star" aria-hidden="true"></i> 1st Floor Heated SqFt: <span class="text-light" style="font-weight: 600;">2776</span></p>
+                                <p class="details"><i class="fa fa-star" aria-hidden="true"></i> 2st Floor Heated SqFt: <span class="text-light" style="font-weight: 600;">590</span></p>
+                                <p class="details"><i class="fa fa-star" aria-hidden="true"></i> Bathrooms: <span class="text-light" style="font-weight: 600;">4</span></p>
+                                <p class="details"><i class="fa fa-star" aria-hidden="true"></i> Bedrooms: <span class="text-light" style="font-weight: 600;">4</span></p>
+                                <p class="details"><i class="fa fa-star" aria-hidden="true"></i> Covered Porches SqFt: <span class="text-light" style="font-weight: 600;">306</span></p>
+                                <p class="details"><i class="fa fa-star" aria-hidden="true"></i> Courtyard SqFt: <span class="text-light" style="font-weight: 600;">992</span></p>
+                                <p class="details"><i class="fa fa-star" aria-hidden="true"></i> Fireplaces: <span class="text-light" style="font-weight: 600;">1</span></p>
+                                <p class="details"><i class="fa fa-star" aria-hidden="true"></i> Garage SqFt: <span class="text-light" style="font-weight: 600;">605</span></p>
+                                <p class="details"><i class="fa fa-star" aria-hidden="true"></i> Half Bathrooms: <span class="text-light" style="font-weight: 600;">1</span></p>
+                                <p class="details"><i class="fa fa-star" aria-hidden="true"></i> Rooms: <span class="text-light" style="font-weight: 600;">16</span></p>
+                                <p class="details"><i class="fa fa-star" aria-hidden="true"></i> Stories: <span class="text-light" style="font-weight: 600;">2</span></p>
+                                <p class="details"><i class="fa fa-star" aria-hidden="true"></i> Unfinished Bonus Room Sqft: <span class="text-light" style="font-weight: 600;">308</span></p>
+                            </div>
+                        </div>
+                        <hr style="color: gray; margin-bottom: 10px;"/>
+
+                        <div class="text-center">
+                            <i class="fa fa-home" style="color: gray; font-size: 6rem;" aria-hidden="true"></i>
+                            <h4>Your future home awaits.</h4>
+                            <h5 style="font-size: 15px; color: gray; margin-top: 10px;">Get in contact with our experienced Sales Team for questions about available homesites.
+                            </h5>
+                        </div>
+
+                        <div class="d-flex justify-content-evenly mt-4">
+                            <div class="d-flex flex-column align-items-center">
+                                <img class="sales_person_img" t-att-src="'/franchisor_theme/static/img/tyler.jpg'"/>
+                                <strong class="mt-2">Tyler</strong>
+                                <p class="text-light">(302) 569-939</p>
+                                <p class="get_to_know text-light">Get to know Tarah</p>
+                            </div>
+                            <div class="d-flex flex-column align-items-center">
+                                <img class="sales_person_img" t-att-src="'/franchisor_theme/static/img/tarah.jpg'"/>
+                                <strong class="mt-2">Tarah</strong>
+                                <p class="text-light">(302) 569-9122</p>
+                                <p class="get_to_know text-light">Get to know Tarah</p>
+                            </div>
+                        </div>
+
+
+                    </section>
+<!--&lt;!&ndash;                    below is for status: Future Homesites&ndash;&gt;-->
+                    <section t-else="" style="margin-top: 5rem; margin-right: 7px; margin-left: 7px;">
+                    <div class="partner_name">
+                        <h4>Miralon</h4>
+                        <h3>Homesite #<t t-esc="data.lot_number || 0"/></h3>
+                        <h4 class="homesites_future_heading"><t t-esc="data.status_name || ''"/> Homesite</h4>
+                    </div>
+                        <hr style="color: gray; margin-bottom: 10px;"/>
+
+                        <div class="text-center">
+                            <i class="fa fa-database" style="color: gray; font-size: 6rem;" aria-hidden="true"></i>
+                            <h4 class="mt-3">Not Available for Purchase.</h4>
+                            <h5 style="font-size: 15px; color: gray; margin-top: 10px;">Homesite #118 is part of a future phase that has not been released for sale. Contact our Sales Team to learn more about current lot availability, premiums and timing.
+                            </h5>
+                        </div>
+
+                        <div class="d-flex justify-content-evenly mt-4">
+                            <div class="d-flex flex-column align-items-center">
+                                <img class="sales_person_img" t-att-src="'/franchisor_theme/static/img/tyler.jpg'"/>
+                                <strong class="mt-2">Tyler</strong>
+                                <p class="text-light">(302) 569-939</p>
+                                <p class="get_to_know text-light">Get to know Tarah</p>
+                            </div>
+                            <div class="d-flex flex-column align-items-center">
+                                <img class="sales_person_img" t-att-src="'/franchisor_theme/static/img/tarah.jpg'"/>
+                                <strong class="mt-2">Tarah</strong>
+                                <p class="text-light">(302) 569-9122</p>
+                                <p class="get_to_know text-light">Get to know Tarah</p>
+                            </div>
+                        </div>
+
+
+                    </section>
+       </div>
+    </t>
+</templates>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="bista_map_component.map_template">
+        <t t-if="props.map.search">
+            <MapSearch/>
+        </t>
+        <div t-ref="google_map_container" class="google_map_load"/>
+        <div t-ref="map_legends" class="map_legends">
+            <div class="status_legend">
+                <ul class="community_list">
+                <t t-foreach="status_ids" t-as="status" t-key="status.id">
+                    <li style="color: black;">
+                        <span t-attf-style="background-color: #{status.fillColor};display: inline-block; width: 15px; height: 15px; border-radius: 50%; margin-right: 8px; vertical-align: middle;"/>
+                        <t t-esc="status.name"/>
+                    </li>
+                </t>
+                    <li><small>*Amenity need not be built</small></li>
+            </ul>
+            </div>
+            <div class="community_legend">
+                <h6 style="color: black;">Communities</h6>
+                <ul t-ref="community_list" class="community_list">
+                    <t t-foreach="community_ids" t-as="community" t-key="community.id">
+                        <li style="color: black;" t-on-click="() => getCommunity(community)" t-esc="community.name"/>
+                    </t>
+                </ul>
+            </div>
+        </div>
+        <div class="map_zoom_level" t-ref="map_zoom_level">
+            <span style="margin-right: 5px; color: black;">Zoom:</span>
+            <span style="color: black;" t-esc="state.zoomLevel"/>
+        </div>
+
+        <div t-ref="object_preview" class="map_item_preview" style="display: none">
+                <a href="#" class="btn fa fa-close" aria-label="Close"/>
+            <div class="preview_content"/>
+        </div>
+
+        <MapEditor/>
+
+    </t>
+</templates>

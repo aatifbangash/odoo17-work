@@ -1,0 +1,55 @@
+.polygon_content {
+  position: absolute;;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px ;
+  overflow: hidden;
+  padding: 10px;
+  z-index: 1000 !important;
+}
+
+
+.polygon_settings {
+  background: none rgb(255, 255, 255);
+  border: 0px;
+  margin: 10px;
+  padding: 0px;
+  text-transform: none;
+  appearance: none;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 2px;
+  height: 40px;
+  width: 40px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: medium;
+}
+
+
+.gm-style-iw-a {
+  .gm-ui-hover-effect {
+    display: none !important;
+  }
+
+  .gm-style-iw-d {
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .gm-style-iw {
+    padding: 0 !important;
+
+
+
+  }
+
+}
+
+.community_marker {
+  padding: 2px 5px;
+}

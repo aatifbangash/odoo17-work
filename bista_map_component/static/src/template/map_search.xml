@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="bista_map_component.map_search">
+            <div class="w-100">
+                <div class="col-md-12 col-lg-12">
+                    <div class="map_search">
+                        <h4>Explore The Home Plans &amp; Communities</h4>
+                        <div class="map_search_input">
+                            <input type="object" t-ref="map_search_input"
+                                   placeholder="Enter Zip Code or Street" class="pac-target-input" autocomplete="off"/>
+                            <span class="fa fa-search"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+    </t>
+</templates>

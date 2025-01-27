@@ -1,0 +1,115 @@
+{
+  "initZoom": 15,
+  "data": [
+    {
+      "name": "Marker A",
+      "content_header": "Marker A",
+      "content_body": "This is a great community",
+      "content_footer": "Coordinates X/Y",
+      "coordinates": [
+        39.077596662687625,
+        -77.47627041520539
+      ],
+      "type": "marker",
+      "zoomMax": 17
+    },
+    {
+      "name": "Marker B",
+      "content_header": "Marker B",
+      "content_body": "This is a great community",
+      "content_footer": "Coordinates X/Y",
+      "coordinates": [
+        39.07858777338164,
+        -77.47649572076264
+      ],
+      "type": "marker",
+      "zoomMin": 15
+    },
+    {
+      "name": "Rectangle A",
+      "coordinates": [
+        [
+          39.08368208993984,
+          -77.48580298604432
+        ],
+        [
+          39.08368208993984,
+          -77.49425730885926
+        ],
+        [
+          39.07845191117746,
+          -77.49425730885926
+        ],
+        [
+          39.07845191117746,
+          -77.48580298604432
+        ]
+      ],
+      "type": "rectangle",
+      "zoomMin": 15,
+      "zoom_content": {
+        "16": {
+          "type": "html",
+          "content": "&lt;h1&gt;Z16&lt;/h1&gt;"
+        },
+        "12": {
+          "type": "html",
+          "content": "&lt;h1&gt;Z12&lt;/h1&gt;"
+        }
+      }
+    },
+    {
+      "name": "Circle",
+      "coordinates": [
+        39.07382807068005,
+        -77.49599538030091
+      ],
+      "radius": 300,
+      "type": "circle",
+      "zoomMin": 15,
+      "zoom_content": {
+        "16": {
+          "type": "html",
+          "content": "&lt;h1&gt;Z16&lt;/h1&gt;"
+        },
+        "12": {
+          "type": "html",
+          "content": "&lt;h1&gt;Z12&lt;/h1&gt;"
+        }
+      }
+    },
+    {
+      "name": "Polygon",
+      "coordinates": [
+        [
+          39.07476093095091,
+          -77.47981629552308
+        ],
+        [
+          39.070096506278695,
+          -77.47870049657288
+        ],
+        [
+          39.06919690320195,
+          -77.48372159184876
+        ],
+        [
+          39.07292851516834,
+          -77.48513779820863
+        ]
+      ],
+      "type": "polygon",
+      "zoomMin": 15,
+      "zoom_content": {
+        "16": {
+          "type": "html",
+          "content": "&lt;h1&gt;Z16&lt;/h1&gt;"
+        },
+        "12": {
+          "type": "html",
+          "content": "&lt;h1&gt;Z12&lt;/h1&gt;"
+        }
+      }
+    }
+  ]
+}

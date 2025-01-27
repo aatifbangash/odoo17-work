@@ -1,0 +1,110 @@
+.map_item_preview {
+  background: black;
+  color: white;
+  height: 100%;
+  width: 30%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  padding: 0;
+  z-index: 999999;
+  transition: all 1s ease-out;
+  overflow: auto;
+
+
+  .fa-close {
+    color: lightgrey;
+    position: absolute;
+    right: 5px;
+    padding: 10px;
+    z-index: 1;
+    cursor: pointer;
+    transition: 0.3s ease all;
+
+    &:hover {
+      color: white;
+    }
+  }
+
+  .preview_content {
+    height: 100%;;
+    z-index: 10;
+
+
+    // below is code for side bar community on click
+
+.partner_name *{
+    text-align: center;
+    }
+
+.partner_name h3{
+    text-align: center;
+    font-weight: 600;
+    padding: 10px 0px;
+    }
+
+.homesites_heading{
+    color: #F6DC6B;
+    margin-bottom: 5px;
+    }
+
+.lot_price{
+    color: #fff;
+    margin-bottom: 10px;
+    }
+
+.lot_price span {
+    color: green;
+    }
+
+.info_desc{
+    font-size: 12px;
+    color: #c1c1c1;
+    }
+
+.restriction {
+    color: gray;
+    font-size: 14px;
+    }
+
+.features_btn{
+    color: #fff;
+    background: black;
+    border: 1px solid #fff;
+    }
+
+.features_btn:hover{
+    color: #000;
+    background: #fff;
+    border: 1px solid #000;
+    }
+
+.features_btn span{
+    color: #fff;
+    font-size: 10px;
+    }
+
+.homesites_sold_heading {
+    color: #D1082E;
+    }
+
+.homesites_model_heading {
+    color: #4EC6B7;
+    }
+
+.homesites_future_heading {
+    color: #596c3b;
+    }
+
+    .details {
+        color: #D1D2D1;
+        }
+
+
+  }
+}
+
+
+

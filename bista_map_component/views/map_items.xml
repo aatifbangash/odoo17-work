@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+
+    <record id="map_item_view_form" model="ir.ui.view">
+        <field name="name">map_item_view_form</field>
+        <field name="model">google.map.item</field>
+        <field name="arch" type="xml">
+            <form string="map_item_form">
+                <header>
+                </header>
+                <sheet>
+                    <field name="background_image" class="oe_avatar" widget="image"/>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="google_map_id" required="1"/>
+                            <field name="status_id" required="1" invisible="type == 'section'"/>
+                            <field name="type" invisible="1"/>
+                            <field name="community_id"
+                                   domain="[('type','=','community')]"
+                                   invisible="type != 'section'"/>
+                            <field name="section_id"
+                                   domain="[('type','=','section')]"
+                                   invisible="type != 'home'"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group invisible="type != 'home'">
+                            <field name="click_event"/>
+                            <field name="content_url" invisible="click_event != 'url'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lots" invisible="type != 'section'">
+                            <field name="home_plan_ids">
+                                <tree>
+<!--                                    <field name="sequence" widget="handle"/>-->
+                                    <field name="name"/>
+                                    <field name="click_event"/>
+                                </tree>
+                            </field>
+                        </page>
+                         <page string="Home Plans" invisible="type != 'community'">
+                            <field name="section_ids">
+                                <tree>
+<!--                                    <field name="sequence" widget="handle"/>-->
+                                    <field name="name"/>
+                                    <field name="click_event"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Content" invisible="type == 'section'">
+                            <field name="content_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="zoom_level"/>
+                                    <field name="description"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Coordinates" invisible="type == 'section'">
+                            <field name="coordinate_ids">
+                                <tree editable="bottom">
+                                    <field name="lat" required="1"/>
+                                    <field name="lng" required="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="On Click Event" invisible="click_event != 'html'">
+                            <field name="content_html"/>
+                        </page>
+                        <page string="KML" invisible="type not in ('community', 'section')">
+                            <group>
+                                <label for="kml_file" string="KML File"/>
+                                <div class="oe_row">
+                                    <field name="kml_file" invisible="type not in ('community', 'section')" class="oe_inline"/>
+                                    <button type="object" name="create_shapes" class="fa fa-refresh oe_inline"
+                                            invisible="type not in ('community', 'section')"/>
+                                </div>
+                                <label for="reload_home_plans"/>
+                                <div class="oe_row">
+                                    <field name="reload_home_plans" class="oe_inline"/>
+                                    <p class="oe_inline">
+                                        If checked. This will delete the existing home plans and create it from the KML
+                                        file
+                                    </p>
+                                </div>
+                            </group>
+                        </page>
+                        <page string="Marker" invisible="type != 'community'">
+                            <field name="marker_icon" widget="image" class="oe_avatar"/>
+                            <group string="Marker">
+                                <group>
+                                    <field name="marker_zoom"/>
+                                    <field name="marker_lat"/>
+                                    <field name="marker_lng"/>
+                                </group>
+                            </group>
+                            <div>
+                                <h6>Marker Content</h6>
+                                <field name="marker_content" placeholder="enter content here..."/>
+                            </div>
+                        </page>
+                        <page string="MISC" name="MISC" invisible="type == 'section'">
+                            <group>
+                                <group string="Style">
+                                    <field name="shape_type"/>
+                                    <field name="fill_type"/>
+                                    <field name="file_type"/>
+                                    <field name="shape_css"/>
+                                </group>
+                                <group string="Circle" invisible="shape_type != 'circle'">
+                                    <field name="radius"/>
+                                </group>
+                            </group>
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="map_item_view_tree" model="ir.ui.view">
+        <field name="name">map_item_view_tree</field>
+        <field name="model">google.map.item</field>
+        <field name="arch" type="xml">
+            <tree string="map_item_tree">
+                <field name="name"/>
+                <field name="type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="map_home_plan_action" model="ir.actions.act_window">
+        <field name="name">Home Plans</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">google.map.item</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type','=','home')]</field>
+        <field name="context">{'default_type': 'home'}</field>
+    </record>
+
+
+    <record id="map_community_action" model="ir.actions.act_window">
+        <field name="name">Communities</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">google.map.item</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type','=','community')]</field>
+        <field name="context">{'default_type': 'community'}</field>
+    </record>
+
+    <record id="map_item_content_view_form" model="ir.ui.view">
+        <field name="name">map_zoom_view_form</field>
+        <field name="model">map.item.content</field>
+        <field name="arch" type="xml">
+            <form string="map_zoom_form">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="description"/>
+                            <field name="name"/>
+                            <field name="zoom_level"/>
+                            <field name="image_url" invisible="name != 'image_url'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Content">
+                            <field name="html_content" invisible="name != 'html'"/>
+                            <field name="css_content" invisible="name != 'css'"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>

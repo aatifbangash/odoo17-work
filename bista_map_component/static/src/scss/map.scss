@@ -1,0 +1,103 @@
+.google_map_load {
+    width: 100%;
+    height: 83%;
+  .gmnoprint {
+    padding: 10px;
+
+    button {
+      padding: 12px !important;
+      margin: 6px 2px !important;
+    }
+  }
+
+  .gm-style-mtc-bbw {
+    padding: 5px !important;
+
+    button {
+      font-size: 14px !important;
+      font-weight: 300 !important;
+    }
+  }
+
+  .map_compass {
+    background-image: url('/bista_map_component/static/src/img/map_compass.png');
+    width: 150px;
+    height: 150px;
+    background-size: contain;
+    right: 50px !important;;
+    bottom: 50px !important;
+  }
+
+
+  .map_coordinates {
+    position: absolute;
+    left: 76px;
+    bottom: 0px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(211, 211, 211, 0.8);
+  }
+
+}
+
+@media only screen and (max-width: 1600px){
+.google_map_load {
+    width: 100%;
+    height: 78%;
+    }
+}
+
+.map_search {
+  background: #006197;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding: 16px 24px;
+
+  h4 {
+    font-weight: 200;
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .map_search_input {
+    background: #DDD;
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+
+    input {
+      font-size: 14px;
+      border-radius: 0;
+      padding: 8px 16px;
+      border: 1px solid #DDD;
+      width: 100%;
+    }
+
+    .fa {
+      color: #4e4d4d;
+      padding: 10px;
+      font-size: 20px;
+    }
+  }
+
+
+}
+
+.map_zoom_level {
+  background: #ffffff;
+  border: 1px solid lightgrey;;
+  padding: 5px 10px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,55 @@
+.map_legends {
+  position: absolute;
+  bottom: 20px !important;
+  max-height: 500px;
+  left: 10px !important;
+  border: 1px solid lightgrey;;
+  overflow: hidden;
+
+    .status_legend {
+        background: #ffffff;
+        margin-bottom: 10px;
+
+        .community_list {
+            li {
+                padding: 3px 10px;
+            }
+        }
+    }
+    .community_legend{
+        background: #ffffff;
+    }
+
+  h6 {
+    padding: 5px 10px;
+    background: lightgray;
+    text-align: left;
+    margin-bottom: 0;
+  }
+
+  .community_list {
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: auto;
+    max-height: 130px;
+
+
+    li {
+      display: flex;
+      padding-right: 10px;
+      padding-left: 10px;
+      font-size: 14px;
+      justify-content: start;
+      border-bottom: 1px solid lightgrey;
+      cursor: pointer;
+      transition: 0.3s ease all;
+
+      &:hover {
+        background: lightgrey;
+      }
+    }
+  }
+
+
+}

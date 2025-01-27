@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="bista_map_component.map_editor">
+    <div t-ref="editor" class="editor" style="display: none">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 o_colored_level">
+                    <div class="action_btn">
+                        <button id="save" t-on-click="save" class="btn btn-primary">Save</button>
+                        <button id="discard" t-on-click="discard" class="btn btn-default">Discard</button>
+                    </div>
+                    <div class="form-group">
+                        <h6>Name</h6>
+                        <input type="text"
+                               required="1" name="name" placeholder="Shape Name"
+                               t-att-value="state.name"
+                               class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <h6>Type</h6>
+                        <select name="type" required="true">
+                            <option value="" disabled="">Select Option</option>
+                            <option value="community" class="o_default_snippet_text"
+                                    t-att-selected="state.type == 'community'">
+                                Community
+                            </option>
+                            <option value="home" class="o_default_snippet_text"
+                                    t-att-selected="state.type == 'home'">
+                                Lot
+                            </option>
+                        </select>
+                    </div>
+<!--                    <t t-esc="state.core_community_id"/>-->
+                    <div class="form-group" t-if="state.type != 'home' and (state.core_community_id == false or !state.core_community_id)">
+                        <h6>Community</h6>
+                        <select t-on-change="onChange" name="core_community_id" placeholder="Select Community">
+                            <option value="" disabled="" t-att-selected="! state.core_community_id">Select Option</option>
+                            <t t-foreach="core_community_ids" t-as="community" t-key="community.id">
+                                <option t-att-value="community.id" t-esc="community.display_name"
+                                        t-att-selected="community.id == state.core_community_id"
+                                />
+                            </t>
+                        </select>
+                    </div>
+                    <div class="form-group" t-if="state.type == 'home'">
+                        <h6>Map Item Community</h6>
+                        <select t-on-change="onChange" name="community_id" placeholder="Select Community">
+                            <option value="" t-att-selected="! state.community_id">Select Option</option>
+                            <t t-foreach="community_ids" t-as="community" t-key="community.id">
+                                <option t-att-value="community.id" t-esc="community.display_name"
+                                />
+                            </t>
+                        </select>
+                    </div>
+                     <div class="form-group" t-if="state.type == 'home' and state.community_id">
+                        <h6>Map Item Section</h6>
+                        <select t-on-change="onChange" name="section_id" placeholder="Select Section">
+                            <option value="" t-att-selected="! state.community_id">Select Option</option>
+                            <t t-foreach="section_ids" t-as="section" t-key="section.id">
+                                <option t-att-value="section.id" t-esc="section.name"
+                                />
+                            </t>
+                        </select>
+                    </div>
+                    <div class="form-group" t-if="state.type == 'home'">
+                        <h6>Status</h6>
+                        <select t-on-change="onChange" name="status_id"
+                                placeholder="Select Status">
+                          <option value="" disabled="" t-att-selected="! state.status_id">Select Option</option>
+                            <t t-foreach="status_ids" t-as="status" t-key="status.id">
+                                <option t-att-value="status.id" t-esc="status.name"
+                                        t-att-selected="status.id == state.status_id"
+                                />
+                            </t>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h6>Order</h6>
+                        <div class="sequence">
+                            <div>
+                                <span id="orderBackward" t-on-click="setOrderBackward" class="fa fa-backward"/>
+                                <span id="orderForward" t-on-click="setOrderForward" class="fa fa-forward"/>
+                            </div>
+                            <input disabled="1" name="sequence" t-att-value="state.sequence"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="field_checkbox">
+                            <input type="checkbox" name="draggable"
+                                   t-att-checked="this.state.draggable"/>
+                            <label for="draggable">Draggable</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="field_checkbox">
+                            <input type="checkbox" name="editable"
+                                   t-att-checked="this.state.editable"/>
+                            <label for="editable">Resizable</label>
+                        </div>
+                    </div>
+                    <div id="borderContainer" class="form-group shape_options d-none">
+                        <h6>Border</h6>
+                        <div class="d-flex options">
+                            <div class="optionInput">
+                                <div>
+                                    <label for="shape_border_width">Width</label>
+                                    <input type="number" placeholder="Width" required="1"
+                                           t-att-value="state.shape_border_width"
+                                           name="shape_border_width" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="colorPicker">
+                                <div>
+                                    <label for="shape_border_color">Color</label>
+                                    <input type="color"
+                                           t-att-value="state.shape_border_color"
+                                           required="1" placeholder="Color" id="borderColor"
+                                           name="shape_border_color" class="input-color form-control"/>
+                                </div>
+                                <div/>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="fillContainer" class="form-group shape_options">
+                        <h6>Fill</h6>
+                        <div class="d-flex options">
+                            <div class="optionInput">
+                                <div>
+                                    <label for="fill_type">Fill Type</label>
+                                    <select t-on-change="onFillTypeChanged" name="fill_type">
+                                        <option value="" disabled="">Select Option</option>
+                                        <option value="color"
+                                                t-att-selected="state.fill_type == 'color'">Status</option>
+                                        <option value="image" t-att-selected="state.fill_type == 'image'">Image</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--                            <div class="colorPicker" t-if="state.fill_type != 'image'">-->
+                            <!--                                <div>-->
+                            <!--                                    <label for="shape_fill_color">Color</label>-->
+                            <!--                                    <input type="color"-->
+                            <!--                                           t-att-value="state.shape_fill_color"-->
+                            <!--                                           required="1" placeholder="Color"-->
+                            <!--                                           name="shape_fill_color"-->
+                            <!--                                           class="input-color form-control"/>-->
+                            <!--                                </div>-->
+                            <!--                                <div>-->
+                            <!--                                    <label for="shape_fill_opacity">Opacity</label>-->
+                            <!--                                    <input type="number"-->
+                            <!--                                           t-att-value="state.shape_fill_opacity"-->
+                            <!--                                           min="0" step="0.1" required="1" placeholder="e.g. 0.5"-->
+                            <!--                                           name="shape_fill_opacity" class="form-control"/>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
+                            <div class="imageUpload" t-if="state.fill_type == 'image'">
+                                <label for="image">Select Image</label>
+                                <input type="file" name="image" id="image" t-on-change="onChange"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h6>Lot Number</h6>
+                        <input type="text"
+                               name="lot_number" placeholder="Lot number"
+                               t-att-value="state.lot_number"
+                               class="form-control"
+                               t-on-blur="onBlur"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </t>
+</templates>

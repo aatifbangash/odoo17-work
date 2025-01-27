@@ -1,0 +1,152 @@
+.editor {
+  position: fixed;
+  right: 0;
+  width: 400px;
+  background: #191922;
+  height: 100%;
+  top: 0;
+  color: white;
+  text-align: left;
+  padding: 5px;
+  z-index: 99999;
+
+
+  .field_checkbox {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+
+    input {
+      width: auto !important;
+      margin: 0 15px;
+    }
+  }
+
+  .form-group {
+    background: #3a3a42;
+    padding: 10px;
+    margin-top: 10px;
+    color: lightgray;
+
+    .sequence {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+
+      div {
+        display: flex;
+      }
+
+      span {
+        padding: 10px;
+        margin: 5px;
+        border: 1px solid lightgray;
+        cursor: pointer;
+        transition: 0.3s ease all;
+
+        &:hover {
+          color: #3a3a42;
+          background: lightgray;
+          border: 1px solid #3a3a42;
+        }
+      }
+
+      input {
+        width: auto;
+        background: none;
+        color: lightgray;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        text-align: right;
+        font-size: 18px;
+      }
+    }
+
+
+    input, select {
+      padding: 3px 10px;
+      width: 100%;
+      border-radius: 0;
+      font-size: 12px;
+    }
+
+  }
+
+  .action_btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    button {
+      padding: 3px 10px;
+      margin-right: 10px;
+    }
+
+    .btn-default {
+      background: lightgray;
+      color: #3a3a42;
+    }
+  }
+
+
+  .shape_options {
+    h6 {
+      margin-bottom: 2px;
+    }
+
+    .options {
+      border-top: 1px solid #6a6a6a;
+
+      div {
+        width: 100%;
+
+        label {
+          font-size: 12px;
+        }
+      }
+
+      .colorPicker {
+        display: flex;
+        justify-content: center;
+
+        div {
+          .input-color {
+            padding: 0;
+            margin-top: -2px
+          }
+
+          input {
+            width: 80%;
+            border: 0;
+            outline: 0;
+          }
+
+        }
+      }
+
+      .optionInput {
+        display: flex;
+        flex-direction: column;
+
+        div {
+          margin-top: 4px;
+          display: flex;
+          flex-direction: column;
+
+          input, select {
+            width: 50%;
+            padding: 4px 10px;
+          }
+        }
+      }
+
+
+    }
+  }
+
+}
+

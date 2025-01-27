@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="bista_map_component.map_playground">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty preference">
+                <div style="margin-top: 120px"/>
+                <section class="web_configurator">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <owl-component name="GoogleMap" t-att-props='json.dumps(data)'/>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+
+</odoo>
