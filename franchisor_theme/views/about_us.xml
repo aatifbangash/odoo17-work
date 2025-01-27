@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="about-us" name="About Us">
+            <t t-call="website.layout">
+                <div class="oe_structure"/>
+                <section style="margin-top: 5rem; width: 100% !important">
+                    <div class="d-flex territory_award_banner">
+                                <img t-att-src="'/franchisor_theme/static/img/award.png'"/>
+                                <h4 style="margin: 0px !important;">Schell Brothers named 2023 Builder of the Year by PROBUILDER Magazine. <a>Read the Article</a></h4>
+                            </div>
+                </section>
+                <section>
+                <div class="page_header_about_us"
+                     t-att-src="'/franchisor_theme/static/img/aboutus.jpg'">
+
+                </div>
+                <div class="header_about_us">
+                     <img style="margin-bottom: 1rem;" t-att-src="'/franchisor_theme/static/img/certification.png'"/>
+                    <h1 class="text-light fw-bold"
+                        style="visibility: visible;animation-duration: 0.4s;animation-delay: 0.1s;animation-name: fadeIn;margin: 0 auto; margin-bottom: 1rem;">
+                        Working together with heart.
+                    </h1>
+                    <button class="btn learn_more transparent">
+                        BROWSE OPEN POSITIONS
+                    </button>
+
+                </div>
+            </section>
+                <section class="our_story_wrapper">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-7">
+                                <div class="d-flex design_studio py-5">
+                                    <div>
+                                        <h1 class="our_story_heading text-center text-light mb-2">Every company has a story. Ours is happiness.</h1>
+                                    </div>
+                                    <div>
+                                        <p class="text-center text-light fs-6">There are so many reasons you’d love working for Schell Brothers, but the one that sets us apart is our culture of happiness. We believe that focusing on the happiness of our employees and homeowners before anything else makes us the best possible versions of ourselves, and that much better at what we do.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="d-flex justify-content-center design_studio pb-4 mb-4 mt-3">
+                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/4ZS9XGnEPEs?si=2fmUm-fBLAvRDmDl" allowfullscreen=""></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="we_different_wrapper">
+                    <div class="container our_story_wrapper_container">
+                        <div class="row justify-content-left align-items-center" style="min-height: 60vh">
+                        <div class="col-lg-1"></div>
+                            <div class="col-lg-4" style="z-index: 1;">
+                                <div class="d-flex design_studio">
+                                    <div>
+                                        <h1 class="our_story_heading text-light mb-3">Why we’re different</h1>
+                                    </div>
+                                    <div>
+                                        <p class="text-light fs-6 mb-3">Our culture of happiness and gratitude not only sets us apart; it keeps our team smiling and completely dedicated to our work. From day one, Schell Brothers employees have a lot to celebrate about working here.</p></div>
+                                </div>
+                                <div>
+                                        <button class="btn our_story_btn">LEARN ABOUT OUR CULTURE</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="container youtube_iframe my-5">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <iframe width="100%" height="600px" src="https://www.youtube.com/embed/QXfdPX0XUNQ?si=nttxm5Hsw1SDLso4" allowfullscreen=""></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="in_house_wrapper">
+                    <div class="container our_story_wrapper_container">
+                        <div class="row justify-content-start align-items-center" style="min-height: 65vh">
+                            <div class="col-lg-5" style="z-index: 1;">
+                                <div class="d-flex design_studio">
+                                    <div>
+                                        <h1 class="our_story_heading text-light mb-3">We keep thins in-house</h1>
+                                    </div>
+                                    <div>
+                                        <p class="text-light fs-6 mb-3">Another unique thing about Schell Brothers is how
+                                                we’re structured. We recognize that the foundation
+                                                of any successful company is its people, and we want
+                                                to make sure our culture touches every inch of what
+                                                we do. So, all of our departments are in-house,
+                                                including our marketing, CAD, accounting, and law
+                                                teams. You can’t outsource this much awesomeness.</p></div>
+                                </div>
+                                <div>
+                                        <button class="btn our_story_btn">LEARN ABOUT OUR CULTURE</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="our_story_wrapper">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-9">
+                                <div class="d-flex design_studio py-5">
+                                    <div>
+                                        <h1 class="our_story_heading text-center text-light mb-2">If all of this sounds good to you, apply today.</h1>
+                                    </div>
+                                    <div class="pb-3">
+                                        <p class="text-center text-light fs-6">We’d love to have you as a part of our family!</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <button class="btn our_story_btn">
+                                            BROWSE OPEN POSITIONS
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6">
+                                <div class="d-flex design_studio py-5">
+                                    <div>
+                                        <h1 class="our_story_heading text-center mb-2">Equal Employment Opportunity</h1>
+                                    </div>
+                                    <div class="pb-3">
+                                        <p class="text-center fs-6">In order to provide equal employment opportunities to all individuals, employment decisions at Schell Brothers are based on merit, qualifications, and abilities. Schell Brothers does not discriminate in employment opportunities or practices because of race, color, religion, sex, national origin, sexual orientation, age or disability. <br/><br/> We also work closely with the United States Department of Labor and Office of Disability Employment Policy to make sure we are compliant and conform to all applicable laws.
+
+</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="oe_structure"/>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Inherit the Contact Us Page -->
+        <template id="contactus_page_inherit" inherit_id="website.contactus">
+            <!-- Action to be changed-->
+<!--            <xpath expr="//form" position="attributes">-->
+<!--                <attribute name="data-success-action">contact_us_customization.contact_form_success</attribute>-->
+<!--            </xpath>-->
+
+           <xpath expr="//div[@id='wrap']//section[@class='s_title parallax s_parallax_is_fixed bg-black-50 pt24 pb24']" position="replace">
+                <section style="margin-top: 5rem;">
+                <div class="page_header_contact_us"
+                     t-att-src="'/franchisor_theme/static/img/family.jpg'">
+
+                </div>
+                <div class="header_about_us">
+                    <h1 class="text-light fw-bold"
+                        style="visibility: visible;animation-duration: 0.4s;animation-delay: 0.1s;animation-name: fadeIn;margin: 0 auto; margin-bottom: 1rem;">
+                        Contact Us
+                    </h1>
+
+                </div>
+            </section>
+           </xpath>
+
+
+            <!-- Address change-->
+            <xpath expr="//div[@id='wrap']//section[@class='s_text_block pt40 pb40 o_colored_level ']//div[@class='container s_allow_columns']//div[@class='row']//div[@class='col-lg-4 mt-4 mt-lg-0']//ul" position="replace">
+                <t t-set="company" t-value="request.env['res.company']._get_main_company()"/>
+               <ul class="list-unstyled mb-0 ps-2">
+                    <li><t t-esc="company.name"/></li>
+                    <li><i class="fa fa-map-marker fa-fw me-2"/><span class="o_force_ltr"><t t-esc="company.street"/></span></li>
+                    <li><i class="fa fa-phone fa-fw me-2"/><span class="o_force_ltr"><t t-esc="company.phone"/></span></li>
+                    <li><i class="fa fa-1x fa-fw fa-envelope me-2"/><span><t t-esc="company.email"/></span></li>
+
+                </ul>
+            </xpath>
+        </template>
+    </data>
+</odoo>

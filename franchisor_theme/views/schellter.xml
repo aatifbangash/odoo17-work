@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="schellter-technology" name="Record listing">
+            <t t-call="website.layout">
+                <div class="oe_structure"/>
+                <div>
+                    <section class="mx-auto" style="margin-bottom: 5rem;">
+                        <div>
+                            <img class="w-100"
+                                 src="https://farm66.static.flickr.com/65535/53558781282_d1abcfe16f_b.jpg" style="height: 50rem"/>
+                            <div class="schellter-card">
+                                <p>
+                                    THE SCHELLTER<span>&#8482;</span> ADVANTAGE
+                                </p>
+                                <span class="d-flex justify-content-center text-center text-light"
+                                      style="padding: 0px 7rem; margin-bottom: 0.5rem;">
+                                    We used the scientific process to create a new type of home
+                                </span>
+                                <div class="text-light schelltor_history">Schellter™ Advanced Building Science was
+                                    developed as part of our continual
+                                    commitment to provide
+                                    our homeowners with an exceptional home worthy of the Schell Brothers name and
+                                    reputation.
+                                </div>
+                                <div class="d-flex justify-content-center gap-4">
+                                    <a class="btn btn-primary rounded-0 shellter-button" href="/">Start Vitual Tour</a>
+                                    <a class="btn btn-primary rounded-0 shellter-button">Download Brochure</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section style="margin-top: 10rem;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3">
+                                    <div class="d-flex flex-column text-center align-items-center">
+                                        <img width="85px"
+                                             t-att-src="'/franchisor_theme/static/img/schelltor-home.png'"/>
+                                        <span>HomeIQ</span>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <div class="d-flex flex-column text-center align-items-center">
+                                        <img width="85px"
+                                             t-att-src="'/franchisor_theme/static/img/schelltor-home.png'"/>
+                                        <span>Enerwize</span>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <div class="d-flex flex-column text-center align-items-center">
+                                        <img width="85px"
+                                             t-att-src="'/franchisor_theme/static/img/schelltor-home.png'"/>
+                                        <span>4Tress</span>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <div class="d-flex flex-column text-center align-items-center">
+                                        <img width="85px"
+                                             t-att-src="'/franchisor_theme/static/img/schelltor-home.png'"/>
+                                        <span>SanctuAIR</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="home_IQ py-5">
+                        <div class="container">
+                            <div class="text-center homeIQ_wrapper py-4">
+                                <img width="85px"
+                                     t-att-src="'/franchisor_theme/static/img/schelltor-home.png'"/>
+                                <h2 class="homeIQ_heading">HomeIQ</h2>
+                                <span>SMART LIVING</span>
+                                <h2 class="home_IQ_punchline">YOUR LIFE, AUTOMATED.</h2>
+                                <p class="home_IQ_description">Smart Home Technology lets you be more efficient and
+                                    monitor your home even when you
+                                    aren't there.
+                                </p>
+                            </div>
+                            <div class="d-flex justify-content-center gap-4">
+                                <a class="btn btn-primary rounded-0 schelltor-homeIQ-button" href="/">Watch Video</a>
+                                <a class="btn btn-primary rounded-0 schelltor-homeIQ-button">Download Brochure</a>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="container-fluid px-0">
+                        <img width="100%" t-att-src="'/franchisor_theme/static/img/schelltor-exterior-lights.png'"/>
+                    </section>
+                    <section class="container-fluid px-0">
+                        <img width="100%" t-att-src="'/franchisor_theme/static/img/schelltor-smart-home.png'"/>
+                    </section>
+                    <section class="home_IQ py-5">
+                        <div class="container">
+                            <div class="text-center homeIQ_wrapper py-4">
+                                <img width="85px"
+                                     t-att-src="'/franchisor_theme/static/img/schelltor-home.png'"/>
+                                <h2 class="homeIQ_heading">Enerwize</h2>
+                                <span>ENERGY OPTIMIZED</span>
+                                <h2 class="home_IQ_punchline">THE NEW STANDARD FOR ENERGY EFFICIENCY</h2>
+                                <p class="home_IQ_description">Enerwize surpasses the requirements &amp; efficiency
+                                    ratings of homes built to Energy Start specifications.
+                                </p>
+                            </div>
+                            <div class="d-flex justify-content-center gap-4">
+                                <a class="btn btn-primary rounded-0 schelltor-homeIQ-button" href="/">Watch Video</a>
+                                <a class="btn btn-primary rounded-0 schelltor-homeIQ-button">Download Brochure</a>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container py-5">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <img width="100%"
+                                         t-att-src="'/franchisor_theme/static/img/schelltor-energy-graph.png'"/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h4>
+                                        Finally, a "miles per gallon" rating for home energy consumption.
+                                    </h4>
+                                    <p>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                                        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                                        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+                                        optio, eaque rerum! Provident similique accusantium nemo autem.
+                                    </p>
+                                    <p>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                                        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                                        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+                                        optio, eaque rerum! Provident similique accusantium nemo autem.
+                                    </p>
+                                    <p>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                                        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum.
+                                    </p>
+                                    <p>
+                                        Source. RESNET*
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="container-fluid px-0">
+                        <img width="100%" t-att-src="'/franchisor_theme/static/img/schelltor-insulated-windows.png'"/>
+                    </section>
+                    <section class="home_IQ py-5">
+                        <div class="container">
+                            <div class="text-center homeIQ_wrapper py-4">
+                                <img width="85px"
+                                     t-att-src="'/franchisor_theme/static/img/schelltor-home.png'"/>
+                                <h2 class="homeIQ_heading">4TRESS</h2>
+                                <span>LEGENDARY QUALITY</span>
+                                <h2 class="home_IQ_punchline">UNPARALLELED DURABILITY, LONGEVITY, AND STRENGTH.</h2>
+                                <p class="home_IQ_description">4Tress meets stringent requirements of 4 categories:
+                                    durability, strength, moisture/water protection, and sound attenuation.
+                                </p>
+                            </div>
+                            <div class="d-flex justify-content-center gap-4">
+                                <a class="btn btn-primary rounded-0 schelltor-homeIQ-button" href="/">Watch Video</a>
+                                <a class="btn btn-primary rounded-0 schelltor-homeIQ-button">Download Brochure</a>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container py-5">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <img width="100%"
+                                         t-att-src="'/franchisor_theme/static/img/schelltor-home-exterior1.png'"/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h4>
+                                        Stick-built homes are stronger than panelized homes.
+                                    </h4>
+                                    <p>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                                        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                                        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+                                        optio, eaque rerum! Provident similique accusantium nemo autem.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="container-fluid px-0">
+                        <img width="100%" t-att-src="'/franchisor_theme/static/img/schelltor-stick-home.png'"/>
+                    </section>
+                    <section>
+                        <div class="container py-5">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <img width="100%"
+                                         t-att-src="'/franchisor_theme/static/img/schelltor-home-interior1.png'"/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h4>
+                                        The EPA ranks indoor air quality as one of the greatest but least recognized
+                                        risks to public health.
+                                    </h4>
+                                    <p>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                                        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                                        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+                                        optio, eaque rerum! Provident similique accusantium nemo autem.
+                                    </p>
+                                    <p>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                                        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                                        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+                                        optio, eaque rerum! Provident similique accusantium nemo autem.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="container-fluid px-0">
+                        <img width="100%" t-att-src="'/franchisor_theme/static/img/schelltor-filter.png'"/>
+                    </section>
+                    <section class="home_IQ py-5">
+                        <div class="container">
+                            <div class="text-center homeIQ_wrapper py-4">
+                                <h2 class="homeIQ_heading pt-2">EXPLORE A SCHELL HOME UNDER CONSTRUCTION</h2>
+                                <p class="home_IQ_description py-3">Take a virtual journey through one of our homes to
+                                    learn
+                                    more about the benefits of Schellter Technology.
+                                </p>
+                                <a class="btn btn-primary rounded-0 schelltor-homeIQ-button" href="/">Start Virtual
+                                    Tour
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="container-fluid px-0">
+                        <img width="100%" t-att-src="'/franchisor_theme/static/img/schelltor-videos.png'"/>
+                    </section>
+
+                </div>
+                <div class="oe_structure"/>
+            </t>
+        </template>
+    </data>
+</odoo>

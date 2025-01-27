@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="franchisor_theme.find_your_home" name="Find Your Home">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'division'"/>
+            <div class="oe_structure"/>
+            <div class="container-fluid" style="margin-top: 85px;">
+                <div class="row">
+
+                    <div class="col-lg-8 p-0 left_section">
+                        <div id="map-loader" style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: rgba(255, 255, 255, 0.8);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        z-index: 10;
+                    ">
+                        <div class="spinner" style="
+                            width: 40px;
+                            height: 40px;
+                            border: 4px solid #ccc;
+                            border-top-color: #3498db;
+                            border-radius: 50%;
+                            animation: spin 1s linear infinite;
+                        "></div>
+                    </div>
+                        <owl-component class="side_map" name="GoogleMap" t-att-props='json.dumps(google_map_object)'/>
+                        <!--                        <img class="side_map" t-att-src="'/franchisor_theme/static/img/tmap.png'"/>-->
+                    </div>
+                    <div class="col-lg-4 p-0 right_section">
+                        <section>
+                            <div class="d-flex territory_award_banner">
+                                <img t-att-src="'/franchisor_theme/static/img/award.png'"/>
+                                <h4 style="margin: 0px !important;">Schell Brothers named 2023 Builder of the Year by PROBUILDER Magazine. <a>Read the Article</a></h4>
+                            </div>
+                            <div class="partner_hero_section">
+                                <a class="back_btn" href="/"><i class="fa-solid fa-arrow-left"></i> Everywhere we Build</a>
+                                <h2 class="text-light heading">NEW HOMES IN DELAWARE</h2>
+                                <h3 class="text-light sub_heading mb-3">AT THE BEACHES</h3>
+                                <h6 class="text-light content mb-3 beaches_description">The coastal resorts of southeastern Delaware are known for their gorgeous natural scenery, protected parks, and clean beaches. <a class="learn_more_partner">Learn more about the Schell Brothers difference <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                <g clip-path="url(#clip0_92_4666)">
+                                <path d="M0.554688 8.00004C0.574966 9.41956 0.919707 10.7174 1.58891 11.8936C2.27839 13.0697 3.23149 14.0229 4.44822 14.7529C5.68523 15.4424 6.98308 15.7871 8.34176 15.7871C9.70044 15.7871 10.9983 15.4424 12.2353 14.7529C13.452 14.0229 14.4051 13.0697 15.0946 11.8936C15.7638 10.7174 16.1086 9.41956 16.1288 8.00004C16.1086 6.58052 15.7638 5.28267 15.0946 4.1065C14.4051 2.93033 13.452 1.97722 12.2353 1.24719C10.9983 0.557705 9.70044 0.212965 8.34176 0.212965C6.98308 0.212965 5.68523 0.557705 4.44822 1.24719C3.23149 1.97722 2.27839 2.93033 1.58891 4.1065C0.919707 5.28267 0.574966 6.58052 0.554688 8.00004ZM7.88549 11.6806C7.54075 11.9645 7.19601 11.9645 6.85127 11.6806C6.56736 11.3359 6.56736 10.9912 6.85127 10.6464L9.49765 8.00004L6.85127 5.35365C6.56736 5.00891 6.56736 4.66417 6.85127 4.31943C7.19601 4.03553 7.54075 4.03553 7.88549 4.31943L11.049 7.48293C11.3329 7.82767 11.3329 8.17241 11.049 8.51715L7.88549 11.6806Z" fill="#FFE26D"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_92_4666">
+                                <rect width="16" height="16" fill="white" transform="matrix(1 0 0 -1 0.341797 16)"/>
+                                </clipPath>
+                                </defs>
+                                </svg></a>
+                                </h6>
+                            </div>
+                                <div class="d-flex justify-content-center align-items-center tabs">
+                                <div class="tab"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="23" viewBox="0 0 18 25" fill="none">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.06838 16.2254L9 24.89L15.9317 16.2254C17.2705 14.5518 18 12.4723 18 10.329V9.89001C18 4.91945 13.9705 0.890015 9 0.890015C4.02944 0.890015 0 4.91945 0 9.89001V10.329C0 12.4723 0.72945 14.5518 2.06838 16.2254ZM9 12.89C10.6569 12.89 12 11.5469 12 9.89001C12 8.23316 10.6569 6.89001 9 6.89001C7.34314 6.89001 6 8.23316 6 9.89001C6 11.5469 7.34314 12.89 9 12.89Z" fill="white"/>
+                                                    </svg> <h5>Communities</h5></div>
+                                <div class="tab"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="24" viewBox="0 0 21 24" fill="none">
+                                                        <path d="M0 9.89001V23.39H7.5V17.39C7.5 15.7332 8.84315 14.39 10.5 14.39C12.1569 14.39 13.5 15.7332 13.5 17.39V23.39H21V9.89001L10.5 0.890015L0 9.89001Z" fill="white"/>
+                                                    </svg> <h5>Model Homes</h5></div>
+                                <div class="tab"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 24 25" fill="none">
+                                                        <path d="M12 0.890015C5.3715 0.890015 0 6.26151 0 12.89C0 19.5185 5.3715 24.89 12 24.89C18.6285 24.89 24 19.5185 24 12.89C24 6.26151 18.6285 0.890015 12 0.890015ZM18.366 19.256C16.6635 20.9525 14.4045 21.89 12 21.89C9.5955 21.89 7.3365 20.9525 5.634 19.256C3.9375 17.5535 3 15.2945 3 12.89C3 10.4855 3.9375 8.22651 5.634 6.52401C7.3365 4.82751 9.5955 3.89001 12 3.89001C14.4045 3.89001 16.6635 4.82751 18.366 6.52401C20.0625 8.22651 21 10.4855 21 12.89C21 15.2945 20.0625 17.5535 18.366 19.256ZM16.176 8.26401L10.524 14.5445L7.893 11.948L5.784 14.081L10.65 18.89L18.4035 10.2695L16.176 8.26401Z" fill="white"/>
+                                                    </svg> <h5>Quick Move-Ins</h5></div>
+                            </div>
+
+                            <div class="d-flex align-items-center sort_wrapper">
+                                <div class="sort_heading">
+                                    <h5>Sort:</h5>
+                                </div>
+                                <div class="sort_item">
+                                    <a>North to South</a>
+                                </div>
+                                <div class="sort_item">
+                                    <a>Lowest Price</a>
+                                </div>
+                                <div class="sort_item">
+                                    <a>Highest Price</a>
+                                </div>
+                            </div>
+                            <hr style="margin: 0px !important; color: #000;"/>
+                        </section>
+
+                        <t t-if="partners">
+                            <t t-foreach="partners" t-as="partner" t-key="partner.id">
+                                <section>
+                                    <a t-attf-href="/find-your-home/{{partner.state_id.code.lower() if partner.state_id and partner.state_id.code else 'undefined' }}/{{partner.slug}}/?company_id={{partner.id}}"
+                                       class="container-fluid cards_wrapper">
+                                        <div class="row w-100">
+                                            <div class="col-lg-3 text-center">
+                                                <img class="partner_image"
+                                                     style="width: 95px; height: 120px; overflow: hidden; object-fit: contain;"
+                                                     t-att-src="image_data_uri(partner.logo) if partner.logo else '/franchisor_theme/static/img/partners.png'"/>
+                                            </div>
+                                            <div class="col-lg-9 card_description_wrapper">
+                                                <h4>
+                                                    <t t-esc="partner.city"/>
+                                                </h4>
+                                                <div class="new_location">New</div>
+                                                <p><t t-esc="partner.name"/>,
+                                                    <t t-esc="partner.city"/>
+                                                    ,
+                                                    <t t-esc="partner.state_id.code"/>
+                                                </p>
+                                                <h6>
+                                                    <t t-esc="partner.description"/>
+                                                </h6>
+                                                <p class="view_details">View details and floor plans</p>
+                                            </div>
+                                        </div>
+
+                                    </a>
+                                </section>
+                            </t>
+                        </t>
+                    </div>
+                    <div class="help_banner_wrapper">
+                        <div class="row justify-content-between">
+                            <div class="col-7 d-flex sales_wrapper_right gap-3">
+                            <div class="d-flex flex-column align-items-center">
+                                <img class="sales_person_img" t-att-src="'/franchisor_theme/static/img/tyler.jpg'"/>
+                                <p>302-569-9698</p>
+                                <p class="get_to_know">Get to know Grace</p>
+                            </div>
+                                <div class="help_heading">
+                                    <h3>Hi there, I'm Grace Hoinowski.</h3>
+                                    <p>I'm here to help! I can answer questions about communities and
+                                        floor plans. I can also schedule a virtual or in person appointment
+                                            for you.</p>
+                                </div>
+                        </div>
+                            <div class="col-4 d-flex flex-column sales_wrapper_right align-items-center gap-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="31" viewBox="0 0 26 31" fill="none">
+                                      <g clip-path="url(#clip0_113_180)">
+                                        <path d="M7.2678 1.0999C8.09313 1.1749 8.5433 1.6249 8.61833 2.4499V4.6999H16.7215V2.4499C16.7966 1.6249 17.2468 1.1749 18.0721 1.0999C18.8974 1.1749 19.3476 1.6249 19.4226 2.4499V4.6999H21.6735C22.6864 4.7374 23.5305 5.09365 24.2058 5.76865C24.881 6.44365 25.2374 7.2874 25.2749 8.2999V9.1999V11.8999V26.2999C25.2374 27.3124 24.881 28.1562 24.2058 28.8312C23.5305 29.5062 22.6864 29.8624 21.6735 29.8999H3.66637C2.65347 29.8624 1.80938 29.5062 1.13412 28.8312C0.458848 28.1562 0.102456 27.3124 0.0649414 26.2999V11.8999V9.1999V8.2999C0.102456 7.2874 0.458848 6.44365 1.13412 5.76865C1.80938 5.09365 2.65347 4.7374 3.66637 4.6999H5.91726V2.4499C5.99229 1.6249 6.44247 1.1749 7.2678 1.0999ZM22.5739 11.8999H2.76601V26.2999C2.80353 26.8624 3.10365 27.1624 3.66637 27.1999H21.6735C22.2362 27.1624 22.5364 26.8624 22.5739 26.2999V11.8999ZM18.5785 17.8062L12.276 24.1062C11.6383 24.6312 11.0005 24.6312 10.3628 24.1062L6.76135 20.5062C6.23614 19.8687 6.23614 19.2312 6.76135 18.5937C7.3991 18.0687 8.03685 18.0687 8.67461 18.5937L11.3194 21.2374L16.6653 15.8937C17.303 15.3687 17.9408 15.3687 18.5785 15.8937C19.1037 16.5312 19.1037 17.1687 18.5785 17.8062Z" fill="white"/>
+                                      </g>
+                                      <defs>
+                                        <clipPath id="clip0_113_180">
+                                          <rect width="25.21" height="30" fill="white" transform="matrix(1 0 0 -1 0.0649414 30.5)"/>
+                                        </clipPath>
+                                      </defs>
+                                    </svg>
+                                    <button class="btn btn-primary help_btn rounded-0">HOW CAN I HELP?</button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="oe_structure"/>
+        </t>
+    </template>
+</odoo>

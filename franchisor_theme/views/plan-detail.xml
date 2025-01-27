@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="franchisor_theme.plan_detail" name="PlanDetail">
+        <xpath expr="//title" position="replace">
+            <title>
+                <t t-esc="home_plan.name"/>
+            </title>
+        </xpath>
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'division'"/>
+            <div class="oe_structure"/>
+
+            <section style="margin-top: 5rem;">
+                <div class="page-header-plan-detail" style="height: 642px;"
+                     t-att-src="'/franchisor_theme/static/img/plan-detail-background.png'">
+                    <div class="leaseback text-center">
+                        <h5 class="mb-4 text-center">Model Leaseback opportunity available!</h5>
+                        <button class="btn">
+                            <strong>LEARN MORE</strong>
+                        </button>
+                    </div>
+                </div>
+                <div class="header-content">
+                    <h1 class="text-light fw-bold"
+                        style="visibility: visible;animation-duration: 0.4s;animation-delay: 0.1s;animation-name: fadeIn;margin: 0 auto; font-weight: 800; font-size: 3.5rem;">
+                        <t t-esc="home_plan.name"/>
+                    </h1>
+                    <h5 class="d-flex justify-content-center text-light"
+                        style="font-size: 1.21875rem; width: 40rem; margin-bottom: 20px;">
+                        <!--                        <t t-esc="partner.header_text"/>-->
+                        Single-Family Home at StillCroft
+                    </h5>
+                    <div class="row plan-details-heading">
+                        <div class="col-lg-4 column">
+                            <h1 class="text-light">
+                                <t t-esc="home_plan.min_bedrooms"/>
+                                -
+                                <t t-esc="home_plan.max_bedrooms"/>
+                            </h1>
+                            <h5 class="text-light">
+                                BEDROOMS
+                            </h5>
+                        </div>
+                        <div class="col-lg-4 column">
+                            <h1 class="text-light">
+                                <t t-esc="home_plan.min_bathrooms"/>
+                                -
+                                <t t-esc="home_plan.max_bathrooms"/>
+                            </h1>
+                            <h5 class="text-light">
+                                BATHROOMS
+                            </h5>
+                        </div>
+                        <div class="col-lg-4 column">
+                            <h1 class="text-light">
+                                <t t-esc="home_plan.base_heated_square_feet"/>
+                                -
+                                <t t-esc="home_plan.max_heated_square_feet"/>
+                            </h1>
+                            <h5 class="text-light">
+                                HEATED SQUARE FEET
+                            </h5>
+                        </div>
+
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-lg-6">
+                            <button class="btn view_floors">
+                                <h5 class="text-light">
+                                    Start Virtual 3D Tour
+                                </h5>
+                            </button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button class="btn view_floors">
+                                <h5 class="text-light">
+                                    View Floor Plan
+                                </h5>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <t t-if="final_response_list">
+                    <div class="row" style="margin: 20px;">
+                        <t t-foreach="final_response_list" t-as="option">
+                            <div class="card col-lg-4">
+                                <div class="card-header">
+                                    <h5 t-esc="option['name']" class="card-title"/>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group">
+                                        <t t-foreach="option['option_values']" t-as="value">
+                                            <li class="list-group-item">
+                                                <t t-esc="value['name']"/>
+                                                <t t-if="value['image']">
+                                                    <img class="w-25"
+                                                         t-att-src="image_data_uri(value['image'])"/>
+                                                </t>
+                                                <t t-if="value['option_value_price']">
+                                                    (Price:<t t-esc="value['option_value_price']"/>)
+                                                </t>
+                                            </li>
+
+                                        </t>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </section>
+
+            <section>
+                <div id="listing-overview" class="mt-5" data-equalizer="" data-equalizer-mq="large-up" wiid="N1128">
+                    <div class="row w-100 justify-content-center" wiid="N1130">
+                        <div class="col-lg-7 elevation_options text-center mb-5" wiid="N1175">
+                            <h5 class="kingfisher_description">With accolodates for its national award-winning floor
+                                plan, the
+                                Kingfisher includes a grant foyer that leads to a flex room that can be customized to be
+                                a home office, adding bathroom or dining room.
+                            </h5>
+                        </div>
+                        <div class="col-lg-12 elevation_options" wiid="N1175">
+                            <div class="row mb-5">
+                                <div class="col-lg-3 text-center kingfisher_border">
+                                    <i class="fa fa-flag kingfisher_icons"></i>
+                                    <h5 class="text-center mt-4">Floor Plan Brochure</h5>
+                                </div>
+                                <div class="col-lg-3 text-center kingfisher_border">
+                                    <i class="fa fa-calendar kingfisher_icons"></i>
+                                    <h5 class="text-center mt-4">Visit a Model</h5>
+                                </div>
+                                <div class="col-lg-3 text-center kingfisher_border">
+                                    <i class="fa fa-bell kingfisher_icons"></i>
+                                    <h5 class="text-center mt-4">Location &amp; Pricing</h5>
+                                </div>
+                                <div class="col-lg-3 text-center">
+                                    <i class="fa fa-bell kingfisher_icons"></i>
+                                    <h5 class="text-center mt-4">Ask a Question</h5>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section>
+                <img class="w-100" t-att-src="'/franchisor_theme/static/img/home-plans.png'"/>
+            </section>
+
+            <section>
+                <div id="listing-overview" class="mt-5" data-equalizer="" data-equalizer-mq="large-up" wiid="N1128">
+                    <div class="row w-100 justify-content-center" wiid="N1130">
+                        <div class="col-lg-8 elevation_options text-center mb-5" wiid="N1175">
+                            <h3 class="text-dark mb-4">
+                                <strong>Elevation Options &amp; Curb Appeal</strong>
+                            </h3>
+                            <h5 class="text-dark">A tremendous amount of time and effort goes into the exterior design
+                                of our homes. The
+                                exceptional curb appeal of a Schell Brothers home is not only a reflection of the
+                                quality and care that goes into the home but also a huge source of pride for our
+                                homeowners.
+                            </h5>
+                        </div>
+                        <div class="col-lg-8 elevation_options" wiid="N1175">
+                            <div class="row mb-5">
+                                <t t-if="elevation_options">
+                                    <t t-foreach="elevation_options" t-as="option">
+                                        <t t-foreach="option['option_values']" t-as="option_value">
+                                            <div class="col-lg-4 text-center">
+                                                <img class="w-100" style="height: 60%; object-fit: contain;"
+                                                     t-att-src="image_data_uri(option_value['image']) if option_value['image'] else '/franchisor_theme/static/img/elevation-image.png'"/>
+                                                <h5 class="text-center text-dark mt-4">
+                                                    <t t-esc="option_value['name']"></t>
+                                                </h5>
+                                            </div>
+                                        </t>
+                                    </t>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <img class="w-100" t-att-src="'/franchisor_theme/static/img/help2.png'"/>
+            </section>
+            <section>
+                <img class="w-100" t-att-src="'/franchisor_theme/static/img/floor-map.png'"/>
+            </section>
+            <section>
+                <img class="w-100" t-att-src="'/franchisor_theme/static/img/benefits.png'"/>
+            </section>
+            <section>
+                <img class="w-100" t-att-src="'/franchisor_theme/static/img/map.png'"/>
+            </section>
+            <div class="oe_structure"/>
+        </t>
+    </template>
+</odoo>

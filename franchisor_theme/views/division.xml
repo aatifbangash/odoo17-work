@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="franchisor_theme.division" name="Division">
+        <xpath expr="//title" position="replace">
+            <title>
+                <t t-esc="partner.name"/>
+            </title>
+        </xpath>
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'division'"/>
+            <div class="oe_structure"/>
+            <section style="margin-bottom: 1rem; margin-top: 5rem;">
+                <div class="page-header"
+                     t-att-src="'/franchisor_theme/static/img/division-background.jpg'">
+                </div>
+                <div class="header-content">
+                    <h1 class="text-light fw-bold"
+                        style="visibility: visible;animation-duration: 0.4s;animation-delay: 0.1s;animation-name: fadeIn;margin: 0 auto;">
+                        <t t-esc="partner.name"/>
+                    </h1>
+                    <h5 class="d-flex justify-content-center text-light" style="font-size: 18px; width: 40rem;">
+                        <t t-if="partner and partner.header_text">
+                            <t t-raw="partner.header_text"/>
+                        </t>
+                    </h5>
+                </div>
+                <div class="page-header-action">
+                    <div class="page-header-details-banner fadeIn animated" data-wow-duration="0.4s"
+                         data-wow-delay="0.4s"
+                         style="visibility: visible; animation-duration: 0.4s; animation-delay: 0.4s; animation-name: fadeIn;">
+                        <a href="http://maps.google.com/?q=19322 Safflower Way Lewes, DE 19958">
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            <t t-esc="partner.street"/>
+                            <t t-esc="partner.city"/>,
+                            <t t-esc="partner.state_id.code"/>
+                            <t t-esc="partner.zip"/>
+                        </a>
+                        <div class="partner_timings">
+                            <i class="fa-solid fa-calendar-week text-light" aria-hidden="true"></i>
+                            <p class="hours-list-days">Mon-Sat</p>
+                                    <p class="hours-list-times">
+                                        10am-5pm
+                                    </p>
+                            <p class="hours-list-days">Sun</p>
+                                    <p class="hours-list-times">
+                                        11am-5pm
+                                    </p>
+                        </div>
+                    </div>
+                    <div style="display: inline;">
+                        <ul class="d-flex justify-content-center scrollable_links">
+                            <li id="button-home" data-id="home_pricing" class="extra-hide">
+                                <a href="#" class="expand button wow fadeIn animated text-decoration-none"
+                                   data-wow-delay="1s"
+                                   style="visibility: visible; animation-delay: 1s; animation-name: fadeIn;">
+                                    Homes &amp; Pricing
+                                </a>
+                            </li>
+                            <li id="button-amenities" data-id="amenities" class="extra-hide">
+                                <a href="#" class="expand button wow fadeIn animated text-decoration-none"
+                                   data-wow-delay="1.1s"
+                                   style="visibility: visible; animation-delay: 1.1s; animation-name: fadeIn;">
+                                    Communities
+                                </a>
+                            </li>
+                            <li id="button-planVisit" data-id="planVisit">
+                                <a href="#"
+                                   class="success expand button wow fadeIn animated text-decoration-none"
+                                   data-wow-delay="1.2s"
+                                   style="visibility: visible; animation-delay: 1.2s; animation-name: fadeIn;">
+                                    Plan a Visit
+                                </a>
+                            </li>
+                            <li id="button-learn" data-id="learn" class="extra-show">
+                                <a href="#" class="expand button wow fadeIn animated text-decoration-none"
+                                   data-wow-delay="1.3s"
+                                   style="visibility: visible; animation-delay: 1.3s; animation-name: fadeIn;">
+                                    Learn More
+                                </a>
+                            </li>
+                            <li id="button-explore" data-id="explore" class="extra-hide">
+                                <a href="#" class="expand button wow fadeIn animated text-decoration-none"
+                                   data-wow-delay="1.4s"
+                                   style="visibility: visible; animation-delay: 1.4s; animation-name: fadeIn;">
+                                    Amenities
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="planVisit" class="division_homes">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="flex-video widescreen">
+                                <iframe width="560" height="315"
+                                        src="https://www.youtube-nocookie.com/embed/-Cb2ysbbDdw?rel=0&amp;hd=1&amp;autohide=1&amp;showinfo=0&amp;wmode=transparent"
+                                        allowfullscreen=""></iframe>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="d-flex design_studio">
+                                <h2 style="box-sizing: border-box; font-size: 2.3125rem; margin: 0.2rem 0px 1rem; padding: 0px;">
+                                    Why <t t-esc="partner.name"/>?
+                                </h2>
+                                <div id="why_us" class="why_us_html">
+                                    <t t-if="partner and partner.why_us_html">
+                                        <t t-raw="partner.why_us_html"/>
+                                    </t>
+
+                                </div>
+                                <div t-if="partner and partner.why_us_html" class="see_more_wrapper text-center ">
+                                    <h6 id="seeMoreButton" data-id="planVisit" style="display:none;">Show More</h6>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-primary launch_design_studio mt-4">LEARN ABOUT THE AMENITIES</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="promotion-notice text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+                            <path d="M20.595 31.5C20.3313 31.9546 19.9528 32.332 19.4973 32.5943C19.0419 32.8566 18.5256 32.9947 18 32.9947C17.4744 32.9947 16.9581 32.8566 16.5027 32.5943C16.0472 32.332 15.6687 31.9546 15.405 31.5M27 12C27 9.61305 26.0518 7.32387 24.364 5.63604C22.6761 3.94821 20.3869 3 18 3C15.6131 3 13.3239 3.94821 11.636 5.63604C9.94821 7.32387 9 9.61305 9 12C9 22.5 4.5 25.5 4.5 25.5H31.5C31.5 25.5 27 22.5 27 12Z" stroke="#006197" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <h4 id="learn" class="color-text">Plus, take advantage of our current incentive package!</h4>
+                        <a href="#community-incentive" class="learn_more small btn btn-primary rounded-0">Learn more</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="amenities">
+                <div class="communities">
+                <p class="communities-heading">
+                    communities
+                </p>
+                <p class="communities-description">
+                    The Coastal resorts of southeastern division are known for their gorgeous natural scenery,
+                    protected parks and clean beaches.
+                </p>
+                </div>
+                <div class="oe_structure"/>
+                <div class="row w-100 m-0" style="height: 50rem;">
+                    <div class="col-lg-9 p-0">
+                    <div id="map-loader" style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: rgba(255, 255, 255, 0.8);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        z-index: 10;
+                    ">
+                        <div class="spinner" style="
+                            width: 40px;
+                            height: 40px;
+                            border: 4px solid #ccc;
+                            border-top-color: #3498db;
+                            border-radius: 50%;
+                            animation: spin 1s linear infinite;
+                        "></div>
+                    </div>
+                    <owl-component name="GoogleMap" t-att-props='json.dumps(google_map_object)'/>
+                        </div>
+                    <div class="col-lg-3 p-0">
+                                <ul t-if="communities" class="d-flex flex-column communities_listing_sidepanel">
+                        <t t-foreach="communities" t-as="community">
+                            <li t-if="community" class="">
+                                <a class="community_link" t-attf-href="/find-your-home/{{partner.state_id.code.lower() if partner.state_id and partner.state_id.code else 'undefined' }}/{{partner.slug}}/{{community.slug}}/?company_id={{partner.id}}&amp;community_id={{community.id}}">
+                                    <div class="card community_card rounded-0 w-100">
+                                        <div class="card-body rounded-0 py-3">
+                                            <div class="d-flex">
+                                                <div>
+                                                    <t t-if="community.image_1920">
+                                                <img
+                                                        t-if="community.image_1920"
+                                                        t-att-src="image_data_uri(community.image_1920)"
+                                                        class="card-img-top rounded-0"
+                                                        style="height: 8rem; width: 140px; height: 115px; overflow: hidden; object-fit: contain;"
+                                                />
+
+                                            </t>
+                                            <t t-else="">
+                                                <img
+                                                        t-att-src="'/franchisor_theme/static/img/placeholder-image.jpeg'"
+                                                        class="card-img-top rounded-0"
+                                                        style="height: 8rem; width: 140px; height: 115px; overflow: hidden; object-fit: contain;"
+                                                />
+                                            </t>
+                                                </div>
+                                                <div class="px-2 pt-2">
+                                                     <h5 class="card-text text-left community_name text-dark mt-1" style="margin-bottom: 2px;">
+                                                <t t-esc="community.display_name"/>
+                                            </h5>
+                                                    <div class="comm_status py-2">
+                                                        <p>Quick Starts</p>
+                                                    </div>
+                                            <p class="text-left text-dark comm_code">
+                                                <t t-esc="community.code"/>
+                                            </p>
+                                            <p class="text-left text-dark comm_address" style="font-size: 12px; margin: 0;">
+                                                <t t-esc="community.address"/>
+                                            </p>
+                                                    <p class="text-left text-dark comm_desc">
+                                                <t t-esc="community.description"/>
+                                            </p>
+<!--                                                     <p class="text-left text-dark comm_view" style="font-size: 11px; line-height: 13px;">-->
+<!--                                                View details and floor plans-->
+<!--                                            </p>-->
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </t>
+                    </ul>
+                        </div>
+                </div>
+                <div>
+                    <!--                <ul t-if="partner.google_map_item_id.community_ids.exists()" class="row mt-1" style="padding: 0px 12rem;">-->
+                    <!--                    <t t-foreach="partner.google_map_item_id.community_ids" t-as="community">-->
+                    <!--                        <li t-if="community" class="col-lg-3 mt-4">-->
+                    <!--                            <a t-attf-href="/find-your-home/{{partner.state_id.code.lower() if partner.state_id and partner.state_id.code else 'undefined' }}/{{partner.slug}}/{{community.slug}}/?company_id={{partner.id}}&amp;community_id={{community.id}}">-->
+                    <!--                                <div class="card rounded-0 w-100">-->
+                    <!--                                    <div class="card-body" style="min-height: 214px;">-->
+                    <!--                                        <t t-if="community.background_image">-->
+                    <!--                                        <img-->
+                    <!--                                                t-if="community.background_image"-->
+                    <!--                                                t-att-src="image_data_uri(community.background_image)"-->
+                    <!--                                                class="card-img-top w-100 rounded-0"-->
+                    <!--                                                style="height: 8rem;"-->
+                    <!--                                        />-->
+
+                    <!--                                        </t>-->
+                    <!--                                        <t t-else="">-->
+                    <!--                                            <img-->
+                    <!--                                                t-att-src="'/franchisor_theme/static/img/placeholder-image.jpeg'"-->
+                    <!--                                                class="card-img-top w-100 rounded-0"-->
+                    <!--                                                style="height: 8rem;"-->
+                    <!--                                        />-->
+                    <!--                                        </t>-->
+                    <!--                                        <h5 class="card-text text-center text-dark mt-1">-->
+                    <!--                                            <t t-esc="community.name"/>-->
+                    <!--                                        </h5>-->
+                    <!--&lt;!&ndash;                                        <p style="font-size: 12px;" class="text-center text-dark">&ndash;&gt;-->
+                    <!--&lt;!&ndash;                                            <t t-esc="community.code"/>&ndash;&gt;-->
+                    <!--&lt;!&ndash;                                        </p>&ndash;&gt;-->
+                    <!--                                        <p class="text-center text-dark">-->
+                    <!--                                            <t t-esc="community.address"/>-->
+                    <!--                                        </p>-->
+
+                    <!--                                    </div>-->
+                    <!--                                </div>-->
+                    <!--                            </a>-->
+                    <!--                        </li>-->
+                    <!--                    </t>-->
+                    <!--                </ul>-->
+<!--                    <ul t-if="communities" class="row mt-1" style="padding: 0px 12rem;">-->
+<!--                        <t t-foreach="communities" t-as="community">-->
+<!--                            <li t-if="community" class="col-lg-3 mt-4">-->
+<!--                                <a t-attf-href="/find-your-home/{{partner.state_id.code.lower() if partner.state_id and partner.state_id.code else 'undefined' }}/{{partner.slug}}/{{community.slug}}/?company_id={{partner.id}}&amp;community_id={{community.id}}">-->
+<!--                                    <div class="card rounded-0 w-100">-->
+<!--                                        <div class="card-body" style="min-height: 214px;">-->
+<!--                                            <t t-if="community.image_1920">-->
+<!--                                                <img-->
+<!--                                                        t-if="community.image_1920"-->
+<!--                                                        t-att-src="image_data_uri(community.image_1920)"-->
+<!--                                                        class="card-img-top w-100 rounded-0"-->
+<!--                                                        style="height: 8rem;"-->
+<!--                                                />-->
+
+<!--                                            </t>-->
+<!--                                            <t t-else="">-->
+<!--                                                <img-->
+<!--                                                        t-att-src="'/franchisor_theme/static/img/placeholder-image.jpeg'"-->
+<!--                                                        class="card-img-top w-100 rounded-0"-->
+<!--                                                        style="height: 8rem;"-->
+<!--                                                />-->
+<!--                                            </t>-->
+<!--                                            <h5 class="card-text text-center text-dark mt-1">-->
+<!--                                                <t t-esc="community.display_name"/>-->
+<!--                                            </h5>-->
+<!--                                            <p style="font-size: 12px;" class="text-center text-dark">-->
+<!--                                                <t t-esc="community.code"/>-->
+<!--                                            </p>-->
+<!--                                            <p class="text-center text-dark">-->
+<!--                                                <t t-esc="community.address"/>-->
+<!--                                            </p>-->
+
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                        </t>-->
+<!--                    </ul>-->
+                </div>
+                <!--                    </div>-->
+            </section>
+            <section id="home_pricing" class="floor_plans">
+                <p class="text-dark communities-heading">
+                    floor plans
+                </p>
+                <p class="text-dark communities-description">
+                    The Coastal resorts of southeastern division are known for their gorgeous natural scenery,
+                    protected parks and clean beaches.
+                </p>
+                <div class="d-flex text-light gap-2 justify-content-center filter_wrapper">
+                    <button class="btn btn-link rounded-pill text-dark filter_button btn_active">All</button>
+                    <button class="btn btn-link rounded-pill tdivision.xmlext-dark filter_button bg-light">Ranch</button>
+                    <button class="btn btn-link rounded-pill text-dark filter_button bg-light">First Floor Suit</button>
+                    <button class="btn btn-link rounded-pill text-dark filter_button bg-light">Second Floor Suit</button>
+                </div>
+                <owl-component name="HomePlans" t-att-props="json.dumps(json_data)"/>
+            </section>
+
+            <section id="explore" class="aminities">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="d-flex design_studio text-center">
+                                <div>
+                                    <h1 class="text-center communities-heading">Brentwood Amenities</h1>
+                                </div>
+                            <div class="d-flex text-light gap-2 justify-content-center filter_wrapper">
+                    <button class="btn btn-link rounded-pill text-dark filter_button btn_active">All</button>
+                    <button class="btn btn-link rounded-pill tdivision.xmlext-dark filter_button bg-light">Pool</button>
+                    <button class="btn btn-link rounded-pill text-dark filter_button bg-light">Pickleball</button>
+                    <button class="btn btn-link rounded-pill text-dark filter_button bg-light">Clubhouse</button>
+                    <button class="btn btn-link rounded-pill text-dark filter_button bg-light">Gym</button>
+                    <button class="btn btn-link rounded-pill text-dark filter_button bg-light">Sports Field</button>
+                </div>
+                            </div>
+                            <div class="pickleballers_section">
+                                <h3 class="text-center">Pickleballer's Paradise</h3>
+                                <p class="text-center">With both indoor and outdoor pickleball courts, you can play year-round in Brentwood!</p>
+                                <div class="row mt-3">
+                                    <div class="col-4">
+                                    <img class="w-100"
+                                 t-att-src="'/franchisor_theme/static/img/pickle1.png'"/>
+                                    </div>
+                                    <div class="col-4">
+                                <img class="w-100"
+                                 t-att-src="'/franchisor_theme/static/img/pickle2.png'"/>
+                                    </div>
+                                    <div class="col-4">
+                                <img class="w-100"
+                                 t-att-src="'/franchisor_theme/static/img/pickle3.png'"/>
+                                    </div>
+
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-6">
+                                    <img class="w-100"
+                                 t-att-src="'/franchisor_theme/static/img/pickle4.png'"/>
+                                    </div>
+                                    <div class="col-6">
+                                <img class="w-100"
+                                 t-att-src="'/franchisor_theme/static/img/pickle5.png'"/>
+                                    </div>
+                                </div>
+
+                                 <h3 class="text-center mt-5">Kick the Ball, Score the Point</h3>
+                                <p class="text-center">Your whole family will keep active with soccer, lacrosse, or the sport of your choice on our grass field!</p>
+                                <div class="row mt-3 justify-content-center">
+                                    <div class="col-8">
+                                    <img class="w-100"
+                                 t-att-src="'/franchisor_theme/static/img/soccer1.png'"/>
+                                    </div>
+                                </div>
+
+                                 <h3 class="text-center mt-5">Play in Luxury By the Pool</h3>
+                                <p class="text-center">The pool area will feature a kids' splash zone, a water curtain, and a large lanai and lounge area.</p>
+                                <div class="row gap-3 mt-3 justify-content-center">
+                                    <div class="col-10">
+                                    <img class="w-100"
+                                 t-att-src="'/franchisor_theme/static/img/pool1.png'"/>
+                                    </div>
+                                     <div class="col-10">
+                                    <img class="w-100"
+                                 t-att-src="'/franchisor_theme/static/img/pool2.png'"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+<!--                        <div class="col-lg-12">-->
+<!--                            <img class="w-100 big_house"-->
+<!--                                 t-att-src="'/franchisor_theme/static/img/schell-bighouse1.png'"/>-->
+<!--                        </div>-->
+<!--                        <div class="col-lg-12">-->
+<!--                            <div class="container text-center my-3">-->
+<!--                                <div class="row mx-auto my-auto justify-content-center">-->
+<!--                                    <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">-->
+<!--                                        <div class="carousel-inner" role="listbox">-->
+<!--                                            <div class="carousel-item active">-->
+<!--                                                <div class="col-md-3">-->
+<!--                                                    <div class="card mx-2">-->
+<!--                                                        <div class="card-img">-->
+<!--                                                            <img src="/franchisor_theme/static/img/schell-interior1.png"-->
+<!--                                                                 class="img-fluid w-100"/>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="carousel-item">-->
+<!--                                                <div class="col-md-3">-->
+<!--                                                    <div class="card mx-2">-->
+<!--                                                        <div class="card-img">-->
+<!--                                                            <img src="/franchisor_theme/static/img/schell-interior2.png"-->
+<!--                                                                 class="img-fluid w-100"/>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="carousel-item">-->
+<!--                                                <div class="col-md-3">-->
+<!--                                                    <div class="card mx-2">-->
+<!--                                                        <div class="card-img">-->
+<!--                                                            <img src="/franchisor_theme/static/img/schell-interior1.png"-->
+<!--                                                                 class="img-fluid w-100"/>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel"-->
+<!--                                           role="button" data-bs-slide="prev">-->
+<!--                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--                                        </a>-->
+<!--                                        <a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel"-->
+<!--                                           role="button" data-bs-slide="next">-->
+<!--                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </section>
+            <div class="help_banner_wrapper">
+                        <div class="row justify-content-between align-items-center">
+                            <div class="col-8 d-flex sales_wrapper_right gap-3">
+                            <div class="d-flex flex-column align-items-center">
+                                <img class="sales_person_img" t-att-src="'/franchisor_theme/static/img/tyler.jpg'"/>
+                            </div>
+                                <div class="help_heading">
+                                    <h3>About Us</h3>
+                                    <p>We believe that focusing on the happiness of our employees and homeowners before anything else makes us the best possible versions of ourselves, and that much better at what we do.</p>
+                                    <div class="mt-2">
+                                        <button class="btn learn_more">Learn More</button>
+                                    <button class="btn learn_more">Email Us</button>
+                                    </div>
+                                </div>
+                        </div>
+                            <div class="col-3 d-flex sales_wrapper_right align-items-start gap-3">
+                                   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 16 17" fill="none">
+                                      <g clip-path="url(#clip0_247_636)">
+                                        <path d="M14 7.52637C14 12.193 8 16.193 8 16.193C8 16.193 2 12.193 2 7.52637C2 5.93507 2.63214 4.40894 3.75736 3.28373C4.88258 2.15851 6.4087 1.52637 8 1.52637C9.5913 1.52637 11.1174 2.15851 12.2426 3.28373C13.3679 4.40894 14 5.93507 14 7.52637Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M8 9.52637C9.10457 9.52637 10 8.63094 10 7.52637C10 6.4218 9.10457 5.52637 8 5.52637C6.89543 5.52637 6 6.4218 6 7.52637C6 8.63094 6.89543 9.52637 8 9.52637Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                      </g>
+                                      <defs>
+                                        <clipPath id="clip0_247_636">
+                                          <rect width="22" height="23" fill="white" transform="translate(0 0.859375)"/>
+                                        </clipPath>
+                                      </defs>
+                                   </svg>
+                                    <p class="text-white fw-bold pe-5">20184 Phillips St
+                                        Rehoboth Beach, DE 19971
+                                        (302) 226-1994 Get directions
+                                    </p>
+                                </div>
+                        </div>
+                    </div>
+<!--            <section class="about_us_section my-3">-->
+<!--                <div class="container">-->
+<!--                    <div class="row build_homes">-->
+<!--                        <div class="col-lg-6">-->
+<!--                            <div class="d-flex design_studio">-->
+<!--                                <div class="heading text-left">-->
+<!--                                    <h1 class="text-dark about-heading">About Us</h1>-->
+<!--                                </div>-->
+<!--                                <div>-->
+
+<!--                                    <p t-if="partner and partner.about_the_builder"-->
+<!--                                       t-esc="partner.about_the_builder"></p>-->
+<!--                                </div>-->
+<!--                                <div>-->
+<!--                                    <h6 class="fw-bold">Address</h6>-->
+<!--                                </div>-->
+<!--                                <div>-->
+<!--                                    <p t-esc="partner.street"></p>-->
+<!--                                </div>-->
+<!--                                <div>-->
+<!--                                    <a class="get_direction_link mt-4">Get Directions-->
+<!--                                        <i class="fa fa-arrow-right"></i>-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                                <div>-->
+<!--                                    <a class="btn btn-primary launch_design_studio mt-3 mb-3"-->
+<!--                                       t-attf-href="mailto:{{partner.email}}">-->
+<!--                                        Email Us-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                                <div>-->
+<!--                                    <button class="btn btn-primary launch_design_studio mb-3">Learn More</button>-->
+<!--                                </div>-->
+<!--                                <div class="d-flex gap-3">-->
+<!--                                    <i class="fa fa-facebook-f media_icons"></i>-->
+<!--                                    <i class="fa fa-instagram media_icons"></i>-->
+<!--                                    <i class="fa fa-linkedin media_icons"></i>-->
+<!--                                    <i class="fa fa-pinterest media_icons"></i>-->
+<!--                                    <i class="fa fa-twitter media_icons"></i>-->
+<!--                                    <i class="fa fa-youtube media_icons"></i>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-lg-6">-->
+
+<!--                            <img-->
+<!--                                    t-if="partner.builder_image"-->
+<!--                                    t-att-src="image_data_uri(partner.builder_image)"-->
+<!--                                    class="w-100 big_house"/>-->
+
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </section>-->
+            <div class="oe_structure"/>
+        </t>
+    </template>
+</odoo>

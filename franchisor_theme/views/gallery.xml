@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="gallery" name="Record listing">
+            <t t-call="website.layout">
+                <div class="oe_structure"/>
+                <div>
+                    <section class="gallery_cover_image py-5">
+                        <div class="container photos_wrapper">
+                            <div class="text-center photos_heading_wrapper py-4">
+                                <h2 class="homeIQ_heading">PHOTOS AND VIDEOS</h2>
+                            </div>
+                            <div class="text-center">
+                                <a class="btn btn-primary rounded-0" href="/gallery">VIEW ALL</a>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="gallery_image_wrapper">
+
+                        <t t-if="galleries">
+                            <t t-foreach="galleries" t-as="gallery">
+                                <div class="container py-5">
+                                    <div class="text-center py-4">
+                                        <h4 class="text-light fw-bold">
+                                            <t t-esc="gallery.name"/>
+                                        </h4>
+                                    </div>
+                                    <div class="container text-center my-3">
+                                        <div class="row mx-auto my-auto">
+                                            <div t-att-id="'carousel-' + str(gallery.id)"
+                                                 t-attf-class="#{len(gallery.gallery_item_ids)>4 and 'carousel slide' or 'd-contents' }"
+                                                 data-bs-ride="carousel">
+                                                <div t-attf-class="#{len(gallery.gallery_item_ids)>4 and 'carousel-inner' or 'without-carousel' }">
+                                                    <t t-foreach="gallery.gallery_item_ids" t-as="items">
+                                                        <div t-attf-class="#{ len(gallery.gallery_item_ids)>4 and 'carousel-item' or 'd-contents'} #{ len(gallery.gallery_item_ids)>4 and items_first and 'active' or '' }">
+                                                            <div class="image-card mb-3">
+                                                                <!--                                                                <a t-attf-href="/gallery" class="image_list_item">-->
+                                                                <t t-if="items.media_type == 'image'">
+                                                                    <div class="card mx-2">
+                                                                        <div class="card-img">
+                                                                            <img t-if="items.image"
+                                                                                 t-att-src="image_data_uri(items.image)"
+                                                                                 class="w-100 img-fluid img-thumbnail"
+                                                                                 style="height: 15rem;object-fit: cover;"
+                                                                                 data-bs-toggle="modal"
+                                                                                 t-att-data-bs-target="'#imageModal-' + str(items.id)"
+                                                                                 t-att-data-image-url="image_data_uri(items.image)"/>
+
+                                                                        </div>
+                                                                        <!--                            <div class="card-img-overlay">Slide 1</div>-->
+                                                                        <div class="text-center bg-light">
+                                                                            <p class="p-2">
+                                                                                <t t-esc="items.name"/>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </t>
+                                                                <t t-if="items.media_type == 'video'">
+                                                                    <div class="card mx-2">
+                                                                        <div class="card-img">
+                                                                            <img t-if="items.video_id"
+                                                                                 t-att-src="'https://img.youtube.com/vi/%s/hqdefault.jpg' % items.video_id"
+                                                                                 class="w-100 img-fluid img-thumbnail"
+                                                                                 style="height: 15rem;object-fit: cover;"
+                                                                                 data-bs-toggle="modal"
+                                                                                 t-att-data-bs-target="'#imageModal-' + str(items.id)"/>
+                                                                            <div t-if="items.video_id"
+                                                                                 class="text-center KJAHKJSDH bg-light">
+                                                                                <p class="p-2">
+                                                                                    <t t-esc="items.name"/>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </t>
+
+
+                                                                <!--                                                                </a>-->
+                                                            </div>
+                                                        </div>
+                                                    </t>
+                                                </div>
+                                                <a class="carousel-control-prev" role="button"
+                                                   t-if="len(gallery.gallery_item_ids)>4"
+                                                   t-att-data-bs-target="'#carousel-' + str(gallery.id)"
+                                                   data-bs-slide="prev">
+                                                    <span class="carousel-control-prev-icon"
+                                                          aria-hidden="true"></span>
+                                                </a>
+                                                <a class="carousel-control-next" t-if="len(gallery.gallery_item_ids)>4"
+                                                   t-att-data-bs-target="'#carousel-' + str(gallery.id)"
+                                                   role="button" data-bs-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <t t-foreach="gallery.gallery_item_ids" t-as="items">
+                                    <div class="modal fade" t-att-id="'imageModal-' + str(items.id)" tabindex="-1"
+                                         aria-labelledby="imageModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content image_modal">
+                                                <i class="fa fa-close dismiss-icon"
+                                                   data-bs-dismiss="modal"
+                                                   aria-label="Close">
+                                                </i>
+                                                <iframe t-att-src="'https://www.youtube.com/embed/'+items.video_id"
+                                                        t-if="items.media_type == 'video'"
+                                                        height="200%"
+                                                        width="100%"
+                                                        id="videoIframe"
+                                                        style="max-height: 40rem;"
+                                                        title="W3Schools Free Online Web Tutorials"></iframe>
+                                                <img t-if="items.image and items.media_type == 'image'"
+                                                     t-att-src="image_data_uri(items.image)"
+                                                     class="img-fluid w-100" alt="Selected Image"
+                                                     style="max-height: 40rem;"/>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </t>
+                        </t>
+
+
+                    </section>
+                </div>
+                <div class="oe_structure"/>
+            </t>
+
+
+        </template>
+    </data>
+</odoo>

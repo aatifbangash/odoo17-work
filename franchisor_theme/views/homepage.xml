@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="franchisor_homepage" name="Record listing">
+            <t t-call="website.layout">
+                <div class="oe_structure"/>
+                    <section class="mx-auto" style="margin-bottom: 5rem; margin-top: 5rem;">
+                        <div class="container-fluid px-0">
+                            <img class="w-100" t-att-src="'/franchisor_theme/static/img/schell-franchisor-home.png'"/>
+                            <div class="division-card">
+                                <p>
+                                    FIND YOUR NEW HOME
+                                <span class="text-center text-light">
+                                    Beautifully designed with a unique approach.
+                                </span>
+                                </p>
+                                <div class="text-center">
+                                     <a t-attf-href="/find-your-home" class="btn btn-primary rounded-0 division-button">Find Your Home</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="mission_section">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <img class="w-100" t-att-src="'/franchisor_theme/static/img/schell-tricycle.png'"/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex our_mission">
+                                        <div class="heading">
+                                            <h3>Our Mission of Happiness</h3>
+                                        </div>
+                                        <div class="description">
+                                            <p>While we've earned a reputation for building distinctive homes,
+                                                much of our company's success is attributed to our unique business
+                                                purpose: to maximize happiness rather than profit! We're truly
+                                                focused on our own happiness and the happiness of our customers.
+                                            </p>
+                                        </div>
+                                        <div class="learn_btn_wrapper">
+                                            <button class="btn btn-primary learn_more">Learn More</button>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex victory_images">
+                                            <img class="w-100 h-100"
+                                                 t-att-src="'/franchisor_theme/static/img/schell-victoryshake.png'"/>
+                                            <img class="w-100"
+                                                 t-att-src="'/franchisor_theme/static/img/schell-teamvictory.png'"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row build_homes">
+                                <div class="col-lg-6">
+                                    <div class="d-flex our_mission">
+                                        <div class="heading">
+                                            <h3>We Build Beautiful Homes</h3>
+                                        </div>
+                                        <div class="description">
+                                            <p>While we've earned a reputation for building distinctive homes,
+                                                much of our company's success is attributed to our unique business
+                                                purpose: to maximize happiness rather than profit! We're truly
+                                                focused on our own happiness and the happiness of our customers
+                                            </p>
+                                        </div>
+                                        <div class="learn_btn_wrapper">
+                                            <button class="btn btn-primary learn_more">Learn More</button>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex victory_images">
+                                        <div>
+                                            <img class="w-100"
+                                                 t-att-src="'/franchisor_theme/static/img/schell-interior1.png'"/>
+                                        </div>
+                                        <div>
+                                            <img class="w-100"
+                                                 t-att-src="'/franchisor_theme/static/img/schell-interior2.png'"/>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <img class="w-100 h-100 big_house"
+                                         t-att-src="'/franchisor_theme/static/img/schell-bighouse1.png'"/>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="blog_section">
+                        <div class="text-center blog">
+                            <h3>What’s New at Schell Brothers</h3>
+                        </div>
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-lg-6 d-flex mb-5">
+                                <img class="new_images" t-att-src="'/franchisor_theme/static/img/schell-biginterior2.png'"/>
+                                <div class="new_desc">
+                                    <h3>Schell Brothers Wins Numerous Regal Awards from Home Builders Association of Delaware</h3>
+                                    <p>or Karen and Dave Orlando, moving to Walden wasn’t just a change of address. Leaving behind their hometown of Northport on Long Island, New York,...</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 d-flex mb-5">
+                                <img class="new_images" t-att-src="'/franchisor_theme/static/img/schell-biginterior2.png'"/>
+                                <div class="new_desc">
+                                    <h3>Schell Brothers Wins Numerous Regal Awards from Home Builders Association of Delaware</h3>
+                                    <p>or Karen and Dave Orlando, moving to Walden wasn’t just a change of address. Leaving behind their hometown of Northport on Long Island, New York,...</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 d-flex">
+                                <img class="new_images" t-att-src="'/franchisor_theme/static/img/schell-biginterior2.png'"/>
+                                <div class="new_desc">
+                                    <h3>Schell Brothers Wins Numerous Regal Awards from Home Builders Association of Delaware</h3>
+                                    <p>or Karen and Dave Orlando, moving to Walden wasn’t just a change of address. Leaving behind their hometown of Northport on Long Island, New York,...</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 d-flex">
+                                <img class="new_images" t-att-src="'/franchisor_theme/static/img/schell-biginterior2.png'"/>
+                                <div class="new_desc">
+                                    <h3>Schell Brothers Wins Numerous Regal Awards from Home Builders Association of Delaware</h3>
+                                    <p>or Karen and Dave Orlando, moving to Walden wasn’t just a change of address. Leaving behind their hometown of Northport on Long Island, New York,...</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row align-items-center build_homes">
+                                <div class="col-lg-3">
+                                    <div>
+                                        <p class="review_description">
+                                            Now that I’ve moved in, the Schell
+                                            Brothers team is still involved in
+                                            our community, hosting events
+                                            that have helped to turn our group
+                                            of neighbors into friends.
+                                        </p>
+                                        <p class="reviewer">— Sharon</p>
+                                        <p class="builders_name">Schell Brothers Homeowners</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="text-center">
+                                          <div class="carousel-inner">
+                                                <div class="carousel-item active">
+                                                  <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="d-block w-100" alt="..."/>
+                                                </div>
+                                                <div class="carousel-item">
+                                                  <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="d-block w-100" alt="..."/>
+                                                </div>
+                                                <div class="carousel-item">
+                                                  <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="d-block w-100" alt="..."/>
+                                                </div>
+                                              </div>
+                                              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                              </button>
+                                              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                              </button>
+                                    </div>
+
+<!--                                    <div class="d-flex victory_images">-->
+<!--                                         <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">-->
+<!--                                        <div class="carousel-inner" role="listbox">-->
+<!--                                            <div class="carousel-item active">-->
+<!--                                                <div class="col-md-3">-->
+<!--                                                    <div class="card mx-2">-->
+<!--                                                        <div class="card-img">-->
+<!--                                                            <img src="/franchisor_theme/static/img/schell-interior1.png"-->
+<!--                                                                 class="img-fluid carousel_image"/>-->
+<!--                                                        </div>-->
+<!--                                                        &lt;!&ndash;                            <div class="card-img-overlay">Slide 1</div>&ndash;&gt;-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="carousel-item">-->
+<!--                                                <div class="col-md-3">-->
+<!--                                                    <div class="card mx-2">-->
+<!--                                                        <div class="card-img">-->
+<!--                                                            <img src="/franchisor_theme/static/img/schell-interior2.png"-->
+<!--                                                                 class="img-fluid carousel_image"/>-->
+<!--                                                        </div>-->
+<!--                                                        &lt;!&ndash;                            <div class="card-img-overlay">Slide 2</div>&ndash;&gt;-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="carousel-item">-->
+<!--                                                <div class="col-md-3">-->
+<!--                                                    <div class="card mx-2">-->
+<!--                                                        <div class="card-img">-->
+<!--                                                            <img src="/franchisor_theme/static/img/schell-interior1.png"-->
+<!--                                                                 class="img-fluid carousel_image"/>-->
+<!--                                                        </div>-->
+<!--                                                        &lt;!&ndash;                            <div class="card-img-overlay">Slide 3</div>&ndash;&gt;-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel"-->
+<!--                                           role="button" data-bs-slide="prev">-->
+<!--                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--                                        </a>-->
+<!--                                        <a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel"-->
+<!--                                           role="button" data-bs-slide="next">-->
+<!--                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+<!--                                    </div>-->
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+<!--                    <section class="footer mx-auto">-->
+<!--                        <img class="w-100" t-att-src="'/franchisor_theme/static/img/schell-footer.png'"/>-->
+<!--                    </section>-->
+                <div class="oe_structure"/>
+            </t>
+        </template>
+        <!--        <template id="custom_footer" inherit_id="website.layout" name="Custom Footer">-->
+        <!--            <xpath expr="//footer" position="replace">-->
+        <!--                <span></span>-->
+
+        <!--                &lt;!&ndash;                        <footer>&ndash;&gt;-->
+        <!--                &lt;!&ndash;                            <div>heeeer</div>&ndash;&gt;-->
+        <!--                &lt;!&ndash;                        </footer>&ndash;&gt;-->
+        <!--            </xpath>-->
+        <!--        </template>-->
+    </data>
+</odoo>

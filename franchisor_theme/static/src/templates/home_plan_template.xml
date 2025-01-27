@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="franchisor_theme.home_plan_template">
+        <div class="container containerr">
+            <div t-if="state.home_plans" class="row justify-content-start card_row">
+                <t t-foreach="state.home_plans" t-as="home_plan" t-key="home_plan.id">
+<!--                    -->
+                    <div t-if="home_plan" class="custom-card-wrapper" t-key="home_plan.id">
+                        <a class="card_anchorr" t-attf-href="/find-your-home/{{state.partner.state_id and state.partner.state_id.code ? state.partner.state_id.code  : 'undefined' }}/{{state.partner.slug}}/plan/{{home_plan.slug}}">
+                        <div class="card card_wrapperr rounded-0">
+                            <div class="image_cont">
+                               <img
+                                            t-if="home_plan.image_1920"
+                                            t-att-src="imageDataUri(home_plan.image_1920)"
+                                            class="card-img-top rounded-0"
+                                    />
+
+                            </div>
+                          <div class="card-body cardd_body">
+                            <h5 class="card-title text-center fw-bold"><t t-esc="home_plan.name"/></h5>
+                            <p class="card-text">
+                                <span class="listing-price">
+                                        Base price
+                                        <span class="nowrap text-dark">
+                                            <t t-set="final_base_price" t-value="0.00"/>
+                                            <t t-set="plan_base_price"
+                                               t-value="home_plan.product_override_ids.filter((r)=> r.type == 'plan' and r.company_id.id == partner.id)"/>
+                                            <t t-if="plan_base_price and plan_base_price.base_price">
+                                                <t t-set="final_base_price"
+                                                   t-value="plan_base_price.base_price"/>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-set="master_plan_base_price"
+                                                   t-value="home_plan.product_override_ids.filter((r)=> r.type == 'master_plan')"/>
+                                                <t t-if="master_plan_base_price and master_plan_base_price.base_price">
+                                                    <t t-set="final_base_price"
+                                                       t-value="master_plan_base_price.base_price"/>
+                                                </t>
+                                            </t>
+                                            $
+                                            <t t-esc="final_base_price"/>
+                                        </span>
+                                    <br/>
+                                        <span class="nowrap text-dark">- $
+                                            <t t-esc="home_plan.incentive_price"/>
+                                            incentive
+                                        </span>
+                                        <span class="nowrap text-dark">=
+                                            $
+                                            <strong class="price"
+                                                    t-esc="final_base_price - home_plan.incentive_price"/>
+                                        </span>
+                                    </span>
+                                <hr class="h_row"/>
+                                <span class="home_structure">
+                                        <ul class="detail-stats large-block-grid-2 small-block-grid-2">
+                                            <li>
+                                                <div class="detail-stat">
+                                                    <p>
+                                                        <strong>
+                                                            <t t-esc="home_plan.min_bedrooms"/>
+                                                            -
+                                                            <t t-esc="home_plan.max_bedrooms"/>
+                                                        </strong>
+                                                    </p>
+                                                    <p>
+                                                        <small>Bedrooms</small>
+                                                    </p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="detail-stat">
+                                                    <p>
+                                                        <strong>
+                                                            <t t-esc="home_plan.min_bathrooms"/>
+                                                            -
+                                                            <t t-esc="home_plan.max_bathrooms"/>
+                                                        </strong>
+                                                    </p>
+                                                    <p>
+                                                        <small>Bathrooms</small>
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </span>
+                                <hr class="h_row"/>
+                                <div class="area-stats">
+                                        <strong class="text-black">
+                                            <t t-esc="home_plan.base_heated_square_feet"/>
+                                            -
+                                            <t t-esc="home_plan.max_heated_square_feet"/>
+                                        </strong>
+                                        <small class="text-black">Heated Sqft</small>
+                                        <small class="text-black">(
+                                            <t t-esc="home_plan.base_total_square_feet"/>
+                                            -
+                                            <t t-esc="home_plan.max_total_square_feet"/>
+                                            Total Sqft)
+                                        </small>
+                                    </div>
+
+                            </p>
+                          </div>
+                        </div>
+                        </a>
+                    </div>
+
+                </t>
+            </div>
+        </div>
+    </t>
+</templates>
+
+<!--                    -->
+<!--                    <div t-if="home_plan" t-att-class="!this.state.isDrawer ? 'col-lg-3 col-md-4 col-sm-6 col-xs-12 mt-4 d-flex justify-content-center': 'col-lg-6 col-md-12 col-sm-12 col-xs-12 mt-4 d-flex justify-content-center'" t-key="home_plan.id">-->
+<!--                        <a class="mx-3" t-attf-href="/find-your-home/{{state.partner.state_id and state.partner.state_id.code ? state.partner.state_id.code  : 'undefined' }}/{{state.partner.slug}}/plan/{{home_plan.slug}}">-->
+<!--                            <div t-att-class="!this.state.isDrawer ? 'card rounded-0 floor-plan-card border-0': 'card rounded-0 drawer-floor-plan-card border-0'">-->
+<!--                                <div class="card-body rounded-0 p-0">-->
+<!--                                    <img-->
+<!--                                            t-if="home_plan.image_1920"-->
+<!--                                            t-att-src="imageDataUri(home_plan.image_1920)"-->
+<!--                                            class="card-img-top w-100 rounded-0"-->
+<!--                                            style="height: 115px;"-->
+<!--                                    />-->
+<!--                                    <div class="card_details">-->
+<!--                                    <h5 class="card-text text-center text-dark mt-1">-->
+<!--                                        <t t-esc="home_plan.name"/>-->
+<!--                                    </h5>-->
+<!--                                    <span class="listing-price">-->
+<!--                                        Base price-->
+<!--                                        <span class="nowrap text-dark">-->
+<!--                                            <t t-set="final_base_price" t-value="0.00"/>-->
+<!--                                            <t t-set="plan_base_price"-->
+<!--                                               t-value="home_plan.product_override_ids.filter((r)=> r.type == 'plan' and r.company_id.id == partner.id)"/>-->
+<!--                                            <t t-if="plan_base_price and plan_base_price.base_price">-->
+<!--                                                <t t-set="final_base_price"-->
+<!--                                                   t-value="plan_base_price.base_price"/>-->
+<!--                                            </t>-->
+<!--                                            <t t-else="">-->
+<!--                                                <t t-set="master_plan_base_price"-->
+<!--                                                   t-value="home_plan.product_override_ids.filter((r)=> r.type == 'master_plan')"/>-->
+<!--                                                <t t-if="master_plan_base_price and master_plan_base_price.base_price">-->
+<!--                                                    <t t-set="final_base_price"-->
+<!--                                                       t-value="master_plan_base_price.base_price"/>-->
+<!--                                                </t>-->
+<!--                                            </t>-->
+<!--                                            $-->
+<!--                                            <t t-esc="final_base_price"/>-->
+<!--                                        </span>-->
+<!--                                        <span class="nowrap text-dark">- $-->
+<!--                                            <t t-esc="home_plan.incentive_price"/>-->
+<!--                                            incentive-->
+<!--                                        </span>-->
+<!--                                        <span class="nowrap text-dark">=-->
+<!--                                            $-->
+<!--                                            <strong class="price"-->
+<!--                                                    t-esc="final_base_price - home_plan.incentive_price"/>-->
+<!--                                        </span>-->
+<!--                                    </span>-->
+<!--                                    <span class="home_structure">-->
+<!--                                        <ul class="detail-stats large-block-grid-2 small-block-grid-2">-->
+<!--                                            <li>-->
+<!--                                                <div class="detail-stat">-->
+<!--                                                    <p>-->
+<!--                                                        <strong>-->
+<!--                                                            <t t-esc="home_plan.min_bedrooms"/>-->
+<!--                                                            - -->
+<!--                                                            <t t-esc="home_plan.max_bedrooms"/>-->
+<!--                                                        </strong>-->
+<!--                                                    </p>-->
+<!--                                                    <p>-->
+<!--                                                        <small>Bedrooms</small>-->
+<!--                                                    </p>-->
+<!--                                                </div>-->
+<!--                                            </li>-->
+<!--                                            <li>-->
+<!--                                                <div class="detail-stat">-->
+<!--                                                    <p>-->
+<!--                                                        <strong>-->
+<!--                                                            <t t-esc="home_plan.min_bathrooms"/>-->
+<!--                                                            - -->
+<!--                                                            <t t-esc="home_plan.max_bathrooms"/>-->
+<!--                                                        </strong>-->
+<!--                                                    </p>-->
+<!--                                                    <p>-->
+<!--                                                        <small>Bathrooms</small>-->
+<!--                                                    </p>-->
+<!--                                                </div>-->
+<!--                                            </li>-->
+<!--                                        </ul>-->
+<!--                                    </span>-->
+<!--                                    <div class="area-stats">-->
+<!--                                        <strong class="text-black">-->
+<!--                                            <t t-esc="home_plan.base_heated_square_feet"/>-->
+<!--                                            - -->
+<!--                                            <t t-esc="home_plan.max_heated_square_feet"/>-->
+<!--                                        </strong>-->
+<!--                                        <small class="text-black">Heated Sqft</small>-->
+<!--                                        <small class="text-black">(-->
+<!--                                            <t t-esc="home_plan.base_total_square_feet"/>-->
+<!--                                            - -->
+<!--                                            <t t-esc="home_plan.max_total_square_feet"/>-->
+<!--                                            Total Sqft)-->
+<!--                                        </small>-->
+<!--                                    </div>-->
+<!--                                        </div>-->
+<!--                                    &lt;!&ndash;                                        <div class="area-stats">&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                            <t t-if="home_plan.home_plan_options_ids.exists()">&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                <ul>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                    <t t-foreach="home_plan.home_plan_options_ids"&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                       t-as="franchise">&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                        <t t-if="franchise.is_active">&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                            <t t-if="franchise.master_plan_options_id.options_id">&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                                <li>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                                    <small class="text-black">&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                                        <t t-esc="franchise.master_plan_options_id.options_id.name"/>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                                    </small>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                                    <small class="text-black">-</small>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                                    <small class="text-black">&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                                        <t t-esc="franchise.master_plan_options_id.option_values_id.name"/>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                                    </small>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                                </li>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                            </t>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                        </t>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                    </t>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                                </ul>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                            </t>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </a>-->
+<!--                    </div>-->

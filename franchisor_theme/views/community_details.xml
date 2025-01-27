@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="franchisor_theme.community_details" name="Division">
+        <xpath expr="//title" position="replace">
+            <title>
+                <!--                <t t-esc="community_home_plan.name"/>-->
+                <t t-esc="community_home_plan.display_name"/>
+            </title>
+        </xpath>
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'Details'"/>
+            <div class="oe_structure"/>
+
+
+            <section style="margin-bottom: 0.5rem; margin-top: 5rem; width: 100% !important">
+                <!--                <div class="page-header"-->
+                <!--                     t-attf-style="background-image: url('{{ image_data_uri(community_home_plan.background_image) if community_home_plan.background_image else '/franchisor_theme/static/img/division-background.jpg' }}');">-->
+                <!--                </div>-->
+                <div class="page-header"
+                     t-attf-style="background-image: url('{{ image_data_uri(community_home_plan.image_1920) if community_home_plan.image_1920 else '/franchisor_theme/static/img/division-background.jpg' }}');">
+                </div>
+                <div class="header-content">
+                    <h1 class="text-light fw-bold"
+                        style="font-size: 48px;">
+                        <!--                        <t t-esc="community_home_plan.name"/>-->
+                        <t t-esc="community_home_plan.display_name"/>
+                    </h1>
+                    <t t-if="community_home_plan and community_home_plan.header_text">
+                        <h5 class="d-flex justify-content-center text-light "
+                            style="font-size: 1.21875rem; width: 40rem; margin-bottom: 24px;">
+                            <t t-esc="community_home_plan.header_text"/>
+                        </h5>
+                    </t>
+
+
+                </div>
+                <div class="leaseback text-center" style="bottom: 20rem !important">
+                    <h5 class="mb-4 text-center">Model Leaseback opportunity available!</h5>
+                    <button class="btn learn_more red">LEARN MORE</button>
+                </div>
+                <div class="page-header-action">
+                    <div class="page-header-details-banner wow fadeIn animated" data-wow-duration="0.4s"
+                         data-wow-delay="0.4s"
+                         style="visibility: visible; animation-duration: 0.4s; animation-delay: 0.4s; animation-name: fadeIn;">
+
+                        <a href="http://maps.google.com/?q=19322 Safflower Way Lewes, DE 19958"
+                           class="text-light">
+                            <t t-if="community_home_plan.address">
+                                <t t-esc="community_home_plan.address"/>
+                                <t t-esc="community_home_plan.city"/>,
+                                <t t-esc="community_home_plan.state_code"/>
+                                <t t-esc="community_home_plan.zip_code"/>
+                            </t>
+                        </a>
+                            <div class="partner_timings">
+                            <i class="fa-solid fa-calendar-week text-light" aria-hidden="true"></i>
+                            <p class="hours-list-days">Mon-Sat</p>
+                                    <p class="hours-list-times">
+                                        10am-5pm
+                                    </p>
+                            <p class="hours-list-days">Sun</p>
+                                    <p class="hours-list-times">
+                                        11am-5pm
+                                    </p>
+                        </div>
+
+
+                    </div>
+                    <div style="display: inline;">
+                        <ul class="d-flex justify-content-center scrollable_links"
+                            style="padding-left: 0px !important;">
+                            <li id="button-home" data-id="home_pricing" class="extra-hide">
+                                <a class="expand button wow fadeIn animated text-decoration-none"
+                                   data-wow-delay="1s"
+                                   style="visibility: visible; animation-delay: 1s; animation-name: fadeIn;">
+                                    Homes &amp; Pricing
+                                </a>
+                            </li>
+
+                            <li id="button-amenities" data-id="amenities" class="extra-hide">
+                                <a href="#" class="expand button wow fadeIn animated text-decoration-none"
+                                   data-wow-delay="1.1s"
+                                   style="visibility: visible; animation-delay: 1.1s; animation-name: fadeIn;">
+                                    Amenities
+                                </a>
+                            </li>
+
+
+                            <li id="button-planVisit" data-id="planVisit">
+                                <a href="#"
+                                   class="success expand button wow fadeIn animated text-decoration-none"
+                                   data-wow-delay="1.2s"
+                                   style="visibility: visible; animation-delay: 1.2s; animation-name: fadeIn;">
+                                    Plan a Visit
+                                </a>
+                            </li>
+                            <li id="button-sitePlan" data-id="sitePlan" class="extra-hide">
+                                <a href="#" class="expand button wow fadeIn animated text-decoration-none"
+                                   data-wow-delay="1.3s"
+                                   style="visibility: visible; animation-delay: 1.3s; animation-name: fadeIn;">
+                                    Site Plan
+                                </a>
+                            </li>
+                            <li id="button-explore" data-id="explore" class="extra-hide">
+                                <a href="#" class="expand button wow fadeIn animated text-decoration-none"
+                                   data-wow-delay="1.4s"
+                                   style="visibility: visible; animation-delay: 1.4s; animation-name: fadeIn;">
+                                    Explore the Area
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="division_homes pb-0">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="flex-video widescreen">
+                                <iframe width="560" height="315"
+                                        src="https://www.youtube-nocookie.com/embed/-Cb2ysbbDdw?rel=0&amp;hd=1&amp;autohide=1&amp;showinfo=0&amp;wmode=transparent"
+                                        allowfullscreen=""></iframe>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="d-flex design_studio">
+
+                                <h3 class="fw-bold">Why Us?</h3>
+                                <p>
+                                    <t t-raw="community_home_plan.why_us_html"/>
+                                </p>
+
+                                <div>
+                                    <button class="btn btn-primary launch_design_studio mt-4">LEARN ABOUT THE AMENITIES</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="promotion-notice text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+                            <path d="M20.595 31.5C20.3313 31.9546 19.9528 32.332 19.4973 32.5943C19.0419 32.8566 18.5256 32.9947 18 32.9947C17.4744 32.9947 16.9581 32.8566 16.5027 32.5943C16.0472 32.332 15.6687 31.9546 15.405 31.5M27 12C27 9.61305 26.0518 7.32387 24.364 5.63604C22.6761 3.94821 20.3869 3 18 3C15.6131 3 13.3239 3.94821 11.636 5.63604C9.94821 7.32387 9 9.61305 9 12C9 22.5 4.5 25.5 4.5 25.5H31.5C31.5 25.5 27 22.5 27 12Z" stroke="#006197" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <h4 id="learn" class="color-text">Plus, take advantage of our current incentive package!</h4>
+                        <a href="#community-incentive" class="learn_more small btn btn-primary rounded-0">Learn more</a>
+                    </div>
+                    </div>
+                    <div id="learn" class="row col-lg-12 mt-5">
+                        <div class="col-lg-3 text-center">
+                            <h5 class="fw-bolder family_homes_heading">
+                                265 Single-Family Homes
+                            </h5>
+                            <button class="btn learn_more mt-3">Learn More</button>
+                        </div>
+                        <div class="col-lg-3 text-center">
+                            <h5 class="fw-bolder family_homes_heading">
+                                265 Single-Family Homes
+                            </h5>
+                            <button class="btn learn_more mt-3">Learn More</button>
+                        </div>
+                        <div class="col-lg-3 text-center">
+                            <h5 class="fw-bolder family_homes_heading">
+                                265 Single-Family Homes
+                            </h5>
+                            <button class="btn learn_more mt-3">Learn More</button>
+                        </div>
+                        <div class="col-lg-3 text-center">
+                            <h5 class="fw-bolder family_homes_heading">
+                                265 Single-Family Homes
+                            </h5>
+                            <button class="btn learn_more mt-3">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="floor_plans">
+                <div class="container-fluid">
+                    <div class="row sales_wrapper justify-content-evenly align-items-center">
+                        <div class="col-7 d-flex sales_wrapper_left flex-column">
+                            <h4 class="mb-2 fw-bold">The Sales Team is here for you!</h4>
+                            <p class="mb-4">We can answer questions about our community, floor plans, what to do in the
+                                area, you name it! We also are happy to schedule dedicated time to meet with you
+                                virtually or in-person.
+                            </p>
+                            <div>
+                               <button class="btn help_btn rounded-0">HOW CAN I HELP?</button>
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex sales_wrapper_right align-items-center gap-3">
+                            <div class="d-flex flex-column align-items-center">
+                                <img class="sales_person_img" t-att-src="'/franchisor_theme/static/img/tyler.jpg'"/>
+                                <strong class="mt-2">Tyler</strong>
+                                <p>(302) 569-939</p>
+                                <p class="get_to_know">Get to know Tarah</p>
+                            </div>
+                            <div class="d-flex flex-column align-items-center">
+                                <img class="sales_person_img" t-att-src="'/franchisor_theme/static/img/tarah.jpg'"/>
+                                <strong class="mt-2">Tarah</strong>
+                                <p>(302) 569-9122</p>
+                                <p class="get_to_know">Get to know Tarah</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid p-0">
+                    <div class="row gx-0">
+                        <div class="col-lg-9">
+                            <div style="height: 668px !important;">
+                    <div id="map-loader" style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: rgba(255, 255, 255, 0.8);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        z-index: 10;
+                    ">
+                        <div class="spinner" style="
+                            width: 40px;
+                            height: 40px;
+                            border: 4px solid #ccc;
+                            border-top-color: #3498db;
+                            border-radius: 50%;
+                            animation: spin 1s linear infinite;
+                        "></div>
+                    </div>
+                    <owl-component name="GoogleMap" t-att-props='json.dumps(google_map_object)'/>
+<!--                    <owl-component name="LotPreview"/>-->
+                </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="explore-area">
+                    <h1 class="mb-3">Explore the Area</h1>
+                    <div class="d-flex">
+                        <div style="margin-right:1rem;">
+                            <i class="fa fa-calendar fs-4"></i>
+                        </div>
+                        <div>
+                            <h5>Walden</h5>
+                            <p style="color: #cecece">Harbeson, DE 19551</p>
+                            <a style="color: #F1E260; cursor: pointer;">Get Direction</a>
+                        </div>
+                    </div>
+                    <ul class="mt-4 explore_list">
+                        <li class="explore-list-item">
+                            <p class="badge selected">Restaurants</p>
+                        </li>
+                        <li class="explore-list-item">
+                            <p class="">Shopping</p>
+                        </li>
+                        <li class="explore-list-item">
+                            <p class="">HealthCare</p>
+                        </li>
+                        <li class="explore-list-item">
+                            <p class="">Grocery</p>
+                        </li>
+                        <li class="explore-list-item">
+                            <p class="">Schools</p>
+                        </li>
+                    </ul>
+
+                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--                <img id="sitePlan" class="w-100" t-att-src="'/franchisor_theme/static/img/map.png'"/>-->
+                <div id="home_pricing" class="pb-5">
+                    <p class="communities-heading mt-5">
+                        Homes &amp; Pricing
+                    </p>
+                    <p class="text-center">Offer available when you use our preferred lender, settlement attorney, and
+                        title insurance company.
+                    </p>
+                </div>
+                <owl-component name="HomePlans" t-att-props="json.dumps(json_data)"/>
+            </section>
+            <section id="explore" class="aminities">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="d-flex design_studio text-center">
+                                <div>
+                                    <h1 class="text-center communities-heading">Brentwood Amenities</h1>
+                                </div>
+                            <div class="d-flex text-light gap-2 justify-content-center filter_wrapper">
+                    <button class="btn btn-link rounded-pill text-dark filter_button btn_active">All</button>
+                    <button class="btn btn-link rounded-pill tdivision.xmlext-dark filter_button bg-light">Pool</button>
+                    <button class="btn btn-link rounded-pill text-dark filter_button bg-light">Pickleball</button>
+                    <button class="btn btn-link rounded-pill text-dark filter_button bg-light">Clubhouse</button>
+                    <button class="btn btn-link rounded-pill text-dark filter_button bg-light">Gym</button>
+                    <button class="btn btn-link rounded-pill text-dark filter_button bg-light">Sports Field</button>
+                </div>
+                            </div>
+                            <div class="pickleballers_section">
+                                <h3 class="text-center">Pickleballer's Paradise</h3>
+                                <p class="text-center">With both indoor and outdoor pickleball courts, you can play year-round in Brentwood!</p>
+                                <div class="row mt-3">
+                                    <div class="col-4">
+                                    <img class="w-100"
+                                 t-att-src="'/franchisor_theme/static/img/pickle1.png'"/>
+                                    </div>
+                                    <div class="col-4">
+                                <img class="w-100"
+                                 t-att-src="'/franchisor_theme/static/img/pickle2.png'"/>
+                                    </div>
+                                    <div class="col-4">
+                                <img class="w-100"
+                                 t-att-src="'/franchisor_theme/static/img/pickle3.png'"/>
+                                    </div>
+
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-6">
+                                    <img class="w-100"
+                                 t-att-src="'/franchisor_theme/static/img/pickle4.png'"/>
+                                    </div>
+                                    <div class="col-6">
+                                <img class="w-100"
+                                 t-att-src="'/franchisor_theme/static/img/pickle5.png'"/>
+                                    </div>
+                                </div>
+
+                                 <h3 class="text-center mt-5">Kick the Ball, Score the Point</h3>
+                                <p class="text-center">Your whole family will keep active with soccer, lacrosse, or the sport of your choice on our grass field!</p>
+                                <div class="row mt-3 justify-content-center">
+                                    <div class="col-8">
+                                    <img class="w-100"
+                                 t-att-src="'/franchisor_theme/static/img/soccer1.png'"/>
+                                    </div>
+                                </div>
+
+                                 <h3 class="text-center mt-5">Play in Luxury By the Pool</h3>
+                                <p class="text-center">The pool area will feature a kids' splash zone, a water curtain, and a large lanai and lounge area.</p>
+                                <div class="row gap-3 mt-3 justify-content-center">
+                                    <div class="col-10">
+                                    <img class="w-100"
+                                 t-att-src="'/franchisor_theme/static/img/pool1.png'"/>
+                                    </div>
+                                     <div class="col-10">
+                                    <img class="w-100"
+                                 t-att-src="'/franchisor_theme/static/img/pool2.png'"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+<!--                        <div class="col-lg-12">-->
+<!--                            <img class="w-100 big_house"-->
+<!--                                 t-att-src="'/franchisor_theme/static/img/schell-bighouse1.png'"/>-->
+<!--                        </div>-->
+<!--                        <div class="col-lg-12">-->
+<!--                            <div class="container text-center my-3">-->
+<!--                                <div class="row mx-auto my-auto justify-content-center">-->
+<!--                                    <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">-->
+<!--                                        <div class="carousel-inner" role="listbox">-->
+<!--                                            <div class="carousel-item active">-->
+<!--                                                <div class="col-md-3">-->
+<!--                                                    <div class="card mx-2">-->
+<!--                                                        <div class="card-img">-->
+<!--                                                            <img src="/franchisor_theme/static/img/schell-interior1.png"-->
+<!--                                                                 class="img-fluid w-100"/>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="carousel-item">-->
+<!--                                                <div class="col-md-3">-->
+<!--                                                    <div class="card mx-2">-->
+<!--                                                        <div class="card-img">-->
+<!--                                                            <img src="/franchisor_theme/static/img/schell-interior2.png"-->
+<!--                                                                 class="img-fluid w-100"/>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="carousel-item">-->
+<!--                                                <div class="col-md-3">-->
+<!--                                                    <div class="card mx-2">-->
+<!--                                                        <div class="card-img">-->
+<!--                                                            <img src="/franchisor_theme/static/img/schell-interior1.png"-->
+<!--                                                                 class="img-fluid w-100"/>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel"-->
+<!--                                           role="button" data-bs-slide="prev">-->
+<!--                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--                                        </a>-->
+<!--                                        <a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel"-->
+<!--                                           role="button" data-bs-slide="next">-->
+<!--                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </section>
+            <section class="request-appointment pb-5">
+                <div class="col-lg-5">
+                    <h1 id="planVisit" style="font-size: 23px; margin: 2.5rem 0rem">Schedule an Appointment</h1>
+                    <div class="row">
+                        <div class="col-lg-4">
+                             <input type="text" class="flex-grow-1 mb-5 border-0 text-dark w-100"
+                               style="padding: 0.8rem;" placeholder="Name" t-ref="autofocus"/>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="flex-grow-1 mb-5 border-0 text-dark w-100"
+                              style="padding: 0.8rem;" placeholder="Email Address"
+                               t-ref="autofocus"/>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="flex-grow-1 mb-5 border-0 text-dark w-100"
+                               style="padding: 0.8rem;" placeholder="Phone Number (optional)"
+                               t-ref="autofocus"/>
+                        </div>
+                        <div class="col-lg-12">
+                             <input type="text" class="flex-grow-1 mb-5 border-0 text-dark w-100"
+                               style="padding: 0.8rem;" placeholder="Message (optional)"
+                               t-ref="autofocus"/>
+                        </div>
+                        <div class="col-lg-12">
+                             <button class="btn learn_more_reverse">Request an Appointment</button>
+                        </div>
+                        <div class="col-lg-5 mt-4 mb-4">
+                        <p class="join_list">When you join our list, you agree to receive email updates and
+                            promotions, as well as calls if you share your phone number.
+                        </p>
+                        </div>
+                        <hr/>
+                    </div>
+                    <div class="d-grid">
+                        <div class="col-lg-12 d-flex">
+                            <div class="col-lg-6 text-center">
+                                <p style="font-size: 18px !important;">Not ready for an appointment?</p>
+                                <a style="cursor: pointer; font-size: 18px !important;">Sign up for updates
+                                </a><span class="right_arrow_icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                  <g clip-path="url(#clip0_304_2110)">
+                                    <path d="M8.16471 11.4769L10.8314 8.81022M10.8314 8.81022L8.16471 6.14355M10.8314 8.81022H5.49805M14.8314 8.81022C14.8314 12.4921 11.8466 15.4769 8.16471 15.4769C4.48282 15.4769 1.49805 12.4921 1.49805 8.81022C1.49805 5.12832 4.48282 2.14355 8.16471 2.14355C11.8466 2.14355 14.8314 5.12832 14.8314 8.81022Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                                  </g>
+                                  <defs>
+                                    <clipPath id="clip0_304_2110">
+                                      <rect width="16" height="16" fill="white" transform="translate(0.165039 0.810059)"/>
+                                    </clipPath>
+                                  </defs>
+                                </svg>
+                            </span>
+                            </div>
+                            <div class="col-lg-6 text-center">
+                                <p style="font-size: 18px !important;">Are you a real estate agent?</p>
+                                <a style="cursor: pointer; font-size: 18px !important;">Register your clients</a>
+                                <span class="right_arrow_icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                  <g clip-path="url(#clip0_304_2110)">
+                                    <path d="M8.16471 11.4769L10.8314 8.81022M10.8314 8.81022L8.16471 6.14355M10.8314 8.81022H5.49805M14.8314 8.81022C14.8314 12.4921 11.8466 15.4769 8.16471 15.4769C4.48282 15.4769 1.49805 12.4921 1.49805 8.81022C1.49805 5.12832 4.48282 2.14355 8.16471 2.14355C11.8466 2.14355 14.8314 5.12832 14.8314 8.81022Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                                  </g>
+                                  <defs>
+                                    <clipPath id="clip0_304_2110">
+                                      <rect width="16" height="16" fill="white" transform="translate(0.165039 0.810059)"/>
+                                    </clipPath>
+                                  </defs>
+                                </svg>
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center p-2 text-center appointment_address">
+                    <p>Model Home <span class="mt-3">The Cassidy</span></p>
+
+                    <p>
+                        19322 Safflower Way
+                        Lewes, DE 19958
+                    </p>
+                    <p>
+                        Mon-Sat |
+                        10am-5pm
+                    </p>
+                    <p>
+                        Sun |
+                        11am-5pm
+                    </p>
+                    <div class="d-flex sales_wrapper_right align-items-center gap-3 mt-3">
+                            <div class="d-flex flex-column align-items-center">
+                                <img class="sales_person_img" t-att-src="'/franchisor_theme/static/img/tyler.jpg'"/>
+                                <strong class="mt-2">Tyler</strong>
+                                <p>(302) 569-939</p>
+                                <p class="get_to_know">Get to know Tarah</p>
+                            </div>
+                            <div class="d-flex flex-column align-items-center">
+                                <img class="sales_person_img" t-att-src="'/franchisor_theme/static/img/tarah.jpg'"/>
+                                <strong class="mt-2">Tarah</strong>
+                                <p>(302) 569-9122</p>
+                                <p class="get_to_know">Get to know Tarah</p>
+                            </div>
+                        </div>
+                </div>
+
+            </section>
+            <div class="oe_structure"/>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="custom_footer" inherit_id="website.layout" name="Custom Footer">
+        <xpath expr="//footer" position="replace">
+            <footer style="z-index: 999 !important; background: #1A1A1A !important; color: #fff !important;">
+                <!--                <div class="container py-5 border-top">-->
+                <!--                    <div class="row">-->
+                <!--                        <div class="col-lg-5">-->
+                <!--                            <img class="footer-logo" src="/franchisor_theme/static/src/img/logo.png"/>-->
+                <!--                            <p class="py-3">All information and pricing is subject to change without notice. Renderings are an artist’s conception and are for illustrative purposes only. Any unauthorized use is strictly prohibited without prior approval from Schell Brothers, LLC. Total Square Footage includes all under roof square footage. Colors and interior selections of actual home will vary, and structural selections are subject to change without notice.-->
+
+                <!--                            </p>-->
+
+                <!--                            <div class="s_share text-left no_icon_color" data-snippet="s_share"-->
+                <!--                                 data-name="Social Media">-->
+                <!--                                <h5 class="s_share_title d-none">Follow us</h5>-->
+                <!--                                <a href="/website/social/facebook" class="s_share_facebook" target="_blank">-->
+                <!--                                    <i class="fa fa-facebook m-1 rounded-circle border"/>-->
+                <!--                                </a>-->
+                <!--                                <a href="/website/social/twitter" class="s_share_twitter" target="_blank">-->
+                <!--                                    <i class="fa fa-twitter m-1 rounded-circle border"/>-->
+                <!--                                </a>-->
+                <!--                                <a href="/website/social/linkedin" class="s_share_linkedin" target="_blank">-->
+                <!--                                    <i class="fa fa-linkedin m-1 rounded-circle border"/>-->
+                <!--                                </a>-->
+                <!--                                <a href="/website/social/instagram" class="s_share_instagram" target="_blank">-->
+                <!--                                    <i class="fa fa-instagram m-1 rounded-circle border"/>-->
+                <!--                                </a>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                        <div class="col-lg-2">-->
+                <!--                            <h5>Quick Links</h5>-->
+                <!--                            <ul class="list-unstyled">-->
+                <!--                                <li>-->
+                <!--                                    <a href="#">Home</a>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <a href="#">About Us</a>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <a href="#">Products</a>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <a href="#">Services</a>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <a href="#">Legal</a>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <a href="#">Contact Us</a>-->
+                <!--                                </li>-->
+                <!--                            </ul>-->
+                <!--                        </div>-->
+                <!--                        <div class="col-lg-2">-->
+                <!--                            <h5>Top Locations</h5>-->
+                <!--                            <ul class="list-unstyled">-->
+                <!--                                <li>-->
+                <!--                                    <a href="#">Location 1</a>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <a href="#">Location 2</a>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <a href="#">Location 3</a>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <a href="#">Location 4</a>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <a href="#">Location 5</a>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <a href="#">Location 6</a>-->
+                <!--                                </li>-->
+                <!--                            </ul>-->
+                <!--                        </div>-->
+                <!--                        <div class="col-lg-3">-->
+                <!--                            <h5>Newsletter</h5>-->
+                <!--                            <form>-->
+                <!--                                <div class="input-group mb-3">-->
+                <!--                                    <input type="email" class="form-control" placeholder="Recipient's username"-->
+                <!--                                           aria-label="Your email" aria-describedby="button-addon2"/>-->
+                <!--                                    <div class="input-group-append">-->
+                <!--                                        <button class="btn btn-primary" type="button" id="button-addon2">-->
+                <!--                                            Submit-->
+                <!--                                        </button>-->
+                <!--                                    </div>-->
+                <!--                                </div>-->
+                <!--                            </form>-->
+                <!--                            <p class="m-0">Contact Us</p>-->
+                <!--                            <t t-set="company" t-value="request.env['res.company']._get_main_company()"/>-->
+                <!--                            <ul class="list-unstyled mb-0 ps-2">-->
+                <!--                                <li>-->
+                <!--                                    <i class="fa fa-map-marker fa-fw me-2"/>-->
+                <!--                                    <span class="o_force_ltr">-->
+                <!--                                        <t t-esc="company.street"/>-->
+                <!--                                    </span>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <i class="fa fa-phone fa-fw me-2"/>-->
+                <!--                                    <span class="m-0">-->
+                <!--                                        <a t-att-href="'tel:'+company.phone">-->
+                <!--                                            <t t-esc="company.phone"/>-->
+                <!--                                        </a>-->
+                <!--                                    </span>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <i class="fa fa-1x fa-fw fa-envelope me-2"/>-->
+                <!--                                    <span class="m-0">-->
+                <!--                                        <a t-att-href="'mailTo:'+company.email">-->
+                <!--                                            <t t-esc="company.email"/>-->
+                <!--                                        </a>-->
+                <!--                                    </span>-->
+                <!--                                </li>-->
+                <!--                            </ul>-->
+                <!--&lt;!&ndash;                            <div class="h2 m-0">&ndash;&gt;-->
+                <!--&lt;!&ndash;                                <a href="tel:01234567890">01234567890</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+                <!--&lt;!&ndash;                            <p>&ndash;&gt;-->
+                <!--&lt;!&ndash;                                <a href="mailto:info@youremail.com" class="text-dark">info@youremail.com</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;                            </p>&ndash;&gt;-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                                </div>-->
+
+                <div class="container py-5 border-top">
+                    <div class="row">
+                        <div class="col-lg-3 p-0">
+                            <h5 style="font-size: 16px; color: #AAAAAA;">Delaware Beaches</h5>
+                            <ul class="list-unstyled footer-listing">
+                                <li class="more-about">
+                                    More about new homes at the Delaware Beaches
+                                </li>
+                                <li>
+                                    Arbor-Lyn
+                                </li>
+                                <li>
+                                    Brentwood
+                                </li>
+                                <li>
+                                    Cardinal Grove
+                                </li>
+                                <li>
+                                    Channel Pointe
+                                </li>
+                                <li>
+                                    The Estates at Bridgewater
+                                </li>
+                                <li>
+                                    Fisher's Cove
+                                </li>
+                                <li>
+                                    Hailey's Glen
+                                </li>
+                                <li>
+                                    Lightship Cove
+                                </li>
+                                <li>
+                                    Miralon
+                                </li>
+                                <li>
+                                    Monarch
+                                </li>
+                                <li>
+                                    Olde Town at Lewes
+                                </li>
+                                <li>
+                                    Peninsula Still Waters
+                                </li>
+                                <li>
+                                    Peninsula Lakes
+                                </li>
+                                <li>
+                                    Serenity at Cubbage Pond
+                                </li>
+                                <li>
+                                    Sunrise
+                                </li>
+                                <li>
+                                    Walden
+                                </li>
+                                <li>
+                                    Welches Pond
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 p-0">
+
+                            <h5 style="font-size: 16px; color: #AAAAAA;">
+                                Nashville, Tennessee
+                            </h5>
+                            <ul class="list-unstyled footer-listing">
+                                <li class="more-about">
+                                    More about new homes in Nashville, Tennessee
+                                </li>
+                                <li>
+                                    Ashton Park
+                                </li>
+                                <li>
+                                    Durham Farms
+                                </li>
+                                <li>
+                                    Estates at Wembley Park
+                                </li>
+                                <li>
+                                    The Landing at Branham
+                                </li>
+                                <li>
+                                    Oak Creek Estates
+                                </li>
+                                <li>
+                                    Oak Hall IV
+                                </li>
+                                <li>
+                                    The Reserve at Horn Springs
+                                </li>
+                                <li>
+                                    Wembley Park
+                                </li>
+                            </ul>
+
+                            <h5 style="font-size: 16px; color: #AAAAAA; margin-top: 1rem;">
+                                Boise, Idaho
+                            </h5>
+                            <ul class="list-unstyled footer-listing">
+                                <li class="more-about">
+                                    More about new homes in Nashville, Tennessee
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 p-0">
+
+                            <h5 style="font-size: 16px; color: #AAAAAA;">
+                                Design Your New Home
+                            </h5>
+                            <ul class="list-unstyled footer-listing">
+                                <li class="more-about">
+                                    Online Design Studio
+                                </li>
+
+                            </ul>
+
+                            <h5 style="font-size: 16px; color: #AAAAAA; margin-top: 1rem;">
+                                Why Choose Schell
+                            </h5>
+                            <ul class="list-unstyled footer-listing" style="margin-left: 1rem;">
+                                <li class="more-about" style="margin-bottom:0;">
+                                    Project Kudos
+                                </li>
+                                <li>
+                                    Culture of Happiness
+
+                                </li>
+                                <li>The Difference
+                                </li>
+                                <li>
+                                    The Schellter Advantage
+                                </li>
+                                <li>
+                                    Testimonials
+                                </li>
+                                <li>
+                                    We Live to Give
+                                </li>
+                                <li>
+                                    Awards
+                                </li>
+                            </ul>
+                            <h5 style="font-size: 16px; color: #AAAAAA; margin-top: 1rem;">
+                                Homeowner Care
+                            </h5>
+                            <ul class="list-unstyled footer-listing">
+                                <li class="more-about">
+                                    Emergency and Appliance Service Procedures
+                                    Home Care Tips
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 p-0">
+                            <h5 style="font-size: 16px; color: #AAAAAA;">Delaware Beaches</h5>
+                            <ul class=" footer-listing" style="list-style-type: disc;">
+                                <li class="more-about" style="margin-bottom:0;">20184 Phillips St
+                                    <br/>
+                                    Rehoboth Beach, DE 19971
+                                    <br/>
+                                    <i class="fa fa-phone fa-fw me-2"/>(302) 226-1994
+                                </li>
+                                <li class="more-about" style="margin-bottom:0;">1919 Huguenot Road
+                                    <br/>
+                                    North Chesterfield, VA 23235
+                                    <br/>
+                                    <i class="fa fa-phone fa-fw me-2"/>(804) 924-9185
+                                </li>
+                                <li class="more-about" style="margin-bottom:0;">150 Saundersville Road
+                                    <br/>
+                                    Hendersonville, TN 37075
+                                    <br/>
+                                    <i class="fa fa-phone fa-fw me-2"/>(615) 608-4557
+                                </li>
+                                <li class="more-about" style="margin-bottom:0;">408 S Eagle Road
+                                    <br/>
+                                    Suite #208
+                                    <br/>
+                                    Eagle, ID 83616
+                                    <br/>
+                                    <i class="fa fa-phone fa-fw me-2"/>(208) 609-5011
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="row" style="justify-content: center; align-items: center; display: inline-flex; padding: 2rem 2rem 0 2rem;">
+                        <div class="col-lg-6 " style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 1px; display: inline-flex">
+                            <div style="align-self: stretch;color: #AAAAAA; font-size: 12.40px; font-weight: 400; line-height: 19.20px; word-wrap: break-word">
+                                © 2025 Schell Brothers, LLC. All Rights Reserved.
+                            </div>
+                            <div style="align-self: stretch; color: #888888; font-size: 11.02px; font-weight: 400; line-height: 16.80px; word-wrap: break-word">
+                                All information and pricing is subject to change without notice. Renderings are an
+                                artist’s conception and are for illustrative purposes only. Any unauthorized use is
+                                strictly prohibited without prior approval from Schell Brothers, LLC. Total Square
+                                Footage includes all under roof square footage. Colors and interior selections of
+                                actual home will vary, and structural selections are subject to change without
+                                notice.
+                            </div>
+                        </div>
+                        <div class="col-lg-6" style="justify-content: flex-end; align-items: center;  display: flex">
+                            <div class="s_share" data-snippet="s_share"
+                                 data-name="Social Media">
+                                <h5 class="s_share_title d-none">Follow us</h5>
+                                <a href="/website/social/facebook" class="s_share_facebook" target="_blank">
+                                    <i class="fa fa-facebook m-1 rounded-circle border"/>
+                                </a>
+                                <a href="/website/social/twitter" class="s_share_twitter" target="_blank">
+                                    <i class="fa fa-twitter m-1 rounded-circle border"/>
+                                </a>
+                                <a href="/website/social/linkedin" class="s_share_linkedin" target="_blank">
+                                    <i class="fa fa-linkedin m-1 rounded-circle border"/>
+                                </a>
+                                <a href="/website/social/instagram" class="s_share_instagram" target="_blank">
+                                    <i class="fa fa-instagram m-1 rounded-circle border"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </xpath>
+    </template>
+</odoo>
