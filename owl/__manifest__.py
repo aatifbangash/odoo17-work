@@ -6,11 +6,15 @@
     'sequence': 100,
     'description': """OWL Backend""",
     'category': 'OWL',
-    'depends': ['base', 'web'],
+    'depends': ['base', 'web', 'sale', 'community_module', 'module_sb'],
     'data': [
         'security/ir.model.access.csv',
         'views/todo_list.xml',
         'views/odoo_services.xml',
+        'views/community.xml',
+        'views/master_plan_options.xml',
+        'views/home_plan.xml',
+        'views/owl_plans.xml',
     ],
     'demo': [
     ],

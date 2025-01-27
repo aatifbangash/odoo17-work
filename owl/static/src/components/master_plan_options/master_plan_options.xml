@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="owl.MasterPlanOptions" owl="1">
+        <div class="option_set_container" t-on-scroll="(e)=> this.onScroll(e)">
+        <div class="container-fluid new_btn_wrapper">
+            <div class="d-flex small_wrapper justify-content-between align-items-center mx-4">
+                <div class="col-lg-4">
+                       <a class="heading-plans" t-on-click="()=> goBack()">
+                            <t t-if="this.state.isMasterPlan">Master Plan</t>
+                           <t t-if="this.state.isHomePlan">Plan</t>
+                           <t t-if="this.state.isCommunity">Communities - <t t-esc="this.state.community_name"/> </t> - Options</a>
+                        <p style="color:white;"><t t-esc="state.homeplan_name"/></p>
+                    </div>
+                    <div class="col-sm-5 hamburger_drawer_wrapper">
+                        <div class="d-flex align-items-center">
+                            <div class="col-sm-6">
+                                <nav class="navbar navbar-expand-sm d-lg-none d-md-none navbar-dark">
+                                    <div class="container">
+                                        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#n_bar" aria-controls="navbarNavAltMarkup" aria-label="Toggle navigation">
+                                            <i class="fa fa-bars"></i>
+                                        </button>
+                                        <div class="collapse navbar-collapse" id="n_bar">
+                                            <ul class="navbar-nav">
+                                                <t t-if="state.isMasterPlan">
+                                                    <li class="nav-item"><a class="nav-link mx-1 my-3" data-bs-toggle="modal"
+                                                    data-bs-target="#createOptionModal"
+                                                    t-on-click="()=> {
+                                                                        getAllOptionsForModal()
+                                                                    }">New Option</a></li>
+                                                </t>
+                                                <li class="nav-item"><a class="nav-link me-1" t-on-click="() => exportToExcel()">Export</a></li>
+                                                <li class="nav-item"><input type="text" class="form-control nav-link edit_option_set_field my-3" placeholder="Search.."/></li>
+                                                <li class="nav-item text-left mb-2" style="text-align: left !important;"><h6 class="d-inline text-light">Filters: </h6></li>
+                                                <li class="nav-item"><select class="form-control edit_option_set_select"
+                                                                    id="option-values"
+                                                                    name="options-values"
+                                                                    t-att-value="this.state.selectedClass"
+                                                                    t-on-change="(e) =>{
+                                                                        this.state.selectedClass = e.target.value;
+                                                                        this.getAllOptions(state.currentPage)
+                                                                    }"
+                                                            >
+
+                                                                <t t-if="state.classes">
+                                                                    <t t-foreach="state.classes" t-as="option" t-key="option.id">
+                                                                        <option t-att-value="option.id"><t t-esc="option.name"/></option>
+                                                                    </t>
+                                                                </t>
+                                                            </select></li>
+                                                <li class="nav-item"> <select class="form-control edit_option_set_select my-3"
+                                                                    id="option-values"
+                                                                    name="options-values"
+                                                                    t-att-value="this.state.selectedLocation"
+                                                                    t-on-change="(e) =>{
+                                                                        this.state.selectedLocation = e.target.value;
+                                                                        this.getAllOptions(state.currentPage)
+                                                                    }"
+                                                            >
+                                                                <t t-if="state.locations">
+                                                                    <t t-foreach="state.locations" t-as="option" t-key="option.id">
+                                                                        <option t-att-value="option.id"><t t-esc="option.name"/></option>
+                                                                    </t>
+                                                                </t>
+                                                            </select></li>
+                                                <li class="nav-item"><select class="form-control edit_option_set_select"
+                                                            id="option-values"
+                                                            name="options-values"
+                                                            t-att-value="this.state.selectedCategory"
+                                                            t-on-change="(e) =>{
+                                                                this.state.selectedCategory = e.target.value;
+                                                                this.getAllOptions(state.currentPage)
+                                                            }"
+                                                    >
+                                                        <t t-if="state.categories">
+                                                            <t t-foreach="state.categories" t-as="option" t-key="option.id">
+                                                                <option t-att-value="option.id"><t t-esc="option.name"/></option>
+                                                            </t>
+                                                        </t>
+                                                    </select></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-success" t-on-click="() => saveOptionSet()"
+                                >
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+            </div> <!-- small screen -->
+            <div class="row medium_and_up_wrapper justify-content-between align-items-center mx-4">
+                <div class="col-lg-3">
+                    <a class="heading-plans" t-on-click="()=> goBack()">
+                        <t t-if="this.state.isMasterPlan">Master Plan</t>
+                        <t t-if="this.state.isHomePlan">Plan</t>
+                           <t t-if="this.state.isCommunity">Communities - <t t-esc="this.state.community_name"/> </t> - Options</a>
+                    <p style="color:white;"><t t-esc="state.homeplan_name"/></p>
+                </div>
+                <div class="form-group filters_large_screen col-lg-5 align-items-center" style="gap: 1rem;">
+                    <div class="col-lg-2">
+                         <select class="form-control edit_option_set_select"
+                                 id="option-values"
+                                 name="options-values"
+                                 t-att-value="this.state.selectedClass"
+                                 t-on-change="(e) =>{
+                                    this.state.selectedClass = e.target.value;
+                                    this.getAllOptions(state.currentPage)
+                                }"
+                         >
+                             <t t-if="state.classes">
+                                 <t t-foreach="state.classes" t-as="option" t-key="option.id">
+                                     <option t-att-value="option.id"><t t-esc="option.name"/></option>
+                                 </t>
+                             </t>
+                         </select>
+                     </div>
+                    <div class="col-lg-2">
+                        <select class="form-control edit_option_set_select"
+                                id="option-values"
+                                name="options-values"
+                                t-att-value="this.state.selectedLocation"
+                                t-on-change="(e) =>{
+                                    this.state.selectedLocation = e.target.value;
+                                    this.getAllOptions(state.currentPage)
+                                }"
+                        >
+                            <t t-if="state.locations">
+                                 <t t-foreach="state.locations" t-as="option" t-key="option.id">
+                                     <option t-att-value="option.id"><t t-esc="option.name"/></option>
+                                 </t>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <select class="form-control edit_option_set_select"
+                                id="option-values"
+                                name="options-values"
+                                t-att-value="this.state.selectedCategory"
+                                t-on-change="(e) =>{
+                                    this.state.selectedCategory = e.target.value;
+                                    this.getAllOptions(state.currentPage)
+                                }"
+                        >
+                            <t t-if="state.categories">
+                                 <t t-foreach="state.categories" t-as="option" t-key="option.id">
+                                     <option t-att-value="option.id"><t t-esc="option.name"/></option>
+                                 </t>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <select class="form-control edit_option_set_select"
+                                id="option-values"
+                                name="options-values"
+                                t-att-value="this.state.enabled"
+                                t-on-change="(e) =>{
+                                    this.state.enabled = e.target.value;
+                                    this.getAllOptions(state.currentPage)
+                                }"
+                        >
+                            <t t-if="state.enabledOptions">
+                                 <t t-foreach="state.enabledOptions" t-as="option" t-key="option.id">
+                                     <option t-att-value="option.id"><t t-esc="option.name"/></option>
+                                 </t>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-lg-4">
+                                <input type="text" class="form-control edit_option_set_field" placeholder="Search.." t-on-input="(e)=> onSearchTextChange(e.target.value)"/>
+                            </div>
+                </div>
+                <div class="form-group searching col-lg-3 col-md-3 align-items-center"> <!-- tab responsive-->
+                    <input type="text" class="form-control edit_option_set_field" placeholder="Search.."/>
+                </div>
+                <div class="col-lg-4 button_group d-flex justify-content-end align-items-center text-end">
+                    <button class="btn btn-primary me-1" t-on-click="() => exportToExcel()">Export</button>
+                    <t t-if="state.isMasterPlan">
+                        <button class="btn btn-primary mx-1" data-bs-toggle="modal"
+                                data-bs-target="#createOptionModal"
+                                t-on-click="()=> {
+                                                    getAllOptionsForModal()
+                                                }">New option</button>
+                    </t>
+                    <button class="btn btn-success" t-on-click="() => saveOptionSet()"
+                    >
+                        Save
+                    </button>
+                    <t t-if="this.state.optionSet?.length > 0">
+                             <p style="display: inline; margin: 0px 3px 0px 6px; color: #fff;"
+                                t-esc="this.getPages()"></p>
+                    </t>
+<!--                        <button class="btn btn-info mx-1" t-att-disabled="state.currentPage == 1"-->
+<!--                                t-on-click="() => prevPage()">-->
+<!--                            <i class="fa fa-chevron-left"></i>-->
+<!--                        </button>-->
+<!--                        <button class="btn btn-info" t-att-disabled="state.currentPage >= state.totalPages"-->
+<!--                                t-on-click="() => nextPage()">-->
+<!--                            <i class="fa fa-chevron-right"></i>-->
+<!--                        </button>-->
+                </div>
+                    <div class="col-lg-5 col-md-5 filter_dropdown_button_group d-flex justify-content-end align-items-center text-end"> <!-- tab responsive-->
+                        <div class="col-lg-2 col-md-2 dropdown filter_dropdown me-1">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-filter"></i>
+                            </button>
+                            <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton1">
+                                <li class="dropDown_list_item">
+                                    <select class="form-control bg-dark edit_option_set_select"
+                                            id="option-values"
+                                            name="options-values"
+                                            t-att-value="this.state.selectedClass"
+                                            t-on-change="(e) =>{
+                                                this.state.selectedClass = e.target.value;
+                                                this.getAllOptions(state.currentPage)
+                                            }"
+                                    >
+
+                                        <t t-if="state.classes">
+                                            <t t-foreach="state.classes" t-as="option" t-key="option.id">
+                                                <option t-att-value="option.id"><t t-esc="option.name"/></option>
+                                            </t>
+                                        </t>
+                                    </select>
+                                </li>
+                                <li class="dropDown_list_item">
+                                    <select class="form-control bg-dark edit_option_set_select"
+                                            id="option-values"
+                                            name="options-values"
+                                            t-att-value="this.state.selectedLocation"
+                                            t-on-change="(e) =>{
+                                                this.state.selectedLocation = e.target.value;
+                                                this.getAllOptions(state.currentPage)
+                                            }"
+                                    >
+                                        <t t-if="state.locations">
+                                            <t t-foreach="state.locations" t-as="option" t-key="option.id">
+                                                <option t-att-value="option.id"><t t-esc="option.name"/></option>
+                                            </t>
+                                        </t>
+                                    </select>
+                                </li>
+                                <li class="dropDown_list_item">
+                                    <select class="form-control bg-dark edit_option_set_select"
+                                            id="option-values"
+                                            name="options-values"
+                                            t-att-value="this.state.selectedCategory"
+                                            t-on-change="(e) =>{
+                                                this.state.selectedCategory = e.target.value;
+                                                this.getAllOptions(state.currentPage)
+                                            }"
+                                    >
+                                        <t t-if="state.categories">
+                                            <t t-foreach="state.categories" t-as="option" t-key="option.id">
+                                                <option t-att-value="option.id"><t t-esc="option.name"/></option>
+                                            </t>
+                                        </t>
+                                    </select>
+                                </li>
+                          </ul>
+                    </div>
+                        <button class="btn btn-success me-1" t-on-click="() => exportToExcel()">Export</button>
+                        <t t-if="state.isMasterPlan">
+                            <button type="button" class=" btn btn-primary me-1" data-bs-toggle="modal"
+                                    data-bs-target="#createOptionModal"
+                                    t-on-click="()=> {
+                                                        getAllOptionsForModal()
+                                                    }">New option</button>
+                        </t>
+                        <button class="btn btn-success" t-on-click="() => saveOptionSet()"
+                        >
+                            Save
+                        </button>
+                        <t t-if="this.state.optionSet?.length > 0">
+                                 <p class="page_details"
+                                    t-esc="this.getPages()"></p>
+                        </t>
+<!--                        <button class="btn btn-info mx-1" t-att-disabled="state.currentPage == 1"-->
+<!--                                t-on-click="() => prevPage()">-->
+<!--                            <i class="fa fa-chevron-left"></i>-->
+<!--                        </button>-->
+<!--                        <button class="btn btn-info" t-att-disabled="state.currentPage >= state.totalPages"-->
+<!--                                t-on-click="() => nextPage()">-->
+<!--                            <i class="fa fa-chevron-right"></i>-->
+<!--                        </button>-->
+                    </div>
+                </div> <!-- medium and large screen -->
+            </div>
+            <div class="row m-2">
+                <div class="options_content">
+                    <t t-if="state.optionSet">
+                      <t t-foreach="state.optionSet" t-as="task" t-key="task.id">
+                          <div class="mb-5">
+                              <div class="d-flex gap-1 justify-content-between align-items-center text-light">
+                                  <div class="col-lg-8 option_name_wrapper d-flex gap-1 align-items-center">
+                                      <t t-if="task.children and task.option_type !== 'binary'">
+                                          <i class="fa fa-angle-right option_collapser collapsed"
+                                             t-if="task.children.find((t=> t.is_active))"
+                                             data-bs-toggle="collapse"
+                                             t-att-data-bs-target="'#collapse' + task.id"
+                                             style="font-size: x-large; cursor: pointer;" aria-hidden="true">
+                                          </i>
+                                      </t>
+                                      <t t-if="task.option_type === 'binary'">
+                                      <t t-esc="task.name">
+                                          <p class="option_set_header" style="margin-left: 12px !important;"></p>
+                                      </t>
+                                      </t>
+                                      <t t-else="">
+                                      <t t-esc="task.name">
+                                          <p class="option_set_header"></p>
+                                      </t>
+
+                                      </t>
+                                      <t t-if="task.price">
+                                          <t t-esc="`($${task.price})`">
+                                              <p class="option_name_price"></p>
+                                          </t>
+                                      </t>
+                                      <t t-if="task.is_override">
+                                          <span class="badge option_set_list_item rounded-pill text-bg-primary">Overridden</span>
+                                      </t>
+                                      <t t-else="">
+                                          <span class="badge rounded-pill text-bg-secondary align-content-center">Inherit</span>
+                                      </t>
+                                  </div>
+                                  <div class="col-lg-3 d-flex action_header align-items-center">
+                                      <t t-if="state.isMasterPlan">
+                                          <t t-if="task.option_type !== 'binary'">
+                                          <button class="btn btn-primary" data-bs-toggle="modal"
+                                                  t-on-click="()=> {
+                                                      getAllOptionValues(task.option_categories_id, task.option_classes_id, task.id)
+                                                  }"
+                                                  data-bs-target="#createOptionValuesModal"
+                                          >
+                                              New option value
+                                          </button>
+
+                                          </t>
+                                          <t t-else="">
+                                              <div style="width: 144.47px !important"></div>
+                                          </t>
+                                      </t>
+                                      <div class="col-lg-1 form-check form-switch">
+                                          <input class="form-check-input" type="checkbox" role="switch"
+                                                 id="flexSwitchCheckDefault"
+                                                 t-att-checked="task.is_active"
+                                                 defauldChecked="true"
+                                                 t-on-change="() => {toggleParentAndChildren(task);}"/>
+                                      </div>
+                                      <div class="col-lg-1">
+                                          <t t-if="task.recordId">
+                                              <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                   height="16"
+                                                   fill="currentColor" class="bi bi-three-dots"
+                                                   style="cursor: pointer;"
+                                                   viewBox="0 0 16 16" data-bs-toggle="modal"
+                                                   data-bs-target="#editOptionNameModal"
+                                                   t-on-click="() => {
+                                                   state.editOptionName.isAttribute = task.option_type === 'attribute' ? true : false;
+                                                   state.editOptionName.price = task.price;
+                                                    state.editOptionName.name = task.is_override ? task.name : '';
+                                                    state.editOptionName.homeplan_id = task.homeplan_id;
+                                                    state.editOptionName.option_id = task.id;
+                                                    state.editOptionName.master_plan_option_id = task.primaryId;
+                                                    this.state.inherited_name = task.inherited_name;
+                                                }"
+                                              >
+                                                  <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                                              </svg>
+                                          </t>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div style="overflow: auto;" t-att-class="{'mapper-wrapper-active': task.is_active, 'mapper-wrapper-inactive': !task.is_active}">
+                                 <t t-if="task.children"><div class="collapse" t-att-id="'collapse'+task.id">
+
+                                     <table class="table table-dark table-responsive mt-3">
+  <thead>
+    <tr style="border-bottom: #414141;">
+      <th class="option_set_heading" scope="col">OPTION NAME</th>
+      <th class="option_set_heading" scope="col"></th>
+      <th class="option_set_heading" scope="col"></th>
+      <th class="option_set_heading" scope="col"></th>
+      <th class="option_set_heading" scope="col">QUANTITY</th>
+        <t t-if="!this.state.isMasterPlan">
+            <th class="option_set_heading" scope="col">UNIT PRICE</th>
+            <th class="option_set_heading" scope="col">EXTENDED PRICE</th>
+        </t>
+        <th class="option_set_heading" scope="col">UNITS</th>
+      <th class="option_set_heading" scope="col">BUILDER OPTION ID</th>
+      <th class="option_set_heading" scope="col">ENABLED</th>
+        <th class="option_set_heading" scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+      <t t-foreach="task.children" t-as="child" t-key="child.id">
+          <tr style="vertical-align: middle;">
+      <td class="option_table_rows"><p><t t-esc="child.name"/></p></td>
+      <td class="option_table_rows"><t t-if="child.image">
+          <img t-on-click="() => {
+                                this.state.option_value_image = child.image;
+                                }" t-att-src="imageDataUri(child.image)" data-bs-target="#viewImageModal" data-bs-toggle="modal"
+               style="height: 40px; width: 55px; border-radius: 50%; cursor: pointer;"
+          />
+      </t></td>
+      <td class="option_table_rows"><t t-if="child.is_base">
+          <span class="badge rounded-pill text-bg-secondary">Base</span>
+      </t></td>
+      <td class="option_table_rows"><t t-if="child.is_override">
+          <span class="badge rounded-pill text-bg-primary ">Overridden</span>
+      </t>
+          <t t-else="">
+              <span class="badge rounded-pill text-bg-secondary ">Inherit</span>
+          </t></td>
+      <td class="option_table_rows"><p><t t-esc="child.quantity === 0 ? '-' : child.quantity"/></p></td>
+          <t t-if="!this.state.isMasterPlan">
+          <t t-if="this.state.isCommunity">
+      <td class="option_table_rows">
+              <p class="">
+                  <t t-esc="task.option_type === 'attribute' and !task.price_type === 'fixed' ? '-'  : child.price === 0 ? '-' : `$${child?.price?.toFixed(2)}`"/>
+              </p>
+      </td>
+          </t>
+          <t t-else="">
+              <td class="option_table_rows">
+              <p class="">
+                  <t t-esc="child.price === 0 ? '-' : `$${child?.price?.toFixed(2)}`"/>
+              </p>
+              </td>
+          </t>
+              <td class="option_table_rows"><p class="">
+              <t t-esc="task.price_type === 'fixed' and task.option_type === 'quantity' ? `$${(child.price*child.quantity)?.toFixed(2)}` : task.price_type === 'fixed' and task.option_type !== 'quantity' ? `$${child?.price?.toFixed(2)}` : child.price*child.quantity ? `$${(child.price*child.quantity)?.toFixed(2)}` : '-'"/>
+          </p></td>
+      </t>
+      <td class="option_table_rows"> <p class="">
+          <t t-esc="task.unit_type === false ? '-' : task.unit_type === 'square_foot' ? 'Square Foot' : task.unit_type === 'linear_foot' ? 'Linear Foot' : task.unit_type === 'each' ? 'Each' : task.unit_type === 'square' ? 'Square' : task.unit_type"/></p></td>
+      <td class="option_table_rows"><p ><t t-esc="child.option_set_id"/></p></td>
+      <td class="option_table_rows"><p>
+          <div>
+              <t t-if="child.is_base">
+                  <i class="fa fa-lock"
+                     style="color: gray; padding-left: 0px;"></i>
+              </t>
+              <t t-else="">
+                  <input class="form-check-input" type="checkbox" value=""
+                         id="flexCheckDefault"
+                         t-att-checked="child.is_active"
+                         t-on-change="() =>{toggleChildAndParent(child, task);}"
+                  />
+              </t>
+          </div>
+      </p></td>
+      <td class="option_table_rows"><p>
+          <button class="btn btn-secondary children_dropdown dropdown-toggle"
+                  type="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                   height="16"
+                   fill="currentColor"
+                   class="bi bi-three-dots dropdown-toggle"
+                   viewBox="0 0 16 16" data-bs-toggle="dropdown-menu"
+                   aria-expanded="false">
+                  <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+              </svg>
+          </button>
+          <ul class="dropdown-menu action_popup">
+              <li>
+                  <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                     data-bs-target="#editDetailModal"
+                     t-on-click="()=> {
+                              getOptionValueParams(child, task);
+                              this.state.quantity = child.quantity ?? 0;
+                              state.editOptionName.isAttribute = task.option_type === 'attribute' ? true : false;
+                              state.option_type = task.option_type;
+                            }"
+                  >
+                      Edit Details
+                  </a>
+              </li>
+              <t t-if="!child.is_base">
+                  <li>
+                      <a class="dropdown-item"
+                         t-on-click="() => setAsBase(child.master_plan_option_id, child.homeplan_option_id)"
+                         href="#">Set Option as Base</a>
+                  </li>
+              </t>
+          </ul></p></td>
+    </tr>
+      </t>
+  </tbody>
+</table>
+                                  </div>
+                                 </t>
+                              </div>
+                          </div>
+                      </t>
+                    </t>
+                </div>
+            </div>
+        </div>
+
+        <!--Edit-Detail-->
+        <div class="modal fade" id="editDetailModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light me-3" id="exampleModalLabel">Edit Option Overrides</h1>
+                  <t t-if="this.state.isHomePlan">
+                  <span class="badge rounded-pill text-bg-secondary">Plan</span>
+                   </t>
+                  <t t-if="this.state.isMasterPlan">
+                  <span class="badge rounded-pill text-bg-secondary">Master Plan</span>
+                   </t>
+                  <t t-if="this.state.isCommunity">
+                  <span class="badge rounded-pill text-bg-secondary">Community</span>
+                   </t>
+
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+              </div>
+                <div class="modal-body">
+                    <div class="mb-3 row">
+                        <div class="col-sm-12 d-flex justify-content-between align-items-center">
+                            <label for="color" class="col-form-label text-light"
+                                   t-att-class="!this.state.inherited_name ? '' : 'tooltip'"><p class="text-light">Option Value Name</p>
+                                <span class="tooltiptext"><t t-esc="this.state.inherited_name"></t></span></label>
+                            <t t-if="!this.state.inherited_name"><span class="badge rounded-pill text-bg-secondary edit_option_set_badge">Inherit</span></t>
+                            <t t-else=""><span class="badge rounded-pill text-bg-primary edit_option_set_badge">Overridden</span></t>
+
+                            </div>
+                        <div class="col-sm-12 mt-1">
+                          <input type="text" class="form-control edit_option_set_field" id="name"
+                                 t-model="state.editOptionValue.name"
+                                 t-att-value="state.editOptionValue.name"/>
+                        </div>
+                    </div>
+                    <t t-if="!this.state.isMasterPlan">
+                        <t t-if="this.state.isCommunity and !state.editOptionName.isAttribute">
+                        </t>
+                        <t t-else="">
+                            <div class="mb-3 row">
+                            <div class="col-sm-12 d-flex justify-content-between">
+                                <label for="color" class="col-form-label text-light">Price</label>
+                            </div>
+                                <div class="col-sm-12">
+                                  <input type="number" class="form-control edit_option_set_field" id="name"
+                                         t-model="state.editOptionValue.price"
+                                         t-att-value="state.editOptionValue.price"/>
+                            </div>
+                        </div>
+                        </t>
+
+                    </t>
+                    <t t-if="(this.state.isMasterPlan and this.state.price_type === 'dynamic') or this.state.option_type === 'quantity'">
+                         <div class="mb-3 row">
+                        <div class="col-sm-12 d-flex justify-content-between">
+                    <label for="color" class="col-form-label text-light">Quantity</label>
+                        </div>
+                             <div class="col-sm-12">
+                            <input type="number" class="form-control edit_option_set_field" id="name"
+                                   t-model="this.state.quantity"
+                                   t-att-value="this.state.quantity"
+                                   t-att-min='0'
+                            />
+                    </div>
+                  </div>
+                    </t>
+
+                    <div class="mb-3 row">
+                        <div class="col-sm-12 d-flex justify-content-between">
+                            <label for="color" class="col-form-label text-light">Description</label>
+                        </div>
+                        <div class="col-sm-12">
+                            <textarea class="form-control edit_option_set_field" rows="3"
+                                      t-model="this.state.editOptionValue.description"/>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-sm-12 d-flex justify-content-between">
+                            <label for="color" class="col-form-label text-light">Upload Image</label>
+                        </div>
+                        <div class="col-sm-6">
+                           <input type="file" class="form-control edit_option_set_field" id="upload_image"
+                                  t-on-change="(e) =>{
+                                        this.state.editOptionValue.image = e.target.files[0];
+                                    }"
+                           />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary me-1" data-bs-dismiss="modal" t-on-click="() => {
+                this.state.inherited_name = ''; this.state.quantity = 0;}">Close</button>
+                    <button type="button" class="btn btn-primary"
+                            t-on-click="() =>editOptionValues()"
+                            data-bs-dismiss="modal"
+                    >Update</button>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!--Edit-Modal-->
+        <div class="modal fade" id="editOptionNameModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light me-3" id="exampleModalLabel">Edit Option Set Overrides</h1>
+                  <t t-if="this.state.isHomePlan">
+                  <span class="badge rounded-pill text-bg-secondary">Plan</span>
+                   </t>
+                  <t t-if="this.state.isMasterPlan">
+                  <span class="badge rounded-pill text-bg-secondary">Master Plan</span>
+                   </t>
+                  <t t-if="this.state.isCommunity">
+                  <span class="badge rounded-pill text-bg-secondary">Community</span>
+                   </t>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+                <div class="modal-body">
+                <div class="mb-3 row">
+                    <div class="col-sm-12 d-flex justify-content-between align-items-center">
+                        <label for="color" class="col-form-label text-light"
+                               t-att-class="!this.state.inherited_name ? '' : 'tooltip'"><p class="text-light">Option Name</p>
+                            <span class="tooltiptext"><t t-esc="this.state.inherited_name"></t></span></label>
+                        <t t-if="!this.state.inherited_name"><span class="badge rounded-pill text-bg-secondary edit_option_set_badge">Inherit</span></t>
+                        <t t-else=""><span class="badge rounded-pill text-bg-primary edit_option_set_badge">Overridden</span></t>
+                        </div>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control edit_option_set_field" id="name"
+                             t-att-value="this.state.editOptionName.name"
+                             t-on-input="(e) => changeOptionNameHandler(e)"
+                      />
+                    </div>
+                  </div>
+                    <t t-if="!state.editOptionName.isAttribute and (state.isCommunity or state.isHomePlan)">
+                    <div class="mb-3 row">
+                    <div class="col-sm-12 d-flex justify-content-between">
+                        <label for="color" class="col-form-label text-light"><p class="text-light">Price</p></label>
+                        </div>
+                        <div class="col-sm-12">
+                      <input type="number" class="form-control edit_option_set_field" id="price"
+                             t-att-value="this.state.editOptionName.price"
+                             t-on-input="(e) => changeOptionPriceHandler(e)"
+                      />
+                    </div>
+                  </div>
+                    </t>
+              </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary me-1" data-bs-dismiss="modal" t-on-click="() => {
+                this.state.inherited_name = ''}">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                            t-on-click="() => overrideOptionName()">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="createOptionModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light me-3" id="exampleModalLabel">Create Option</h1>
+                  <span class="badge rounded-pill text-bg-secondary ">Master Plan</span>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+                <div class="modal-body">
+                    <div class="mb-3 row">
+                        <div class="col-sm-12 d-flex justify-content-between">
+                    <label for="color" class="col-form-label text-light">Sales Category</label>
+                        </div>
+                        <div class="col-sm-12">
+                            <select class="form-control edit_option_set_select"
+                                    id="options"
+                                    name="options"
+                                    t-on-change="(e) =>{
+                                        this.state.selectedOption = e.target.value;
+                                    }"
+                                    t-att-value="this.state.selectedOption"
+                            >
+<!--                                <option t-att-value="this.state.selectedOption"><t t-esc="Select Option"/></option>-->
+                                <t t-if="state.createOptions">
+                                     <t t-foreach="state.createOptions" t-as="option" t-key="option.id">
+                                         <option t-att-value="option.id"><t t-esc="option.name"/></option>
+                                     </t>
+                                </t>
+                            </select>
+                    </div>
+                  </div>
+              </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary me-1" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary"
+                            t-on-click="() =>addTask()"
+                            data-bs-dismiss="modal">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="createOptionValuesModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light me-3" id="exampleModalLabel">Create Option</h1>
+                  <span class="badge rounded-pill text-bg-secondary ">Master Plan</span>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+                <div class="modal-body">
+                    <div class="mb-3 row">
+                        <div class="col-sm-12 d-flex justify-content-between">
+                    <label for="color" class="col-form-label text-light">Option Value</label>
+                        </div>
+                        <div class="col-sm-12">
+                            <select class="form-control edit_option_set_select"
+                                    id="option-values"
+                                    name="options-values"
+                                    t-on-change="(e) =>{
+                                        this.state.selectedOption = e.target.value;
+                                       setPriceType(e.target.value)
+                                    }"
+                                    t-att-value="this.state.selectedOption"
+                            >
+<!--                                <option t-att-value="this.state.selectedOption"><t t-esc="Select Option"/></option>-->
+                                <t t-if="state.createOptionValues">
+                                     <t t-foreach="state.createOptionValues" t-as="option" t-key="option.id">
+                                         <option t-att-value="option.id"><t t-esc="option.name"/></option>
+                                     </t>
+                                </t>
+                            </select>
+                    </div>
+                  </div>
+                    <t t-if="this.state.price_type === 'dynamic'">
+                    <div class="mb-3 row">
+                        <div class="col-sm-12 d-flex justify-content-between">
+                    <label for="color" class="col-form-label text-light">Quantity</label>
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="number" class="form-control edit_option_set_field" id="name"
+                                   t-model="this.state.quantity"
+                                   t-att-value="this.state.quantity"
+                                   t-att-min='0'
+                            />
+                    </div>
+                  </div>
+                    </t>
+              </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary me-1" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary"
+                            t-on-click="() =>addOptionValue()"
+                            data-bs-dismiss="modal">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="viewImageModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light me-3" id="exampleModalLabel">Image Preview</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+                <div class="modal-body">
+                <div class="mb-3 row">
+                    <div class="col-sm-12 d-flex justify-content-center align-items-center">
+                       <img
+                            style="width: 28rem !important; height: 28rem !important; object-fit: contain;"
+                            t-att-src="imageDataUri(this.state.option_value_image)"
+
+          />
+                        </div>
+                  </div>
+
+              </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary me-1" data-bs-dismiss="modal" t-on-click="() => {
+                this.state.inherited_name = ''}">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </t>
+</templates>

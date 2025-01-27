@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <record id="owl_product_kanban_view" model="ir.ui.view">
+            <field name="name">owl product kanban view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="module_sb.module_sb_product"/>
+            <field name="arch" type="xml">
+                <field name="kova_model_rid" position="after">
+                    <div >
+                        <field name="id" invisible="1"/>
+                        <button class="btn btn-primary" name="action_set_options" type="object"
+                                string="Set Master Plan Options"
+                                groups="!module_sb.franchise_admin"
+                                context="{'homeplan_id': id, 'homeplan_name': name, 'panel': 'Master Plans'}"/>
+
+                        <button class="btn btn-primary" name="action_set_options" type="object"
+                                string="Set Plan Options"
+                                groups="module_sb.franchise_admin"
+                                context="{'homeplan_id': id, 'homeplan_name': name, 'panel': 'Home plans'}"/>
+                        <br/>
+                    </div>
+                </field>
+                <!--                 <xpath expr="//notebook/page[@name='Options']/field[1]" position="before">-->
+                <!--                     <button name="master_plan_options_page" type="object" string="Master Plan Options" context="{'test_data_btn': 'masterplan btn'}"/>-->
+                <!--                 </xpath>-->
+            </field>
+        </record>
+    </data>
+</odoo>

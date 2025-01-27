@@ -1,0 +1,76 @@
+<odoo>
+    <data>
+        <record id="owl_community_product_form_view" model="ir.ui.view">
+            <field name="name">owl community product form view</field>
+            <field name="model">community_module.community</field>
+            <field name="inherit_id" ref="community_module.view_community_form"/>
+            <field name="arch" type="xml">
+                <!--                <xpath expr="//form" position="attributes">-->
+                <!--                    <attribute name="js_class">owl_form_view</attribute>-->
+                <!--                </xpath>-->
+                <!--                <field name="community_homeplans_ids" position="attributes">-->
+                <!--                    <attribute name="widget">valid_email</attribute>-->
+                <!--                </field>-->
+<!--                <xpath expr="//notebook/page[@name='Plans']//field[@name='community_homeplans_ids']/kanban/templates/t/div"-->
+<!--                       position="inside">-->
+<!--                    <button class="btn btn-primary" name="action_set_options" type="object" icon="fa-options" string="Set Options"-->
+<!--                            context="{'homeplan_id':homeplan_id, 'panel': 'Communities', 'community_homeplan_id': id, 'homeplan_name': parent.display_name}"-->
+<!--                            invisible="not id"-->
+<!--                    />-->
+<!--                </xpath>-->
+
+<!--                <field name="is_active" position="attributes">-->
+<!--                    <attribute name="widget">boolean_widget</attribute>-->
+<!--                    <attribute name="string">Active (Widget)</attribute>-->
+<!--                </field>-->
+                <field name="longitude" position="after">
+                    <field name="is_active"/>
+                </field>
+                <!--                <notebook>-->
+                <!--                    <page name="Set Options" string="Set Options">-->
+                <!--                        <button name="options_page" type="object" string="Set Communities Options"/>-->
+                <!--                        &lt;!&ndash;                    <field name="json_data" placeholder="json" widget="valid_email" options="{'any_custom_data':'custom data value'}"/>&ndash;&gt;-->
+                <!--                    </page>-->
+                <!--                </notebook>-->
+            </field>
+
+        </record>
+
+
+
+
+        <record id="owl_community_plans_kanban_override" model="ir.ui.view">
+            <field name="name">owl community plans kanban override</field>
+            <field name="model">community_module.community_homeplans</field>
+            <field name="inherit_id" ref="community_module.view_community_plans_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban/templates/t/div"
+                       position="inside">
+                    <field name="community_display_name" invisible="1"/>
+                    <button class="btn btn-primary" name="action_set_options" type="object" icon="fa-options" string="Set Options"
+                            context="{'homeplan_id':homeplan_id, 'panel': 'Communities', 'community_homeplan_id': id, 'homeplan_name': community_display_name}"
+                            invisible="not id"
+                    />
+                </xpath>
+            </field>
+        </record>
+
+
+
+        <record id="owl_franchise_plans_kanban_override" model="ir.ui.view">
+            <field name="name">owl franchise plans kanban override</field>
+            <field name="model">module_sb.franchise_homeplans</field>
+            <field name="inherit_id" ref="module_sb.view_franchise_plans_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban/templates/t/div"
+                       position="inside">
+<!--                    <field name="community_display_name" invisible="1"/>-->
+                    <button class="btn btn-primary" name="action_set_options" type="object" icon="fa-options" string="Set Options"
+                            invisible="not community_homeplan_id"
+                            context="{'homeplan_id':homeplan_id, 'panel': 'Communities', 'community_homeplan_id': community_homeplan_id, 'homeplan_name': community_name}"
+                    />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

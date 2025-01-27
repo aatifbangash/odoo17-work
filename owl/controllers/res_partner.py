@@ -10,7 +10,6 @@ class ResPartner(http.Controller):
     @http.route('/owl/fetch_api', type='http', auth='public', methods=['GET'])
     def get_customers_fetch_api(self):
         data = http.request.env['product.template'].sudo().search_read([], ['name'])
-        print(data)
         return json.dumps(data)
 
     @http.route('/v1/api', type='http', auth='none')
@@ -21,7 +20,6 @@ class ResPartner(http.Controller):
         cr.execute("SELECT name, email FROM res_partner ORDER BY id desc LIMIT %s", (limit,))
         # response = cr.fetchall()
         response = cr.dictfetchall()
-        pprint(response)
         return http.Response(json.dumps(response), content_type='application/json', status=200)
 
     # @http.route('/owl/dashboard_service', type='json', auth='user')

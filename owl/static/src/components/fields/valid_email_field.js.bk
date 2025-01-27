@@ -1,0 +1,44 @@
+/** @odoo-module **/
+
+import { registry } from "@web/core/registry";
+import { _t } from "@web/core/l10n/translation";
+import { useInputField } from "@web/views/fields/input_field_hook";
+import { standardFieldProps } from "@web/views/fields/standard_field_props";
+
+import { Component } from "@odoo/owl";
+
+export class ValidEmailField extends Component {
+    static template = "owl.ValidEmailField";
+    static props = {
+        ...standardFieldProps,
+        placeholder: { type: String, optional: true },
+    };
+
+    setup() {
+//        console.log(this.props.record)
+//        console.log(this.props.name)
+//        console.log(this.props.record.data['community_homeplans_ids'].records[0].data['homeplan_id'][1])
+//        console.log(this.props.record.data['community_homeplans_ids'])
+//        console.log(this.props.record.fields['community_homeplans_ids'].type)
+//        console.log(this.props.record.fields['community_homeplans_ids'].viewMode)
+//        console.log(this.props.record.fields['community_homeplans_ids'].relation)
+//        console.log(this.props.record.fields['community_homeplans_ids'])
+//        console.log(this.props.record.data[this.props.name])
+//        console.log(this.props.record.data)
+        useInputField({ getValue: () => this.props.record.data[this.props.name] || "From Owl" });
+    }
+    get phoneHref() {
+        return "tel:" + this.props.record.data[this.props.name].replace(/\s+/g, "");
+    }
+}
+
+export const ValidEmailFieldObject = {
+    component: ValidEmailField,
+    displayName: "Custom Field",
+    supportedTypes: ["char","one2many"],
+    extractProps: ({ attrs }) => ({
+        placeholder: attrs.placeholder,
+    }),
+};
+
+registry.category("fields").add("valid_email", ValidEmailFieldObject);

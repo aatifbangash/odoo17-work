@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="owl.BooleanWidget">
+        <div class="form-check form-switch">
+  <input
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          t-att-id="props.id"
+          t-att-checked="state.value"
+          t-on-change="onChange"
+  />
+</div>
+    </t>
+</templates>

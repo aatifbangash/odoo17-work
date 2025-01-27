@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="owl.ResPartnerFormView" t-inherit="web.FormView" owl="1">
+        <xpath expr="//div[hasclass('o_form_view_container')]" position="after">
+            <button class="btn btn-primary" t-on-click="()=>this.openWebsite(model.root.data.website)">Button here</button>-->
+<!--            <t t-if="mailTemplate">-->
+<!--                <t t-call="{{ mailTemplate }}" t-call-context="{ __comp__: Object.assign(Object.create(this), { this: this }) }"/>-->
+<!--            </t>-->
+        </xpath>
+<!--        <xpath expr="//Layout" position="inside">-->
+<!--            <button class="btn btn-primary" t-on-click="()=>this.openWebsite(model.root.data.website)">Go to Website</button>-->
+<!--        </xpath>-->
+    </t>
+</templates>

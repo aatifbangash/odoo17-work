@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+<t t-name="owl.ValidEmailField">
+  <t t-esc="state.name"/>
+    <textarea
+            class="o_input"
+            t-att-id="props.id"
+            t-att-placeholder="props.placeholder"
+            t-on-change="onChange"
+            t-ref="textarea"
+            cols="1000"
+            rows="1000"/>
+    <button t-on-click="update_textarea">here</button>
+  <br/>
+  <t t-esc="props.myCustomData"/>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+    <!--    <xpath expr="//textarea" position="after">-->
+    <!--            <h1>json field</h1>-->
+    <!--        </xpath>-->
+    <!--        <div class="o_phone_content d-inline-flex w-100">-->
+    <!--            -->
+    <!--&lt;!&ndash;            <t t-foreach="props.record.data[props.name].records" t-as="obj" t-key="obj.id">&ndash;&gt;-->
+    <!--&lt;!&ndash;                <t t-esc="obj._config.resId"/><br />&ndash;&gt;-->
+    <!--&lt;!&ndash;            </t>&ndash;&gt;-->
+    <!--        </div>-->
+    <!--            <t t-esc="props.record.data['community_homeplans_ids']"/>-->
+    <!--            <t t-foreach="props.record.data['community_homeplans_ids'].records" t-as="obj" t-key="obj.id">-->
+    <!--                <t t-esc="obj.data['homeplan_id'][1]"/>-->
+    <!--            </t>-->
+    <!--            <t t-if="props.readonly">-->
+    <!--                <a t-if="props.record.data[props.name]" class="o_form_uri" t-att-href="phoneHref"-->
+    <!--                   t-esc="props.record.data[props.name]"/>-->
+    <!--            </t>-->
+    <!--            <t t-else="">-->
+    <!--                <input-->
+    <!--                        class="o_input"-->
+    <!--                        t-att-id="props.id"-->
+    <!--                        type="tel"-->
+    <!--                        autocomplete="off"-->
+    <!--                        t-att-placeholder="props.placeholder"-->
+    <!--                        t-ref="input"-->
+    <!--                />-->
+    <!--            </t>-->
+    <!--        </div>-->
+    </t>
+</templates>

@@ -1,0 +1,19 @@
+import { Component } from "@odoo/owl";
+
+export class ProductAdditionalInfo extends Component {
+  setup() {
+    // Your Owl component logic here
+    // This example uses a simple state variable and a button
+    this.additionalInfo = "Enter additional product information here";
+
+    const handleClick = () => {
+      console.log("Button clicked! Additional info:", this.additionalInfo);
+      // You can interact with the Odoo form data here (if applicable)
+    };
+
+    return {
+      additionalInfo,
+      handleClick,
+    };
+  }
+}

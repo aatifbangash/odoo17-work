@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="owl.Plans" owl="1">
+        <div class="option_set_container">
+            <div class="header-plans">
+            <div class="container-fluid new_btn_wrapper">
+                <div class="row mx-4">
+                    <div class="col-lg-6 d-flex align-items-center">
+                        <t t-if="state.is_franchisor">
+                            <button class="btn btn-success" style="margin-right: 1rem" t-on-click="() => newPlan()"
+                            >
+                                New
+                            </button>
+                        </t>
+                        <a t-if="state.panelName === 'Community'" style="color: #fff; cursor: pointer;" t-on-click="()=> goBack()">
+                            <t t-esc="state.header" />
+                        </a>
+                        <h4 t-if="state.panelName != 'Community'" style="color: #fff ">
+                            <t t-esc="state.header"/>
+                        </h4>
+                    </div>
+                    <div class="col-lg-6 text-end">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="available-partner-plans">
+                <div class="container-fluid new_btn_wrapper">
+                    <div class="row mx-4">
+                        <div class="col-lg-1 d-flex p-0">
+                            <h2 style="color:white;">
+                                <t t-if="state.is_franchisor">
+                                    Available
+                                </t>
+                                <t t-else="">
+                                   Enabled
+                                </t>
+                            </h2>
+                        </div>
+                        <div class="col-lg-1 d-flex align-items-center" style="color:white;">
+                            <t t-esc="state.activePlans.length"/>
+                        </div>
+                    </div>
+                </div>
+                <t t-if="state.activePlans.length > 0">
+                    <div class="plans">
+                        <div class="row mx-3" style="gap: 2rem">
+                            <t t-foreach="state.activePlans" t-as="activeMasterPlan" t-key="activeMasterPlan.id">
+                                <div class="plan-card">
+                                    <div class="plan-card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="plan-card-header">
+                                                <strong>
+                                                    <t t-esc="activeMasterPlan.name"/>
+                                                </strong>
+                                            </div>
+                                            <div class="d-flex">
+                                                <li class="list-item align-self-start">
+                                                    <t t-if="state.panelName === 'Community'">
+                                                        <input type="checkbox"
+                                                               t-on-change="() => toggleModal(activeMasterPlan.id)"
+                                                               data-bs-target="#confirmationModal"
+                                                               t-att-checked="activeMasterPlan.enable ? 'checked' : ''"
+                                                               role="switch"
+                                                               class="form-check-input"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <t t-if="state.is_franchisor">
+                                                            <input type="checkbox"
+                                                                   t-on-change="() => toggleModal( activeMasterPlan.id)"
+                                                                   data-bs-target="#confirmationModal"
+                                                                   t-att-checked="activeMasterPlan.is_published ? 'checked' : ''"
+                                                                   role="switch"
+                                                                   class="form-check-input"/>
+                                                        </t>
+                                                        <t t-else="">
+                                                             <input type="checkbox"
+                                                                    t-on-change="() => toggleModal( activeMasterPlan.id)"
+                                                                    t-att-checked="activeMasterPlan.enable ? 'checked' : ''"
+                                                                    data-bs-target="#confirmationModal"
+                                                                    role="switch"
+                                                                    class="form-check-input"/>
+                                                        </t>
+                                                    </t>
+                                                </li>
+                                                <li class="list-item">
+                                                    <button class="border-0 fa fa-gear bg-transparent"
+                                                            t-on-click="() => setMasterPlanOption(activeMasterPlan.id, activeMasterPlan.name, activeMasterPlan)"/>
+                                                </li>
+                                            </div>
+                                        </div>
+                                        <div t-on-click="
+                                                    state.panelName ==='Community' ?
+                                                    ()=> editCommunityPlan(activeMasterPlan.community_plan_id) :
+                                                    () => editPlan(activeMasterPlan.id) ">
+                                            <ul class="plan-card-content">
+
+                                                <li class="price">
+                                                    <t t-esc="formattedPrice(activeMasterPlan.price)"/>
+                                                </li>
+                                                <li class="list-item">
+                                                    <i class="fa fa-id-card"></i>
+                                                    <t t-esc="`Legal Name: `"/>
+                                                    <t t-esc="`${activeMasterPlan.legal_name ? activeMasterPlan.legal_name : '-' }`"/>
+                                                </li>
+                                                <li class="list-item">
+                                                    <i class="fa fa-check" title="icon"></i>
+                                                    <t t-esc="`Available: `"/>
+                                                    <t t-esc="`${activeMasterPlan.is_published ? 'yes' : 'no' }`"/>
+                                                </li>
+                                                <li class="list-item">
+                                                    <i class="fa fa-filter" title="icon"></i>
+                                                    <t t-esc="`Type: `"/>
+                                                    <t t-esc="activeMasterPlan.type"/>
+                                                </li>
+                                                <li class="list-item">
+                                                    <i class="fa fa-check" title="icon"></i>
+                                                    <t t-esc="`Active: `"/>
+                                                    <t t-esc="`${activeMasterPlan.active ? 'yes' : 'no' }`"/>
+                                                </li>
+                                                <li class="list-item">
+                                                    <i class="fa fa-regular fa-envelope"></i>
+                                                    <t t-esc="`Code: `"/>
+                                                    <t t-esc="`${activeMasterPlan.default_code ? activeMasterPlan.default_code : '-' }`"/>
+                                                </li>
+                                                <li class="list-item">
+                                                    <i class="fa fa-hashtag"></i>
+                                                    <t t-esc="`Kova ID: `"/>
+                                                    <t t-esc="activeMasterPlan.kova_model_rid"/>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </div>
+            <div class="unavailable-partner-plans">
+                <div class="container-fluid new_btn_wrapper">
+                    <div class="row mx-4">
+                        <div class="col-lg-1 d-flex p-0">
+                            <h2 style="color:white;">
+                              <t t-if="state.is_franchisor">
+                                    UnAvailable
+                              </t>
+                                <t t-else="">
+                                    Available
+                                </t>
+                            </h2>
+                        </div>
+                        <div class="col-lg-1 d-flex align-items-center" style="color:white;">
+                            <t t-esc="state.inActivePlans.length"/>
+                        </div>
+                    </div>
+                </div>
+                <t t-if="state.inActivePlans.length > 0">
+                    <div class="plans">
+                        <div class="row mx-3" style="gap: 2rem">
+                            <t t-foreach="state.inActivePlans" t-as="activeMasterPlan" t-key="activeMasterPlan.id">
+                                <div class="plan-card">
+                                    <div class="plan-card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="plan-card-header">
+                                                <strong>
+                                                    <t t-esc="activeMasterPlan.name"/>
+                                                </strong>
+                                            </div>
+                                            <div class="d-flex">
+                                                <li class="list-item align-self-start">
+                                                    <t t-if="state.panelName === 'Community'">
+                                                        <input type="checkbox"
+                                                               t-on-change="() => activatePlan(activeMasterPlan.id)"
+                                                               t-att-checked="activeMasterPlan.enable ? 'checked' : ''"
+                                                               role="switch"
+                                                               class="form-check-input"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <t t-if="state.is_franchisor">
+                                                            <input type="checkbox"
+                                                                   t-on-change="() => setMasterPlanAvailable(activeMasterPlan.id)"
+                                                                   t-att-checked="activeMasterPlan.enable ? 'checked' : ''"
+                                                                   role="switch"
+                                                                   class="form-check-input"/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <input type="checkbox"
+                                                                    t-on-change="() => setPlanToggle(activeMasterPlan.id)"
+                                                                    t-att-checked="activeMasterPlan.enable ? 'checked' : ''"
+                                                                    role="switch"
+                                                                    class="form-check-input"/>
+                                                        </t>
+                                                    </t>
+                                                </li>
+                                        </div>
+                                        </div>
+                                        <div t-on-click="() => editPlan(activeMasterPlan.id)">
+                                            <ul class="plan-card-content">
+                                                <li class="price">
+                                                    <t t-esc="formattedPrice(activeMasterPlan.price)"/>
+
+                                                </li>
+                                                <li class="list-item">
+                                                    <i class="fa fa-id-card"></i>
+                                                    <t t-esc="`Legal Name: `"/>
+                                                    <t t-esc="`${activeMasterPlan.legal_name ? activeMasterPlan.legal_name : '-' }`"/>
+                                                </li>
+                                                <li class="list-item">
+                                                    <i class="fa fa-check" title="icon"></i>
+                                                    <t t-esc="`Available: `"/>
+                                                    <t t-esc="`${activeMasterPlan.is_published ? 'yes' : 'no' }`"/>
+                                                </li>
+                                                <li class="list-item">
+                                                    <i class="fa fa-filter" title="icon"></i>
+                                                    <t t-esc="`Type: `"/>
+                                                    <t t-esc="activeMasterPlan.type"/>
+                                                </li>
+                                                <li class="list-item">
+                                                    <i class="fa fa-check" title="icon"></i>
+                                                    <t t-esc="`Active: `"/>
+                                                    <t t-esc="`${activeMasterPlan.active ? 'yes' : 'no' }`"/>
+                                                </li>
+                                                <li class="list-item">
+                                                    <i class="fa fa-regular fa-envelope"></i>
+                                                    <t t-esc="`Code: `"/>
+                                                    <t t-esc="`${activeMasterPlan.default_code ? activeMasterPlan.default_code : '-' }`"/>
+                                                </li>
+                                                <li class="list-item">
+                                                    <i class="fa fa-hashtag"></i>
+                                                    <t t-esc="`Kova ID: `"/>
+                                                    <t t-esc="activeMasterPlan.kova_model_rid"/>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+            </t>
+              </div>
+        </div>
+
+        <div t-if="state.confirmId > 0" class="modal show" style="display: block;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                  <h1 class="modal-title fs-5 text-light me-3" id="exampleModalLabel">Confirm Disable</h1>
+                  <button type="button" class="btn-close" t-on-click="() => toggleModal(-1)"  data-bs-dismiss="modal" aria-label="Close">X</button>
+              </div>
+                <div class="modal-body">
+                    <p class="text-light">Are you sure you want to disable this plan?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary me-1" data-bs-dismiss="modal" t-on-click="() => toggleModal(-1)" >Close</button>
+                    <button type="button" class="btn btn-primary"
+                            t-on-click="() => disablePlan()"
+                            data-bs-dismiss="modal"
+                    >Confirm</button>
+                </div>
+            </div>
+          </div>
+        </div>
+
+    </t>
+</templates>
