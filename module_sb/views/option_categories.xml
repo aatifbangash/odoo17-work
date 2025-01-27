@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Action -->
+        <record id="action_option_categories" model="ir.actions.act_window">
+            <field name="name">Option Categories</field>
+            <field name="res_model">module_sb.option_categories</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem id="menu_option_categories"
+                  name="Categories"
+                  parent="module_sb.menu_option_parent"
+                  action="action_option_categories"
+                  sequence="1"/>
+    </data>
+</odoo>

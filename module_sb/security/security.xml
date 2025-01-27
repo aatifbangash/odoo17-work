@@ -16,6 +16,36 @@
     </record>
 
 
+    <record id="franchise_admin_can_update_own_partner" model="ir.model.access">
+        <field name="name">Franchise admin can update own partner</field>
+        <field name="model_id" ref="base.model_res_company"/>
+        <field name="group_id" ref="franchise_admin"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="franchise_admin_ir_model_access_right" model="ir.model.access">
+        <field name="name">Franchise admin ir_model access right</field>
+        <field name="model_id" ref="base.model_ir_model"/>
+        <field name="group_id" ref="franchise_admin"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="franchise_admin_crm_lead_access_right" model="ir.model.access">
+        <field name="name">Franchise admin crm.lead access right</field>
+        <field name="model_id" ref="crm.model_crm_lead"/>
+        <field name="group_id" ref="franchise_admin"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+
 <!--    <record id="own_community_records" model="ir.rule">-->
 <!--        <field name="name">Own community records</field>-->
 <!--        <field name="model_id" ref="community_module.model_community_module_community"/>-->
@@ -38,20 +68,9 @@
         <field name="perm_unlink" eval="True"/>
     </record>
 
-    <record id="own_company_website" model="ir.rule">
-        <field name="name">Own company websites</field>
-        <field name="model_id" ref="website.model_website"/>
-        <field name="domain_force">[('company_id', 'in', user.company_ids.ids)]</field>
-        <field name="groups" eval="[(4, ref('franchise_admin'))]"/>
-        <field name="perm_create" eval="True"/>
-        <field name="perm_write" eval="True"/>
-        <field name="perm_read" eval="True"/>
-        <field name="perm_unlink" eval="True"/>
-    </record>
-
-<!--    <record id="own_franchise_options" model="ir.rule">-->
-<!--        <field name="name">Own franchise options</field>-->
-<!--        <field name="model_id" ref="module_sb.model_module_sb_franchise_options"/>-->
+<!--    <record id="own_company_website" model="ir.rule">-->
+<!--        <field name="name">Own company websites</field>-->
+<!--        <field name="model_id" ref="website.model_website"/>-->
 <!--        <field name="domain_force">[('company_id', 'in', user.company_ids.ids)]</field>-->
 <!--        <field name="groups" eval="[(4, ref('franchise_admin'))]"/>-->
 <!--        <field name="perm_create" eval="True"/>-->

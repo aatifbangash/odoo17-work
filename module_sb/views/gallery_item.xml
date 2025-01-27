@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_gallery_item_form" model="ir.ui.view">
+            <field name="name">module_sb.gallery.item.form</field>
+            <field name="model">module_sb.gallery_item</field>
+            <field name="arch" type="xml">
+                <form string="Gallery Item">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="media_type"/>
+                            <field name="image" invisible="media_type !=  'image'" widget="image" class="oe_avatar"/>
+                            <field name="video_code" invisible="media_type !=  'video'"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="active_plans" model="ir.actions.act_window">
+        <field name="name">Plans</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="domain">[('is_published', '=', True)]</field>
+    </record>
+
+    <record id="inactive_plans" model="ir.actions.act_window">
+        <field name="name">In ActivePlans</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_published', '=', False)]</field>
+    </record>
+
+    <record id="plans_dashboard_form_view" model="ir.ui.view">
+        <field name="name">Dashboard Plans</field>
+        <field name="model">board.board</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Plans Dashboard">
+                <board style="1">
+                    <column>
+                        <action
+                                string="Published Plans"
+                                name="%(module_sb.active_plans)d"/>
+
+                        <action
+                                string="In Active Plans"
+                                name="%(module_sb.inactive_plans)d"/>
+                    </column>
+                </board>
+            </form>
+        </field>
+    </record>
+
+    <record id="plans_dashboard" model="ir.actions.act_window">
+        <field name="name">Plans Dashboard</field>
+        <field name="res_model">board.board</field>
+        <field name="view_mode">form</field>
+        <field name="usage">menu</field>
+        <field name="view_id" ref="module_sb.plans_dashboard_form_view"/>
+    </record>
+
+    <menuitem
+            name="Plans Dashboard"
+            parent="sale.product_menu_catalog"
+            action="plans_dashboard"
+            sequence="1"
+            id="menu_plans_dashboard"/>
+
+</odoo>

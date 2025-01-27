@@ -16,6 +16,8 @@ class OptionsGroup(models.Model):
 
     location = fields.Many2one('module_sb.option_locations', 'Location')
     option_id = fields.Char('Opt Sel ID')
+    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.user.company_id)
+
     # @api.model
     # def search(self, domain, offset=0, limit=None, order=None):
     #     print('search method')
@@ -94,3 +96,14 @@ class OptionsGroup(models.Model):
     # def unlink(self):
     #     print('delete')
     #     return super().unlink()
+    # @api.model
+    # def default_get(self, fields):
+    #     res = super(OptionsGroup, self).default_get(fields)
+    #
+    #     company_text = self.get_company_text()
+    #     if company_text:
+    #         res.update({'name': company_text.name })
+    #     return res
+    #
+    # def get_company_text(self):
+    #     return self.search([('company_id', '=', self.env.company.id)], limit=1)

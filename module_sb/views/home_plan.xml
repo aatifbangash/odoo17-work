@@ -5,6 +5,9 @@
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_kanban_view"/>
             <field name="arch" type="xml">
+<!--                <xpath expr="//kanban" position="attributes">-->
+<!--                    <attribute name="default_group_by">is_published</attribute>-->
+<!--                </xpath>-->
                 <xpath expr="//kanban/templates/t/div/div[1]" position="replace">
                     <div>
                     </div> <!-- hide image from kanban view -->
@@ -21,17 +24,9 @@
                 </xpath>
                 <field name="name" position="attributes">
                     <attribute name="style">color: white; font-family: poppins, sans-serif;</attribute>
-
                 </field>
-                <!--                <field name="name" position="before"> for future use-->
-                <!--                    <strong style="color:white !important;">-->
-                <!--                        <field name="categ_id"/>-->
-                <!--                    </strong>-->
-                <!--                    <br/>-->
-                <!--                </field>-->
                 <field name="name" position="after">
                     <div class="list-group-itemlist-item kanban-items text-light">
-                        <!--                        <i class="fa fa-globe" title=icon"/></i>-->
                         <field name="base_price" style="font-size: 40px; font-weight: bold;"/>
                     </div>
                     <div class="list-group-itemlist-item kanban-items" style="color:white !important;">
@@ -69,7 +64,6 @@
                         <field name="kova_model_rid"/>
                     </div>
                 </field>
-
                 <div name="product_lst_price" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </div>
@@ -90,18 +84,18 @@
                     <group>
                         <group name="block1">
                             <field name="base_price"/>
-                            <field name="min_bedrooms"/>
-                            <field name="min_bathrooms"/>
-                            <field name="base_heated_square_feet"/>
-                            <field name="base_total_square_feet"/>
-                            <field name="price"/>
+                            <field name="min_bedrooms" readonly="is_franchise_admin"/>
+                            <field name="min_bathrooms" readonly="is_franchise_admin"/>
+                            <field name="base_heated_square_feet" readonly="is_franchise_admin"/>
+                            <field name="base_total_square_feet" readonly="is_franchise_admin"/>
+                            <field name="price" readonly="is_franchise_admin"/>
                         </group>
                         <group name="block2">
-                            <field name="incentive_price"/>
-                            <field name="max_bedrooms"/>
-                            <field name="max_bathrooms"/>
-                            <field name="max_heated_square_feet"/>
-                            <field name="max_total_square_feet"/>
+                            <field name="incentive_price" readonly="is_franchise_admin"/>
+                            <field name="max_bedrooms" readonly="is_franchise_admin"/>
+                            <field name="max_bathrooms" readonly="is_franchise_admin"/>
+                            <field name="max_heated_square_feet" readonly="is_franchise_admin"/>
+                            <field name="max_total_square_feet" readonly="is_franchise_admin"/>
                         </group>
                     </group>
 
@@ -111,19 +105,20 @@
                 </field>
 
                 <field name="detailed_type" position="after">
-                    <field name="legal_name" placeholder="Legal Name..."/>
-                    <field name="kova_model_rid"/>
+                    <field name="legal_name" placeholder="Legal Name..." readonly="is_franchise_admin"/>
+                    <field name="slug" placeholder="Slug." readonly="is_franchise_admin"/>
+                    <field name="kova_model_rid" readonly="is_franchise_admin"/>
                     <field name="is_published" string="Available" groups="!module_sb.franchise_admin"/>
                     <field name="active" groups="!module_sb.franchise_admin"/>
                     <field name="enable" readonly="False" groups="module_sb.franchise_admin"/>
                     <field name="is_franchise_admin" invisible="1"/>
-                    <field name="default_code" string="Code" placeholder="Code..."/>
-                    <field name="image_1920" widget='image'/>
+                    <field name="default_code" string="Code" placeholder="Code..." readonly="is_franchise_admin"/>
+                    <field name="image_1920" widget='image' readonly="is_franchise_admin"/>
                 </field>
 
                 <notebook>
                     <page name="Attributes" String="Attributes">
-                        <field name="homeplan_groups">
+                        <field name="homeplan_groups" readonly="is_franchise_admin">
                             <tree editable="top">
                                 <field name="type" domain="[('parent_id', '=', False)]"/>
                                 <field name="style"
@@ -134,105 +129,60 @@
                 </notebook>
 
                 <notebook>
-                    <page name="Master plan options" String="Master plan options">
-                        <field name="master_plan_options_ids">
+                    <page name="Options" String="Options" groups="!module_sb.franchise_admin">
+                        <field name="master_plan_options_ids" readonly="is_franchise_admin">
                             <tree editable="top">
                                 <field name="options_id"/>
-                                <field name="options_related_category_id" invisible="1"/>
                                 <field name="option_values_id"
                                        domain="[('option_categories_id', '=', options_related_category_id), ('enabled', '=', True)]"/>
                                 />
+                                <field name="options_related_category_id" column_invisible="1"/>
                             </tree>
                         </field>
                     </page>
                 </notebook>
 
-<!--                <notebook>-->
-<!--                    <page name="Options" String="Options" groups="!module_sb.franchise_admin">-->
-<!--                        <field name="homeplan_options">-->
-<!--                            <tree editable="top">-->
-<!--                                &lt;!&ndash;                                <field name="company_id" readonly="1"/>&ndash;&gt;-->
-<!--                                <field name="option_group_id"/>-->
-<!--                                <field name="option_name_id"-->
-<!--                                       domain="domain_check"/>-->
-<!--                                &lt;!&ndash;                                       domain="[('parent_id', '=', option_group_id), ('parent_id', '!=', False), ('enabled', '=', True)]"/>&ndash;&gt;-->
-<!--                                <field name="domain_check" invisible="1" string=""/>-->
-<!--                                &lt;!&ndash;                                <field name="options"&ndash;&gt;-->
-<!--                                &lt;!&ndash;                                       domain="[('parent_id', '=', type_id), ('status', '=', 'active')]"/>&ndash;&gt;-->
-<!--                            </tree>-->
-<!--                        </field>-->
-<!--                    </page>-->
-<!--                </notebook>-->
-<!--                <notebook>-->
-<!--                    <page name="Options" String="Options" groups="module_sb.franchise_admin">-->
-<!--                        <field name="homeplan_franchise_options">-->
-<!--                            <tree editable="top">-->
-<!--                                <field name="company_id" groups="!module_sb.franchise_admin"/>-->
-<!--                                <field name="option_group_id" domain="[('homeplan_id', '=', parent.id)]"-->
-<!--                                       widget="selection"-->
-<!--                                       options="{'no_create_edit': True,'no_edit': True, 'no_create': True, 'no_open': True}"/>-->
-<!--                                &lt;!&ndash;                                <field name="display_name" string="Option Name"/>&ndash;&gt;-->
-<!--                            </tree>-->
-<!--                        </field>-->
-<!--                    </page>-->
-<!--                </notebook>-->
-
                 <notebook>
-                    <page name="Partner Options" String="Partner Options" >
-                        <field name="home_plan_options_ids">
+                    <page name="Options" String="Options" groups="module_sb.franchise_admin">
+                        <field name="home_plan_options_ids" readonly="is_franchise_admin">
                             <tree editable="top">
                                 <field name="company_id" groups="!module_sb.franchise_admin"/>
-                                <field name="option_group_id" domain="[('homeplan_id', '=', parent.id)]"
+                                <field name="master_plan_options_id" domain="[('homeplan_id', '=', parent.id)]"
                                        widget="selection"
                                        options="{'no_create_edit': True,'no_edit': True, 'no_create': True, 'no_open': True}"/>
-                                <!--                                <field name="display_name" string="Option Name"/>-->
+
+                                <field name="options_id" />
+                                <field name="option_values_id" />
                             </tree>
                         </field>
                     </page>
                 </notebook>
                 <notebook>
-                    <page name="Franchise Homeplans" String="Franchise Homeplans" invisible="is_franchise_admin">
-                        <field name="franchise_homeplans_ids">
+                    <page name="Franchise Plans" String="Franchise Plans" invisible="is_franchise_admin">
+                        <field name="franchise_homeplans_ids" readonly="is_franchise_admin">
                             <tree editable="top">
                                 <field name="company_id"/>
-                                <field name="homeplan_id"/>
+                                <field name="homeplan_id" String="Plans"/>
                             </tree>
                         </field>
                     </page>
                 </notebook>
 
-                <!--                <notebook>-->
-                <!--                    <page name="Options 2" String="Options 2">-->
-                <!--                        <field name="homeplan_options" widget="many2many_checkboxes"-->
-                <!--                               domain="[('parent_id', '=', False)]"/>-->
-                <!--                    </page>-->
-                <!--                </notebook>-->
-
-                <!--                <notebook>-->
-                <!--                    <page name="Options 3" String="Options 3">-->
-                <!--                        <field name="homeplan_options" widget="many2many_tags" domain="[('parent_id', '=', False)]"/>-->
-                <!--                    </page>-->
-                <!--                </notebook>-->
-
-                <!--                <notebook>-->
-                <!--                    <page name="Options 4" String="Options 4">-->
-                <!--                        <field name="homeplan_options">-->
-                <!--                            <tree-->
-                <!--                                    default_order="parent_id asc, name asc"-->
-                <!--                                    default_group_by="parent_id"-->
-                <!--                                    expand="True"-->
-                <!--                            >-->
-
-                <!--                                <field name="name" string="Option Names"/>-->
-                <!--                                <field name="enabled" widget="button"/>-->
-                <!--                            </tree>-->
-                <!--                        </field>-->
-                <!--                    </page>-->
-                <!--                </notebook>-->
-
                 <field name="name" position="attributes">
-                    <attribute name="placeholder">Home plan...</attribute>
+                    <attribute name="placeholder">Enter plan...</attribute>
                     <attribute name="string">Name</attribute>
+                    <attribute name="readonly">is_franchise_admin</attribute>
+                </field>
+
+                <field name="description" position="attributes">
+                    <attribute name="readonly">is_franchise_admin</attribute>
+                </field>
+
+                <field name="uom_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="uom_po_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
                 </field>
 
                 <!-- hide fields -->
@@ -263,9 +213,6 @@
                 <field name="product_tooltip" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </field>
-                <!--                <button name="202" position="attributes">-->
-                <!--                    <attribute name="invisible">1</attribute>-->
-                <!--                </button>-->
                 <field name="sale_ok" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </field>
@@ -291,6 +238,15 @@
             </field>
         </record>
 
+        <record id="options_navigation_action_button" model="ir.actions.server">
+            <field name="name">Go To Options</field>
+            <field name="model_id" ref="product.model_product_template"/>
+            <field name="binding_model_id" ref="product.model_product_template"/>
+            <field name="binding_view_types">form</field>
+            <field name="state">code</field>
+            <field name="code">action = records.options_action()</field>
+        </record>
+
         <!--        inherit the existing action and alter its properties-->
         <record id="sale.product_template_action" model="ir.actions.act_window">
             <field name="name">Master Plans</field>
@@ -301,13 +257,14 @@
         <!--        inherit existing menu and change it's name-->
         <record id="sale.menu_product_template_action" model="ir.ui.menu">
             <field name="name">Master Plans</field>
+            <field name="active">False</field>
             <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
         </record>
 
 
         <!-- Added new Action for home plans (franchise) -->
         <record id="home_plan_action_franchise" model="ir.actions.act_window">
-            <field name="name">Home plans</field>
+            <field name="name">Plans</field>
             <field name="res_model">product.template</field>
             <field name="view_mode">kanban,form,tree</field>
             <field name="domain">[('is_published', '=', True)]</field>
@@ -316,10 +273,11 @@
 
         <!-- Added new menu for home plans (franchise)-->
         <menuitem id="home_plan_menu_franchise"
-                  name="Home plans"
+                  name="Plans"
                   parent="sale.product_menu_catalog"
                   action="home_plan_action_franchise"
                   groups="module_sb.franchise_admin"
+                  active="False"
                   sequence="0"/>
 
         <!-- restrict menus to specific groups -->
@@ -328,6 +286,9 @@
         </record>
         <record id="base.menu_administration" model="ir.ui.menu">
             <field name="groups_id" eval="[(4, ref('module_sb.franchise_admin'))]"/>
+        </record>
+        <record id="sale.prod_config_main" model="ir.ui.menu">
+            <field name="name">Plans</field>
         </record>
     </data>
 </odoo>

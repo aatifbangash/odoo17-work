@@ -5,6 +5,40 @@
   border-radius: 5px;
 }
 
+.oe_kanban_global {
+  background-color: #80B602 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #80B602 !important;
+  border-radius: 5px;
+}
+.o_kanban_renderer.o_renderer.o_kanban_ungrouped{
+    overflow-y: auto !important;
+    max-height: 100% !important;
+    }
+.o_kanban_renderer .o_kanban_group .o_kanban_header > .o_kanban_header_title .o_kanban_config {
+    visibility: hidden !important;
+}
+.o_kanban_quick_add  {
+    visibility: hidden !important;
+    }
+.o_column_title {
+    color: white !important;
+    }
+.o_animated_number {
+    color: white !important;
+    }
+.o_column_progress {
+    display: none;
+    }
+i {
+    color: white !important;
+    }
+.o_content {
+        overflow-y: auto !important;
+        }
+.o_kanban_group {
+    background: none !important;
+}
 .oe_kanban_details {
 color: #FFFFFF !important;
 }

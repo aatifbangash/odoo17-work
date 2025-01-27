@@ -69,6 +69,7 @@
                   name="Categories Group"
                   parent="sale.prod_config_main"
                   action="action_categories_group"
+                  active="False"
                   sequence="0"/>
 
     </data>

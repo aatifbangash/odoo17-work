@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form View -->
+        <record id="view_website_content_form" model="ir.ui.view">
+            <field name="name">view.website.content.form</field>
+            <field name="model">module_sb.website_content</field>
+            <field name="arch" type="xml">
+                <form string="Website Content">
+                    <notebook>
+                        <page name="General" String="General">
+                            <group>
+                                <field name="header_text" placeholder="Header Text..." widget="html"/>
+                                <field name="why_us_html" placeholder="Why Us..." widget="html"/>
+                                <field name="company_id" invisible="1"/>
+                            </group>
+                        </page>
+                        <page name="About" String="About">
+                            <group>
+                                <field name="about_the_builder" placeholder="About The Builder Text..." widget="html"/>
+                                <field name="builder_image" widget="image" class="oe_avatar"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_partner_website_content" model="ir.actions.server">
+            <field name="name">Website Content</field>
+            <field name="model_id" ref="module_sb.model_module_sb_website_content"/>
+            <field name="state">code</field>
+            <field name="code">action = model.do_action()</field>
+        </record>
+
+        <menuitem id="partner_website_content_menu"
+                  name="Website Content"
+                  parent="base.menu_users"
+                  active="False"
+                  action="action_partner_website_content"
+                  sequence="5"/>
+
+    </data>
+</odoo>

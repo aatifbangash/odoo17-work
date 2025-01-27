@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import re
+from pprint import pprint
 
 from odoo import models, fields, api
 
@@ -6,40 +8,82 @@ from odoo import models, fields, api
 class ModuleSBHomePlans(models.Model):
     _inherit = "product.template"
 
+    slug = fields.Char(string='Slug', size=128, tracking=True)
+
     kova_model_rid = fields.Integer(string='Kova Model Rid')
-    legal_name = fields.Char(string='Legal Name', size=128)
+    legal_name = fields.Char(string='Legal Name', size=128, tracking=True)
     is_published = fields.Boolean(string='Published', default=True)
     category_groups = fields.Many2many('product.category', string="Category Groups")
 
     # attributes
     homeplan_groups = fields.One2many('module_sb.homeplan.groups', 'homeplan_id', string='Groups')
-
-    # base options (replaced with master_plan_option_ids)
-    # homeplan_options = fields.One2many('module_sb.homeplan.options', 'homeplan_id', string='Options')
-
-    # master plan options
     master_plan_options_ids = fields.One2many('module_sb.master_plan_options', 'homeplan_id',
                                               string='Master Plan Options')
     home_plan_options_ids = fields.One2many('module_sb.home_plan_options', 'homeplan_id',
-                                              string='Home Plan Options')
+                                            string='Home Plan Options')
     # checkbox to enable home plan for franchise
     enable = fields.Boolean(string='Enable', default=False, store=False, compute='_compute_enable')
-    # franchise enabled home plans
     franchise_homeplans_ids = fields.One2many('module_sb.franchise_homeplans', 'homeplan_id',
                                               string='Franchise Home plans')
+    product_override_ids = fields.One2many('module_sb.product_override', 'product_id',
+                                           string='Product Override')
     is_franchise_admin = fields.Boolean(string='Is Franchise Admin', store=False, compute='_compute_franchise_admin')
 
-    # franchise selected home plan options (based on base selected options) (replaced with home_plan_options_ids)
-    # homeplan_franchise_options = fields.One2many('module_sb.franchise.options', 'homeplan_id',
-    #                                              string='Franchise Options')
-    base_price = fields.Float(string='Base Price', default=0.00)
-    incentive_price = fields.Float(string='Incentive Price', default=0.00)
-    price = fields.Float(string='Price', default=0.00)
+    def _compute_base_price(self):
+        for product in self:
+
+            base_price_record = None
+            user_role = 'franchisee' if self.env.user.has_group('module_sb.franchise_admin') else 'franchisor'
+
+            if user_role == 'franchisee':
+                base_price_record = product.product_override_ids.filtered(
+                    lambda r: r.type == 'plan' and r.company_id == self.env.company)
+                if not base_price_record:
+                    base_price_record = product.product_override_ids.filtered(lambda r: r.type == 'master_plan')
+
+            if user_role == 'franchisor':
+                base_price_record = product.product_override_ids.filtered(lambda r: r.type == 'master_plan')
+
+            product.base_price = base_price_record.base_price if base_price_record else 0.00
+
+    def _inverse_base_price(self):
+        for product in self:
+            new_price_from_view = product.base_price
+            record_type = 'plan' if self.env.user.has_group('module_sb.franchise_admin') else 'master_plan'
+
+            base_price_record = self.env['module_sb.product_override'].search([
+                ('product_id', '=', product.id),
+                ('company_id', '=', self.env.company.id),
+                ('type', '=', record_type)
+            ], limit=1)
+            if base_price_record and new_price_from_view < 1:
+                base_price_record.unlink()
+            else:
+                if base_price_record:
+                    base_price_record.base_price = new_price_from_view  # Store the user-provided price
+                else:
+                    self.env['module_sb.product_override'].create({
+                        'product_id': product.id,
+                        'base_price': new_price_from_view,
+                        'company_id': self.env.company.id,
+                        'type': record_type
+                    })
+
+    base_price = fields.Float(string='Base Price', default=0.00, tracking=False, store=False,
+                              compute='_compute_base_price',
+                              inverse='_inverse_base_price')
+    incentive_price = fields.Float(string='Incentive Price', default=0.00, tracking=True)
+
+    @api.depends('base_price', 'incentive_price')
+    def _compute_price(self):
+        for product in self:
+            product.price = product.base_price - product.incentive_price
+    price = fields.Float(string='Price', default=0.00, tracking=True,compute='_compute_price', )
 
     min_bedrooms = fields.Integer(string='Min Bedrooms', default=0)
     max_bedrooms = fields.Integer(string='Max Bedrooms', default=0)
-    min_bathrooms = fields.Integer(string='Min Bathrooms', default=0)
-    max_bathrooms = fields.Integer(string='Max Bathrooms', default=0)
+    min_bathrooms = fields.Float(string='Min Bathrooms', default=0)
+    max_bathrooms = fields.Float(string='Max Bathrooms', default=0)
     base_heated_square_feet = fields.Integer(string='Base Heated Square Feet', default=0)
     max_heated_square_feet = fields.Integer(string='Max Heated Square Feet', default=0)
     base_total_square_feet = fields.Integer(string='Base Total Square Feet', default=0)
@@ -76,77 +120,55 @@ class ModuleSBHomePlans(models.Model):
                         'franchise_homeplans_ids': [(fields.Command.delete(record.id))]
                     })
 
-    # @api.onchange('is_published')
-    # def changed_published(self):
-    #     company_name = [company.name for company in self.env.user.company_ids]
-    #     print(self.env)
-    #     pass
+    @api.model_create_multi
+    def create(self, vals_list):
+        for values in vals_list:
+            if not values.get('slug'):
+                values['slug'] = self._generate_slug(values['name'])
+        return super(ModuleSBHomePlans, self).create(vals_list)
 
+    @api.model
+    def _generate_slug(self, name):
+        slug = re.sub(r'[^\w\s-]', '', name).strip().lower()
+        slug = re.sub(r'[-\s]+', '-', slug)
+        return self._ensure_unique_slug(slug)
 
-class HomePlanGroups(models.Model):
-    _name = 'module_sb.homeplan.groups'
-    _description = 'Home Plan Groups'
+    @api.model
+    def _ensure_unique_slug(self, slug):
+        original_slug = slug
+        counter = 1
+        while self.search([('slug', '=', slug)]):
+            slug = f"{original_slug}-{counter}"
+            counter += 1
+        return slug
 
-    type = fields.Many2one("product.category", string='Type')
-    style = fields.Many2one("product.category", string='Style')
-    homeplan_id = fields.Many2one('product.template', string='Home Plans')
+    def write(self, vals):
+        if 'is_published' in vals and not vals['is_published']:
+            franchise_homeplans = self.env['module_sb.franchise_homeplans'].search([
+                ('homeplan_id', 'in', self.ids)
+            ])
+            if franchise_homeplans:
+                franchise_homeplans.unlink()
 
+        return super(ModuleSBHomePlans, self).write(vals)
 
-# model to hold base options for master plan
-class HomePlanOptions(models.Model):
-    _name = 'module_sb.homeplan.options' # replaced with module_sb.master_plan_options
-    _description = 'Home Plan Options'
-    _rec_name = 'option_group_name'
+    def options_action(self):
+        self.ensure_one()
+        ctx = self.env.context.copy()
+        ctx.update({'testing_data': 'test', 'active_id': self.id})
 
-    option_group_id = fields.Many2one("module_sb.options_group", string='Option Group',
-                                      domain="[('parent_id', '=', False), ('enabled', '=', True)]")
-    option_group_name = fields.Char(string="Option Group Name", related='option_group_id.name', store=True,
-                                    readonly=False)
+        is_franchise_admin = self.env.user.has_group('module_sb.franchise_admin')
+        plan = 'Home plans' if is_franchise_admin else 'Master Plans'
 
-    option_name_id = fields.Many2one("module_sb.options_group", string='Option Name')
-    option_set_name = fields.Char(string="Option Set Name", related='option_name_id.name', store=True, readonly=False)
-    homeplan_id = fields.Many2one('product.template', string='Home Plans')
-    domain_check = fields.Char(compute='_compute_domain_check')
-
-    @api.depends('option_group_id')
-    def _compute_domain_check(self):
-        for record in self:
-            record.domain_check = "[(0, '=', 1)]"
-            if record.option_group_id:
-                record.domain_check = f"[('parent_id', '=', {record.option_group_id.id})]"
-
-    @api.depends('option_group_id', 'option_name_id')
-    def _compute_display_name(self):
-        for record in self:
-            record.display_name = f"{record.option_group_name} / {record.option_set_name}"
-
-
-class HomePlanFranchiseOptions(models.Model):
-    _name = 'module_sb.franchise.options' # replaced with module_sb.home_plan_options
-    _description = 'Home Plan Franchise Options'
-    _rec_name = 'option_group_id'
-    _check_company_auto = True
-
-    option_group_id = fields.Many2one("module_sb.homeplan.options", string='Option Group')
-    # display_name = fields.Char(string="Display Name", related='option_group.option_set_name', store=True)
-    # option_group_name = fields.Char(string="Option Group Name", related='option_group_id.option_group_name', store=True,
-    #                                 readonly=False)
-    homeplan_id = fields.Many2one('product.template', string='Home Plans')
-    company_id = fields.Many2one('res.company', 'Company',
-                                 readonly=True,
-                                 default=lambda self: self.env.company)
-
-    _sql_constraints = [
-        ('company_option_group_unique', 'unique (company_id, option_group)', 'The record already exists!'),
-    ]
-
-
-class FranchiseHomePlan(models.Model):
-    _name = 'module_sb.franchise_homeplans'
-    _description = 'Franchise Home Plans'
-    _check_company_auto = True
-
-    homeplan_id = fields.Many2one('product.template', string='Home Plans')
-    company_id = fields.Many2one('res.company', 'Company',
-                                 readonly=True,
-                                 default=lambda self: self.env.company)
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'owl.master_plan_options',
+            "target": "current",
+            "context": ctx,
+            'params': {
+                "homeplan_id": self.id,
+                "homeplan_name": self.name,
+                "panel": plan,
+                'view_type': 'form'
+            }
+        }

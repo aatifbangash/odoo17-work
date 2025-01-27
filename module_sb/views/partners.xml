@@ -67,7 +67,26 @@
             <field name="model">res.company</field>
             <field name="inherit_id" ref="base.view_company_form"/>
             <field name="arch" type="xml">
+                <notebook>
+                    <page name="Web Content" string="Web Content">
+                        <notebook>
+                        <page name="General" String="General">
+                            <group>
+                                <field name="header_text" placeholder="Header Text..." widget="html"/>
+                                <field name="why_us_html" placeholder="Why Us..." widget="html"/>
+                            </group>
+                        </page>
+                        <page name="About" String="About">
+                            <group>
+                                <field name="about_the_builder" placeholder="About The Builder Text..." widget="html"/>
+                                <field name="builder_image" widget="image" class="oe_avatar"/>
+                            </group>
+                        </page>
+                    </notebook>
+                    </page>
+                </notebook>
                 <field name="currency_id" position="after">
+                    <field name="state_code"/>
                     <field name="code"/>
                     <field name="legal_name"/>
                     <field name="latitude"/>
@@ -78,11 +97,22 @@
                     <field name="active"/>
                     <field name="kova_bunit_rid"/>
                     <field name="is_franchisor"/>
+                    <field name="tax_id" placeholder="Tax ID"/>
                 </field>
 
                 <field name="name" position="attributes">
                     <attribute name="string">Name</attribute>
                     <attribute name="placeholder">e.g. Partner Name</attribute>
+                </field>
+
+                <field name="email" position="attributes">
+                    <attribute name="required">1</attribute>
+                    <attribute name="placeholder">Admin email...</attribute>
+                </field>
+
+                <field name="name" position="after">
+                    <label class="o_form_label" for="slug">Territory</label>
+                    <field name="slug" placeholder="Territory"/>
                 </field>
 
                 <field name="street" position="attributes">
@@ -92,11 +122,14 @@
                     <attribute name="placeholder">Address2...</attribute>
                 </field>
 
+<!--                <field name="state_id" position="attributes">-->
+<!--                    <attribute name="domain">[('code', 'in', ['DE', 'VA', 'TN', 'ID']), ('country_id.code', 'in', ['US'])]</attribute>-->
+<!--                </field>-->
+
                 <!-- Hide elements -->
                 <field name="country_id" position="attributes">
                     <attribute name="invisible">1</attribute>
-                </field>
-                <field name="color" position="attributes">
+                </field><field name="color" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </field>
                 <field name="social_twitter" position="attributes">
@@ -133,7 +166,6 @@
                     <attribute name="invisible">1</attribute>
                 </page>
                 <!-- Hide elements -->
-
             </field>
         </record>
 
