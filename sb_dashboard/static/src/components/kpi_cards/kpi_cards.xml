@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="owl.KpiCard" owl="1">
+        <div class="col-lg-3 m-0 p-0">
+            <div class="shadow-sm border m-2 p-2 bg-white text-center cursor-pointer" t-on-click="()=>this.props.onClick()">
+                <div class="h1 fw-bold text-dark" style="font-size: 48px"><t t-esc ="this.props.value" /></div>
+                <div class="h3 text-muted"><t t-esc ="this.props.name" /></div>
+<!--                <div class="h6 mt-5">-->
+<!--                    <span t-attf-class="text-success">-->
+<!--                        <span t-attf-class="me-1 fa fa-arrow-up"/>-->
+<!--                        <t t-esc ="this.props.percentage" />%-->
+<!--                    </span>-->
+<!--                    <span> since last period</span>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </t>
+</templates>

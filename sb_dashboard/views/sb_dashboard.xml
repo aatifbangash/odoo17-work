@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="action_owl_sb_dashboard" model="ir.actions.client">
+            <field name="name">SB Dashboard</field>
+            <field name="tag">owl.sb_dashboard</field>
+        </record>
+
+        <menuitem name="SB Dashboard" id="menu_owl_tutorial" sequence="10">
+            <menuitem name="SB Dashboard" id="menu_owl_sales_dashboard" sequence="10" action="action_owl_sb_dashboard"/>
+        </menuitem>
+    </data>
+</odoo>

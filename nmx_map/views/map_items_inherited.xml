@@ -1,0 +1,230 @@
+<odoo>
+    <data>
+        <record id="inherited_map_item_view_form" model="ir.ui.view">
+            <field name="name">inherited_map_item_view_form</field>
+            <field name="model">google.map.item</field>
+            <field name="inherit_id" ref="bista_map_component.map_item_view_form"/>
+            <field name="arch" type="xml">
+                <field name="name" position="attributes">
+                    <attribute name="invisible">type in ['community', 'home']</attribute>
+                </field>
+                <xpath expr="//page[6]" position="attributes">
+                    <attribute name="invisible">type == 'home'  </attribute>
+                </xpath>
+
+                <xpath expr="//page[2]" position="attributes">
+                    <attribute name="string">Sections</attribute>
+                    <attribute name="name">Sections</attribute>
+                    <attribute name="invisible">type != 'community'</attribute>
+                </xpath>
+
+                <xpath expr="//page[1]/field/tree/field[@name='name']" position="after">
+                    <field name="lot_number" invisible="{'is_not_home': True}"/>
+                </xpath>
+
+                <xpath expr="//page[2]" position="after">
+                    <page string="Communities" invisible="type != 'franchise'">
+                        <field name="community_ids">
+                            <!--                            edit="false" create="false" editable="top"-->
+                            <tree>
+                                <field name="sequence" widget="handle"/>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+
+                <field name="community_id" position="after">
+                    <field name="franchise_id"
+                           domain="[('type','=','franchise')]"
+                           invisible="type != 'community'"/>
+                    <!--                    required="type == 'community'"-->
+                </field>
+
+                <field name="name" position="after">
+                    <field name="lot_number" invisible="type != 'home'"/>
+                    <field name="address" invisible="type != 'home'"/>
+                </field>
+
+                <!--                <field name="home_plan_ids" position="attributes">-->
+                <!--                    <attribute name="readonly">1</attribute>-->
+                <!--                </field>-->
+                <!--                <xpath expr="//field[@name='home_plan_ids']/tree" position="attributes">-->
+                <!--                    <attribute name="editable">top</attribute>-->
+                <!--                    <attribute name="create">false</attribute>-->
+                <!--                    <attribute name="edit">false</attribute>-->
+                <!--                </xpath>-->
+            </field>
+        </record>
+
+        <record id="inherit_map_item_view_tree" model="ir.ui.view">
+            <field name="name">inherit_map_item_view_tree</field>
+            <field name="model">google.map.item</field>
+            <field name="inherit_id" ref="bista_map_component.map_item_view_tree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="lot_number"
+                            column_invisible="{'is_not_home': True}"/>
+                    <field name="franchise_id"
+                           invisible="type != 'community'"
+                           column_invisible="context.get('hide_franchise_column', True)"/>
+
+                    <field name="community_id"
+                           invisible="type != 'home'"
+                           column_invisible="context.get('hide_community_column', True)"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="bista_map_component.map_community_action" model="ir.actions.act_window">
+            <field name="context">{'default_type': 'community', 'create': True, 'delete': True,
+                'hide_franchise_column': False}
+            </field>
+        </record>
+
+        <record id="map_franchise_action" model="ir.actions.act_window">
+            <field name="name">Franchisees</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">google.map.item</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('type','=','franchise')]</field>
+            <field name="context">{'default_type': 'franchise', 'create': True, 'delete': True}</field>
+        </record>
+        <menuitem parent="bista_map_component.google_map_root" id="map_item_franchise_menu" name="Franchisees"
+                  action="map_franchise_action" sequence="0"/>
+        <record id="map_section_action" model="ir.actions.act_window">
+            <field name="name">Section</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">google.map.item</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('type','=','section')]</field>
+            <field name="context">{'default_type': 'section'}</field>
+        </record>
+        <menuitem parent="bista_map_component.google_map_root" id="map_item_section_menu" name="Sections"
+                  action="map_section_action"
+                  sequence="5"/>
+
+
+
+        <record id="view_community_map_kanban" model="ir.ui.view">
+            <field name="name">google.community.map.kanban</field>
+            <field name="model">google.map.item</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_card">
+                                    <div class="oe_kanban_card_content">
+                                        <div class="oe_kanban_primary">
+                                            <div class="oe_kanban_content">
+                                                <t t-if="record.background_image.value">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="oe_kanban_bottom_right d-flex justify-content-between">
+                                                            <field name="background_image" widget="image"/>
+                                                        </div>
+                                                        <button class="border-0 fa fa-gear bg-transparent d-flex"
+                                                                groups="module_sb.franchise_admin"
+                                                                name="action_owl_community_plans"
+                                                                type="object"
+                                                        />
+                                                    </div>
+                                                </t>
+                                                <t t-else="">
+                                                    <div class="d-flex justify-content-end"
+                                                         groups="module_sb.franchise_admin">
+
+                                                        <button class="border-0 fa fa-gear bg-transparent d-flex"
+                                                                name="action_owl_community_plans"
+                                                                type="object"
+                                                        />
+                                                    </div>
+                                                </t>
+                                                <!--                                                <div class="oe_kanban_bottom_right">-->
+                                                <!--                                                    <label for="kova_community_rid" style="font-weight: bold;">Kova-->
+                                                <!--                                                        Community RID:-->
+                                                <!--                                                    </label>-->
+                                                <!--                                                    <field name="kova_community_rid" placeholder="Kova Community RID"/>-->
+                                                <!--                                                </div>-->
+                                                <!--                                                <div class="oe_kanban_bottom_right list-group-itemlist-item">-->
+                                                <!--                                                    <i title="icon" class="fa fa-globe"/>-->
+                                                <!--                                                    <field name="city" placeholder="City"/>-->
+                                                <!--                                                </div>-->
+                                                <!--                                                <div class="oe_kanban_bottom_left list-group-itemlist-item">-->
+                                                <!--                                                    <i title="icon" class="fa fa-location-arrow"/>-->
+                                                <!--                                                    <field name="zip_code" placeholder="Zip Code"/>-->
+                                                <!--                                                </div>-->
+                                                <!--                                                <div class="oe_kanban_bottom_right list-group-itemlist-item">-->
+                                                <!--                                                    <i title="icon" class="fa fa-home"/>-->
+                                                <!--                                                    <field name="address" placeholder="Address"/>-->
+                                                <!--                                                </div>-->
+
+                                                <!--                                                <div class="oe_kanban_bottom_right list-group-itemlist-item">-->
+                                                <!--                                                    <i title="icon" class="fa fa-compass"/>-->
+                                                <!--                                                    <field name="code" placeholder="Code"/>-->
+                                                <!--                                                </div>-->
+                                                <div class="oe_kanban_bottom_right list-group-itemlist-item">
+                                                    <i title="icon" class="fa fa-user"/>
+                                                    <field name="name"/>
+                                                </div>
+                                                <!--                                                <div class="oe_kanban_bottom_right list-group-itemlist-item">-->
+                                                <!--                                                    <i title="icon" class="fa fa-file"/>-->
+                                                <!--                                                    <field name="display_name" placeholder="Display Name"/>-->
+                                                <!--                                                </div>-->
+                                                <!--                                                <div class="oe_kanban_bottom_right list-group-itemlist-item">-->
+                                                <!--                                                    <i title="icon" class="fa fa-envelope"/>-->
+                                                <!--                                                    <field name="email" placeholder="Email"/>-->
+                                                <!--                                                </div>-->
+                                                <!--                                                <div class="oe_kanban_bottom_right list-group-itemlist-item">-->
+                                                <!--                                                    <i title="icon" class="fa fa-phone"/>-->
+                                                <!--                                                    <field name="phone" placeholder="Phone"/>-->
+                                                <!--                                                </div>-->
+
+                                                <!--                                                <div class="oe_kanban_bottom_right list-group-itemlist-item"-->
+                                                <!--                                                     groups="module_sb.franchise_admin">-->
+                                                <!--                                                    <br/>-->
+                                                <!--                                                </div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!--        &lt;!&ndash; Community Action &ndash;&gt;-->
+        <!--        <record id="action_community_map" model="ir.actions.act_window">-->
+        <!--            <field name="name">Communities Map</field>-->
+        <!--            <field name="res_model">google.map.item</field>-->
+        <!--            <field name="view_mode">kanban,form</field>-->
+        <!--            <field name="domain">[('type','=','community')]</field>-->
+        <!--            &lt;!&ndash;            <field name="context">{'default_type': 'franchise', 'create': True, 'delete': True}</field>&ndash;&gt;-->
+        <!--        </record>-->
+
+        <!--        &lt;!&ndash; Community Menu &ndash;&gt;-->
+        <!--        <menuitem id="menu_community_map_list" name="Communities map" parent="base.menu_users"-->
+        <!--                  action="action_community_map"/>-->
+
+        <!--        <record id="action_section_wizard_map_item" model="ir.actions.server">-->
+        <!--    <field name="name">Set Category</field>-->
+        <!--    <field name="binding_model_id" ref="bista_map_component.model_google_map_item"/>-->
+        <!--    <field name="binding_type">action</field>-->
+        <!--</record>-->
+
+        <!--        <record id="test_google_map_community_action_button" model="ir.actions.server">-->
+        <!--            <field name="name">Add Section</field>-->
+        <!--            <field name="model_id" ref="bista_map_component.model_google_map_item"/>-->
+        <!--            <field name="binding_model_id" ref="bista_map_component.model_google_map_item"/>-->
+        <!--            <field name="binding_view_types">form,tree</field>-->
+        <!--            <field name="state">code</field>-->
+        <!--            <field name="code">-->
+        <!--                if env.context.get('default_type') == 'home':-->
+        <!--                    action = env['nmx_map.section_wizard'].with_context(active_ids=records.ids).create({}).action_open_wizard()-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+    </data>
+</odoo>

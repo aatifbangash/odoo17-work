@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <record id="view_section_wizard_form" model="ir.ui.view">
+            <field name="name">nmx.map.section.wizard.form</field>
+            <field name="model">nmx_map.section_wizard</field>
+            <field name="arch" type="xml">
+                <form string="Select Category">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="community_id"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Apply" type="object" name="action_apply_category" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

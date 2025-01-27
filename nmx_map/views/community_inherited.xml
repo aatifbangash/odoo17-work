@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="map_item_view_community_form" model="ir.ui.view">
+            <field name="name">map.item.community_module.community.form</field>
+            <field name="model">community_module.community</field>
+            <field name="inherit_id" ref="community_module.view_community_form"/>
+            <field name="arch" type="xml">
+                <field name="longitude" position="after">
+                    <field name="google_map_item_id" invisible="1"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

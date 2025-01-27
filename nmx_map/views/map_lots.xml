@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <!-- inherit the existing action and alter its properties-->
+        <record id="bista_map_component.map_home_plan_action" model="ir.actions.act_window">
+            <field name="name">Lots</field>
+            <field name="context">{'default_type': 'home', 'hide_community_column': False}</field>
+        </record>
+
+        <!-- inherit existing menu and change it's name-->
+        <record id="bista_map_component.map_item_home_pan_menu" model="ir.ui.menu">
+            <field name="name">Lots</field>
+        </record>
+    </data>
+</odoo>

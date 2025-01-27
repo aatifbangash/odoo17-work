@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="custom_crm_new" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='team_id']" position="after">
+                <field name="team_ids" widget="many2many_tags"/>
+            </xpath>
+            <xpath expr="//field[@name='stage_id']" position="attributes">
+                <attribute name="domain">['|', ('team_id', 'in', team_ids), ('team_id', '=', False)]</attribute>
+                <attribute name="invisible">not active</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm.crm_lead_all_leads_view_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+    </record>
+
+    <record id="crm.crm_lead_all_leads_view_kanban" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+    </record>
+
+    <record id="crm.crm_lead_action_pipeline" model="ir.actions.act_window">
+        <field name="domain">[]</field>
+    </record>
+
+</odoo>
